@@ -12,6 +12,45 @@ import math
 import random
 
 
+# def snail(snail_map):
+#     result = []
+#     while snail_map:
+#         result += snail_map.pop(0)
+#         if snail_map and snail_map[0]:
+#             for row in snail_map:
+#                 result.append(row.pop())
+#         if snail_map:
+#             result += snail_map.pop()[::-1]
+#         if snail_map and snail_map[0]:
+#             for row in snail_map[::-1]:
+#                 result.append(row.pop(0))
+#
+#     return result
+#
+#
+# array = [[1, 2, 3],
+#          [8, 9, 4],
+#          [7, 6, 5]]
+#
+# print(snail(array))  #=> [1,2,3,4,5,6,7,8,9]
+
+# или
+
+# def snail(snail_map):
+#     result = []
+#     while len(snail_map):
+#         result += snail_map.pop(0)
+#         snail_map = list(zip(*snail_map))[::-1]
+#     return result
+#
+#
+# array = [[1, 2, 3],
+#          [8, 9, 4],
+#          [7, 6, 5]]
+#
+# print(snail(array))  #=> [1,2,3,4,5,6,7,8,9]
+
+
 # res = [i for i in range(1000) if i % 3 == 0 and i % 5 != 0]
 # for i in res:
 #     if i % 100 // 10 + i % 10 + i // 100 < 10:
