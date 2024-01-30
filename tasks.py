@@ -12,6 +12,29 @@ import math
 import random
 
 
+# def next_bigger(n):
+#     digits = list(str(n))
+#
+#     # Шаг 1: Найти первую цифру, которая меньше цифры рядом с ней, справа налево
+#     for i in range(len(digits) - 2, -1, -1):
+#         if digits[i] < digits[i + 1]:
+#             break
+#     else:
+#         return -1
+#
+#     # Шаг 2: Найти наименьшую цифру справа от (i-й цифры), которая больше digits[i]
+#     for j in range(len(digits) - 1, i, -1):
+#         if digits[j] > digits[i]:
+#             break
+#
+#     digits[i], digits[j] = digits[j], digits[i]
+#     digits[i + 1:] = sorted(digits[i + 1:])
+#     return int("".join(digits))
+#
+#
+# print(next_bigger(2017))
+
+
 # def snail(snail_map):
 #     result = []
 #     while snail_map:
