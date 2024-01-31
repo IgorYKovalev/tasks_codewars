@@ -12,6 +12,80 @@ import math
 import random
 
 
+# def strip_comments(string, markers):
+#     lines = string.split('\n')
+#     for i, line in enumerate(lines):
+#         min_index = len(line)
+#         for marker in markers:
+#             index = line.find(marker)
+#             if index != -1 and index < min_index:
+#                 min_index = index
+#         lines[i] = line[:min_index].rstrip()
+#     return "\n".join(lines)
+#
+#
+# print(strip_comments("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]))
+
+# или
+
+# def strip_comments(string, markers):
+#     for num, marker in enumerate(markers):
+#         string = '\n'.join([i.split(marker)[0].rstrip() for i in string.split('\n')])
+#
+#     return string
+#
+#
+# print(strip_comments("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]))
+
+
+# def permutations(s):
+#     result = set()
+#     for i in itertools.permutations(s):
+#         if ''.join(i) not in result:
+#             result.add(''.join(i))
+#     return list(result)
+#
+#
+# print(permutations('aabb'))
+
+# или
+
+# def permutations(s):
+#     return list("".join(i) for i in set(itertools.permutations(s)))
+#
+#
+# print(permutations('aabb'))
+
+
+# def sum_strings(x, y):
+#     x, y = x[::-1], y[::-1]
+#     result = []
+#     carry = 0
+#
+#     for i in range(max(len(x), len(y))):
+#         dig_x = int(x[i]) if i < len(x) else 0
+#         dig_y = int(y[i]) if i < len(y) else 0
+#         total = dig_x + dig_y + carry
+#         carry = total // 10
+#         result.append(total % 10)
+#     if carry:
+#         result.append(carry)
+#
+#     return ''.join(map(str, result))[::-1].lstrip('0') or '0'
+#
+#
+# print(sum_strings("123", "456999"))
+
+# или
+# from gmpy2 import mpz
+
+# def sum_strings(x, y):
+#     return str(mpz(x or '0') + mpz(y or '0'))
+#
+#
+# print(sum_strings("123", "456999"))
+
+
 # def next_bigger(n):
 #     digits = list(str(n))
 #
