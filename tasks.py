@@ -12,6 +12,38 @@ import math
 import random
 
 
+# class Node:
+#     def __init__(self, L, R, n):
+#         self.left = L
+#         self.right = R
+#         self.value = n
+#
+#
+# def tree_by_levels(root):
+#     if root is None:
+#         return []
+#
+#     queue = [root]
+#     level_order = []
+#
+#     while queue:
+#         current_root = queue.pop(0)
+#         level_order.append(current_root.value)
+#
+#         if current_root.left:
+#             queue.append(current_root.left)
+#
+#         if current_root.right:
+#             queue.append(current_root.right)
+#
+#     return level_order
+#
+#
+# # node = Node(Node(Node(None, None, 4), Node(None, None, 5), 2), Node(None, None, 3), 1)
+# node = Node(Node(None, Node(None, None, 4), 2), Node(Node(None, None, 5), Node(None, None, 6), 3), 1)
+# print(tree_by_levels(node))
+
+
 # def strip_comments(string, markers):
 #     lines = string.split('\n')
 #     for i, line in enumerate(lines):
