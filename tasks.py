@@ -12,6 +12,56 @@ import math
 import random
 
 
+# def longest_slide_down(pyramid):
+#     for row in range(len(pyramid)-2, -1, -1):
+#         for col in range(len(pyramid[row])):
+#             pyramid[row][col] += max(pyramid[row + 1][col], pyramid[row + 1][col + 1])
+#     return pyramid[0][0]
+#
+#
+# print(longest_slide_down([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]))
+
+
+# class Node:
+#     def __init__(self, L, R, n):
+#         self.left = L
+#         self.right = R
+#         self.value = n
+#
+#
+# def tree_by_sum(node):
+#     if node is None:
+#         return 0
+#
+#     max_l = tree_by_sum(node.left)
+#     max_r = tree_by_sum(node.right)
+#     return max_l + max_r + node.value
+#
+#
+# res = Node(Node(None, Node(None, None, -4), -2), Node(Node(None, None, 5), Node(None, None, 6), 3), 1)
+# print(tree_by_sum(res))
+
+
+# class Node:
+#     def __init__(self, L, R, n):
+#         self.left = L
+#         self.right = R
+#         self.value = n
+#
+#
+# def tree_by_sum(root):
+#     if root is None:
+#         return 0
+#
+#     max_l = tree_by_sum(root.left)
+#     max_r = tree_by_sum(root.right)
+#     return max(max_l, max_r) + root.value
+#
+#
+# node = Node(Node(Node(None, None, 4), Node(None, None, 5), 2), Node(None, None, 3), 1)
+# print(tree_by_sum(node))
+
+
 # class Node:
 #     def __init__(self, L, R, n):
 #         self.left = L
@@ -39,7 +89,6 @@ import random
 #     return level_order
 #
 #
-# # node = Node(Node(Node(None, None, 4), Node(None, None, 5), 2), Node(None, None, 3), 1)
 # node = Node(Node(None, Node(None, None, 4), 2), Node(Node(None, None, 5), Node(None, None, 6), 3), 1)
 # print(tree_by_levels(node))
 
