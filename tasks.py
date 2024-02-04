@@ -12,6 +12,18 @@ import math
 import random
 
 
+# def find_reverse_number(n):
+#     if n < 11:
+#         return n - 1
+#     n_zeros = len(str(n // 11))
+#     left = str(n - 10 ** n_zeros)
+#     right = left[n_zeros - 1::-1]
+#     return int(left + right)
+#
+#
+# print(find_reverse_number(100))
+
+
 # def longest_slide_down(pyramid):
 #     for row in range(len(pyramid)-2, -1, -1):
 #         for col in range(len(pyramid[row])):
@@ -165,6 +177,31 @@ import random
 #
 #
 # print(sum_strings("123", "456999"))
+
+
+# def next_smaller(n):
+#     digits = list(str(n))
+#     for i in range(len(digits) - 2, -1, -1):
+#         if digits[i] > digits[i + 1]:
+#             break
+#     else:
+#         return - 1
+#
+#     for j in range(len(digits) - 1, i, -1):
+#         if digits[j] < digits[i]:
+#             break
+#
+#     digits[i], digits[j] = digits[j], digits[i]
+#     digits[i + 1:] = sorted(digits[i + 1:], reverse=True)
+#     result = int(''.join(digits))
+#
+#     if str(result) != ''.join(map(str, digits)):
+#         return - 1
+#
+#     return result
+#
+#
+# print(next_smaller(1027))
 
 
 # def next_bigger(n):
