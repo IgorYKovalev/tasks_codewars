@@ -11,6 +11,27 @@ import math
 import random
 
 
+# def cakes(recipe, available):
+# 	return min(available.get(k, 0)/recipe[k] for k in recipe)
+
+# или
+
+# def cakes(recipe, available):
+#     result = []
+#     for i in recipe:
+#         if available.get(i) is None:
+#             return 0
+#         result.append(available[i] // recipe[i])
+#     return min(result)
+#
+#
+# r = {"flour": 500, "sugar": 200, "eggs": 1}
+# a = {"flour": 1200, "sugar": 1200, "eggs": 5, "milk": 200}
+# r = {"apples": 3, "flour": 300, "sugar": 150, "milk": 100, "oil": 100}
+# a = {"sugar": 500, "flour": 2000, "milk": 2000}
+# print(cakes(r, a))
+
+
 # PIN = {
 #     '1': ('1', '2', '4'),
 #     '2': ('1', '2', '3', '5'),
