@@ -11,6 +11,29 @@ import math
 import random
 
 
+# def min_path(grid, x, y):
+#     s = [float('inf')] * (x + 2)
+#     s[1] = 0
+#
+#     for i in range(y + 1):
+#         for j in range(x + 1):
+#             s[j + 1] = min(s[j], s[j + 1]) + grid[i][j]
+#
+#     return s[-1]
+#
+#
+# square = [
+#     [1, 2, 3, 6, 2, 8, 1],
+#     [4, 8, 2, 4, 3, 1, 9],
+#     [1, 5, 3, 7, 9, 3, 1],
+#     [4, 9, 2, 1, 6, 9, 5],
+#     [7, 6, 8, 4, 7, 2, 6],
+#     [2, 1, 6, 2, 4, 8, 7],
+#     [8, 4, 3, 9, 2, 5, 8]]
+#
+# print(min_path(square, 6, 6))
+
+
 # def cakes(recipe, available):
 # 	return min(available.get(k, 0)/recipe[k] for k in recipe)
 
