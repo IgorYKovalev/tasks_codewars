@@ -11,6 +11,25 @@ import math
 import random
 
 
+# def domain_name(url):
+#     url = re.sub(r'https?://', '', url)
+#     url = re.sub(r'www\.', '', url)
+#     result = re.split(r'/|\.', url)[0]
+#     return result
+
+# или
+
+# def domain_name(url):
+#     return url.split("//")[-1].split("www.")[-1].split(".")[0]
+#
+#
+# print(domain_name("http://google.com"))
+# print(domain_name("http://google.co.jp"))
+# print(domain_name("https://123.net"))
+# print(domain_name("icann.org"))
+# print(domain_name("https://hyphen-site.org"))
+
+
 # def min_path(grid, x, y):
 #     s = [float('inf')] * (x + 2)
 #     s[1] = 0
