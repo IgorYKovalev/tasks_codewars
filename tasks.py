@@ -6,9 +6,23 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import datetime
 from functools import reduce
-from itertools import groupby, product
+from itertools import groupby, product, permutations
 import math
 import random
+
+
+# def anagram(strs):
+#     anagrams = {}
+#     for i in strs:
+#         key = tuple(sorted(i))
+#         if key in anagrams:
+#             anagrams[key].append(i)
+#         else:
+#             anagrams[key] = [i]
+#     return list(anagrams.values())
+#
+#
+# print(anagram(["eat", "tea", "tan", "ate", "nat", "bat"]))  # [["bat"],["nat","tan"],["ate","eat","tea"]]
 
 
 # def domain_name(url):
