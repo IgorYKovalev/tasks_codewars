@@ -11,6 +11,22 @@ import math
 import random
 
 
+# def frequencysort(s):
+#
+#     res = []
+#     result = collections.Counter(s[::-1]).most_common()
+#     for i, j in result:
+#         res.append(i * j)
+#
+#     return ''.join(res)
+#
+#
+# print(frequencysort('tree'))  # eert
+# print(frequencysort('cccaaa'))  # aaaccc
+# print(frequencysort('Aabb'))  # bbAa
+# print(frequencysort('raaeaedere'))  # "eeeeaaarrd"
+
+
 # def anagram(strs):
 #     anagrams = {}
 #     for i in strs:
