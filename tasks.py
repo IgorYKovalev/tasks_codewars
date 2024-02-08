@@ -11,6 +11,20 @@ import math
 import random
 
 
+# def firstuniqchar(s):
+#     result = collections.Counter(s)
+#     for k, v in enumerate(s):
+#         if result[v] == 1:
+#             return k
+#     return -1
+#
+#
+# print(firstuniqchar('z'))
+# print(firstuniqchar('aabb'))
+# print(firstuniqchar('loveleetcode'))
+# print(firstuniqchar('leetcode'))
+
+
 # def numsquares(n):
 #     dp = [float('inf')] * (n + 1)
 #     dp[0] = 0
