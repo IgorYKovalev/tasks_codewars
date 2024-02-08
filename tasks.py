@@ -11,6 +11,20 @@ import math
 import random
 
 
+# def numsquares(n):
+#     dp = [float('inf')] * (n + 1)
+#     dp[0] = 0
+#     for i in range(1, n + 1):
+#         j = 1
+#         while j*j <= i:
+#             dp[i] = min(dp[i], dp[i - j*j] + 1)
+#             j += 1
+#     return dp[n]
+#
+#
+# print(numsquares(12))  # Вывод: 3
+
+
 # def frequencysort(s):
 #
 #     res = []
@@ -84,7 +98,7 @@ import random
 
 
 # def cakes(recipe, available):
-# 	return min(available.get(k, 0)/recipe[k] for k in recipe)
+# 	return min(available.get(k, 0) // recipe[k] for k in recipe)
 
 # или
 
@@ -122,8 +136,7 @@ import random
 #     return [''.join(a) for a in product(*(PIN[b] for b in observed))]
 #
 #
-# variations = get_pins('76')
-# print(variations)
+# print(get_pins('76'))
 
 
 # def find_reverse_number(n):
@@ -284,8 +297,9 @@ import random
 # print(sum_strings("123", "456999"))
 
 # или
-# from gmpy2 import mpz
 
+# from gmpy2 import mpz
+#
 # def sum_strings(x, y):
 #     return str(mpz(x or '0') + mpz(y or '0'))
 #
