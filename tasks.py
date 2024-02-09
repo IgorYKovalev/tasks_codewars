@@ -11,6 +11,25 @@ import math
 import random
 
 
+# def largestdivisiblesubset(nums):
+#     n = len(nums)
+#     if n == 0:
+#         return []
+#     nums.sort()
+#     dp = [[i] for i in nums]
+#
+#     for i in range(n):
+#         for j in range(i):
+#             if nums[i] % nums[j] == 0 and len(dp[j]) + 1 > len(dp[i]):
+#                 dp[i] = dp[j] + [nums[i]]
+#
+#     return max(dp, key=len)
+#
+#
+# print(largestdivisiblesubset([1, 2, 4, 8]))
+# print(largestdivisiblesubset([1, 2, 3]))
+
+
 # def firstuniqchar(s):
 #     result = collections.Counter(s)
 #     for k, v in enumerate(s):
