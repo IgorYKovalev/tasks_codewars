@@ -1,5 +1,6 @@
 import asyncio
 import collections
+import itertools
 import operator
 import re
 from collections.abc import Iterator
@@ -9,6 +10,29 @@ from functools import reduce
 from itertools import groupby, product, permutations
 import math
 import random
+
+
+# def countsubstrings(s):
+#     def helper(left, right):
+#         count = 0
+#         while left >= 0 and right < len(s) and s[left] == s[right]:
+#             count += 1
+#             left -= 1
+#             right += 1
+#         return count
+#
+#     result = 0
+#     for i in range(len(s)):
+#         result += helper(i, i)
+#         result += helper(i, i + 1)
+#
+#     return result
+#
+#
+# print(countsubstrings('a'))
+# print(countsubstrings('aba'))
+# print(countsubstrings('abc'))
+# print(countsubstrings('aaa'))
 
 
 # def largestdivisiblesubset(nums):
