@@ -12,6 +12,32 @@ import math
 import random
 
 
+# def cherrypickup(grid):
+#     n, m = len(grid), len(grid[0])
+#     memo = {}
+#
+#     def dp(r, c1, c2):
+#         if (r, c1, c2) in memo:
+#             return memo[(r, c1, c2)]
+#         if c1 < 0 or c1 >= m or c2 < 0 or c2 >= m:
+#             return float('-inf')
+#
+#         result = grid[r][c1] + (grid[r][c2] if c1 != c2 else 0)
+#         if r != n - 1:
+#             result += max(
+#                 dp(r + 1, newc1, newc2)
+#                 for newc1 in [c1 - 1, c1, c1 + 1]
+#                 for newc2 in [c2 - 1, c2, c2 + 1]
+#             )
+#             memo[(r, c1, c2)] = result
+#         return result
+#     return dp(0, 0, m - 1)
+#
+#
+# print(cherrypickup([[3, 1, 1], [2, 5, 1], [1, 5, 5], [2, 1, 1]]))
+# print(cherrypickup([[1, 0, 0, 0, 0, 0, 1], [2, 0, 0, 0, 0, 3, 0], [2, 0, 9, 0, 0, 0, 0], [0, 3, 0, 5, 4, 0, 0], [1, 0, 2, 3, 0, 0, 6]]))
+
+
 # def countsubstrings(s):
 #     def helper(left, right):
 #         count = 0
