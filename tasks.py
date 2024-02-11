@@ -12,6 +12,31 @@ import math
 import random
 
 
+# def ip_to_int(ip):
+#     result = map(int, ip.split('.'))
+#     return sum(
+#         part << (8 * (3 - index))
+#         for index, part in enumerate(result)
+#     )
+#
+#
+# def ips_between(start, end):
+#     first_int = ip_to_int(start)
+#     last_int = ip_to_int(end)
+#     return last_int - first_int
+
+# или
+
+# from ipaddress import ip_address
+#
+# def ips_between(start, end):
+#     return int(ip_address(end)) - int(ip_address(start))
+
+
+# print(ips_between("10.0.0.0", "10.0.0.50"))
+# print(ips_between("20.0.0.10", "20.0.1.0"))
+
+
 # def cherrypickup(grid):
 #     n, m = len(grid), len(grid[0])
 #     memo = {}
