@@ -12,6 +12,23 @@ import math
 import random
 
 
+# def majorityelement(nums):
+#     result = collections.Counter(nums)
+#     return max(result.keys(), key=result.get)
+
+# или
+
+# def majorityelement(nums):
+#     nums.sort()
+#     n = len(nums)
+#     return nums[n // 2]
+#
+#
+# print(majorityelement([2, 2, 1, 1, 1, 2, 2]))
+# print(majorityelement([3, 2, 3]))
+# print(majorityelement([3, 3, 4]))
+
+
 # def ip_to_int(ip):
 #     result = map(int, ip.split('.'))
 #     return sum(
