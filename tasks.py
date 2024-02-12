@@ -12,6 +12,21 @@ import math
 import random
 
 
+# def twosum(nums, target):
+#     result = {}
+#     for k, v in enumerate(nums):
+#         complement = target - v
+#         if complement in result:
+#             return [result[complement], k]
+#         result[v] = k
+#     return []
+#
+#
+# print(twosum([2, 7, 11, 15], 9))
+# print(twosum([3, 2, 4], 6))
+# print(twosum([3, 3], 6))
+
+
 # def majorityelement(nums):
 #     result = collections.Counter(nums)
 #     return max(result.keys(), key=result.get)
