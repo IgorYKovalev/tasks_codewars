@@ -12,6 +12,46 @@ import math
 import random
 
 
+# def increment_string(strng):
+#     num_part = ''
+#     found_number = False
+#     for k, v in enumerate(strng[::-1]):
+#         if v.isdigit():
+#             num_part = v + num_part
+#             found_number = True
+#         elif found_number:
+#             break
+#     if not found_number:
+#         return strng + '1'
+#
+#     index = len(strng) - len(num_part)
+#     incremented = str(int(num_part) + 1).zfill(len(num_part))
+#     return strng[:index] + incremented
+
+# или
+
+# def increment_string(strng):
+#     head = strng.rstrip('0123456789')
+#     tail = strng[len(head):]
+#     if tail == "": return strng + "1"
+#     return head + str(int(tail) + 1).zfill(len(tail))
+#
+#
+# print(increment_string("foobar001"))
+# print(increment_string("fo99obar99"))
+# print(increment_string("foobar"))
+
+
+# def firstpalindrome(words):
+#     result = [i for i in words if i == i[::-1]][:1]
+#     return ''.join(result) if result else ''
+#
+#
+# print(firstpalindrome(["abc", "car", "ada", "racecar", "cool"]))
+# print(firstpalindrome(["notapalindrome", "racecar"]))
+# print(firstpalindrome(["def", "ghi"]))
+
+
 # def twosum(nums, target):
 #     result = {}
 #     for k, v in enumerate(nums):
