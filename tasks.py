@@ -12,6 +12,21 @@ import math
 import random
 
 
+# def rearrangearray(nums):
+#     pos, neg = [], []
+#     result = []
+#
+#     res = [pos.append(i) if i >= 0 else neg.append(i) for i in nums]
+#     for k, v in list(zip(pos, neg)):
+#         result.append(k)
+#         result.append(v)
+#     return result
+#
+#
+# print(rearrangearray([3, 1, -2, -5, 2, -4]))  # [3, -2, 1, -5, 2, -4]
+# print(rearrangearray([-1, 1]))  # [1, -1]
+
+
 # def increment_string(strng):
 #     num_part = ''
 #     found_number = False
