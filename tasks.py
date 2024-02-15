@@ -12,6 +12,22 @@ import math
 import random
 
 
+# def largestperimeter(nums):
+#     nums.sort()
+#     elements_sum = 0
+#     ans = -1
+#     for num in nums:
+#         if num < elements_sum:
+#             ans = num + elements_sum
+#         elements_sum += num
+#     return ans
+#
+#
+# print(largestperimeter([5, 5, 5]))
+# print(largestperimeter([5, 5, 50]))
+# print(largestperimeter([1, 12, 1, 2, 5, 50, 3]))
+
+
 # def rearrangearray(nums):
 #     pos, neg = [], []
 #     result = []
