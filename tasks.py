@@ -12,6 +12,23 @@ import math
 import random
 
 
+# def findLeastNumOfUniqueInts(arr, k):
+#     freq = collections.Counter(arr)
+#     sorted_items = sorted(freq.items(), key=lambda x: x[1])
+#     for num, count in sorted_items:
+#         if k >= count:
+#             k -= count
+#             del freq[num]
+#         else:
+#             break
+#
+#     return len(freq)
+#
+#
+# print(findLeastNumOfUniqueInts([5, 5, 4], 1))  # 1
+# print(findLeastNumOfUniqueInts([4, 3, 1, 1, 3, 3, 2], 3))  # 2
+
+
 # def largestperimeter(nums):
 #     nums.sort()
 #     elements_sum = 0
