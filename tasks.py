@@ -1,5 +1,6 @@
 import asyncio
 import collections
+import heapq
 import itertools
 import operator
 import re
@@ -10,6 +11,24 @@ from functools import reduce
 from itertools import groupby, product, permutations
 import math
 import random
+
+
+# def furthestbuilding(heights, bricks, ladders):
+#     heap = []
+#     for i in range(len(heights) - 1):
+#         diff = heights[i + 1] - heights[i]
+#         if diff > 0:
+#             heapq.heappush(heap, diff)
+#         if len(heap) > ladders:
+#             bricks -= heapq.heappop(heap)
+#         if bricks < 0:
+#             return i
+#     return len(heights) - 1
+#
+#
+# print(furthestbuilding([4, 12, 2, 7, 3, 18, 20, 3, 19], 10, 2))  # 7
+# print(furthestbuilding([4, 2, 7, 6, 9, 14, 12], 5, 1))  # 4
+# print(furthestbuilding([14, 3, 19, 3], 17, 0))  # 3
 
 
 # def findLeastNumOfUniqueInts(arr, k):
