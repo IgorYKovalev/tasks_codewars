@@ -13,6 +13,34 @@ import math
 import random
 
 
+# def roomwithmostmeetings(n, meetings):
+#     meetings.sort()
+#     hm = [0] * n
+#     heap, occupied_heap = [i for i in range(n)], []
+#     heapq.heapify(heap)
+#
+#     for i in range(len(meetings)):
+#         start, end = meetings[i]
+#
+#         while occupied_heap and occupied_heap[0][0] <= start:
+#             end_time, room_num = heapq.heappop(occupied_heap)
+#             heapq.heappush(heap, room_num)
+#         if heap:
+#             unused_room = heapq.heappop(heap)
+#             hm[unused_room] += 1
+#             heapq.heappush(occupied_heap, (end, unused_room))
+#         else:
+#             end_time, room_num = heapq.heappop(occupied_heap)
+#             hm[room_num] += 1
+#             heapq.heappush(occupied_heap, (end_time + end - start, room_num))
+#
+#     return hm.index(max(hm))
+#
+#
+# print(roomwithmostmeetings(2, [[0, 10], [1, 5], [2, 7], [3, 4]]))  # 0
+# print(roomwithmostmeetings(3, [[1, 20], [2, 10], [3, 5], [4, 9], [6, 8]]))  # 1
+
+
 # def furthestbuilding(heights, bricks, ladders):
 #     heap = []
 #     for i in range(len(heights) - 1):
