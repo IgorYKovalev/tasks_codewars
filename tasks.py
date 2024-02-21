@@ -13,6 +13,20 @@ import math
 import random
 
 
+# def rangebitwiseand(left, right):
+#     shift = 0
+#     # Сдвигаем, пока числа не станут равны
+#     while left < right:
+#         left >>= 1
+#         right >>= 1
+#         shift += 1
+#     # Сдвигаем результат обратно влево
+#     return left << shift
+#
+#
+# print(rangebitwiseand(5, 7))
+
+
 # def roomwithmostmeetings(n, meetings):
 #     meetings.sort()
 #     hm = [0] * n
