@@ -13,6 +13,26 @@ import math
 import random
 
 
+# def findоudge(n, trust):
+#     trusts_count = [0] * (n + 1)
+#     trusted_by_count = [0] * (n + 1)
+#
+#     for a, b in trust:
+#         trusts_count[a] += 1
+#         trusted_by_count[b] += 1
+#
+#     for i in range(1, n + 1):
+#         if trusts_count[i] == 0 and trusted_by_count[i] == n - 1:
+#             return i
+#
+#     return -1
+#
+#
+# print(findоudge(3, [[1, 2],[2, 3]]))
+# print(findоudge(3, [[1, 3],[2, 3]]))
+# print(findоudge(3, [[1, 3],[2, 3],[3, 1]]))
+
+
 # def rangebitwiseand(left, right):
 #     shift = 0
 #     # Сдвигаем, пока числа не станут равны
