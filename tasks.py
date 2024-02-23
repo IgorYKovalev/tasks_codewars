@@ -13,6 +13,22 @@ import math
 import random
 
 
+# def findcheapestprice(n, flights, src, dst, k):
+#     cost = [[float('inf')] * n for _ in range(k + 2)]
+#     cost[0][src] = 0
+#
+#     for i in range(1, k + 2):
+#         cost[i][src] = 0
+#         for from_city, to_city, price in flights:
+#             cost[i][to_city] = min(cost[i][to_city], cost[i - 1][from_city] + price)
+#             print(cost[i][to_city])
+#
+#     return cost[k + 1][dst] if cost[k + 1][dst] != float('inf') else -1
+#
+#
+# print(findcheapestprice(4, [[0, 1, 100], [1, 2, 100], [2, 0, 100], [1, 3, 600], [2, 3, 200]], 0, 3, 1))
+
+
 # def findоudge(n, trust):
 #     trusts_count = [0] * (n + 1)
 #     trusted_by_count = [0] * (n + 1)
