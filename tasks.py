@@ -13,6 +13,36 @@ import math
 import random
 
 
+# def findallpeople(n, meetings, firstperson):
+#     graph = collections.defaultdict(list)
+#
+#     for x, y, t in meetings:
+#         graph[x].append((y, t))
+#         graph[y].append((x, t))
+#
+#     heap = [(0, firstperson)]
+#     for nei, time in graph[0]:
+#         heapq.heappush(heap, (time, nei))
+#
+#     visited = set([0])
+#
+#     while heap:
+#         time, person = heapq.heappop(heap)
+#         if person in visited:
+#             continue
+#
+#         visited.add(person)
+#
+#         for nei, t in graph[person]:
+#             if t >= time:
+#                 heapq.heappush(heap, (t, nei))
+#
+#     return visited
+#
+#
+# print(findallpeople(6, [[1, 2, 5], [2, 3, 8], [1, 5, 10]], 1))  # [0, 1, 2, 3, 5]
+
+
 # def findcheapestprice(n, flights, src, dst, k):
 #     cost = [[float('inf')] * n for _ in range(k + 2)]
 #     cost[0][src] = 0
