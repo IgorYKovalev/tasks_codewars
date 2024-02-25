@@ -11,6 +11,35 @@ from functools import reduce
 from itertools import groupby, product, permutations
 import math
 import random
+from collections import defaultdict
+
+
+# class Solution:
+#     def canTraverseAllPairs(self, nums):
+#         if len(nums) == 1: return True
+#         nums_set = set(nums)
+#         if 1 in nums_set: return False
+#         nums_sorted = sorted(nums_set, reverse=True)
+#
+#         for i in range(len(nums_sorted) - 1):
+#             for j in range(i + 1, len(nums_sorted)):
+#                 if self.gcd(nums_sorted[i], nums_sorted[j]) - 1:
+#                     nums_sorted[j] *= nums_sorted[i]
+#                     break
+#             else:
+#                 return False
+#         return True
+#
+#     def gcd(self, a, b):
+#         while b:
+#             a, b = b, a % b
+#         return a
+#
+#
+# sol = Solution()
+# print(sol.canTraverseAllPairs([2, 3, 6]))  # Вывод: true
+# print(sol.canTraverseAllPairs([3, 9, 5])) # Вывод: false
+# print(sol.canTraverseAllPairs([4, 3, 12, 8]))  # Вывод: true
 
 
 # def findallpeople(n, meetings, firstperson):
