@@ -307,8 +307,8 @@ from collections import defaultdict
 #
 # def ips_between(start, end):
 #     return int(ip_address(end)) - int(ip_address(start))
-
-
+#
+#
 # print(ips_between("10.0.0.0", "10.0.0.50"))
 # print(ips_between("20.0.0.10", "20.0.1.0"))
 
@@ -583,6 +583,36 @@ from collections import defaultdict
 #
 # node = Node(Node(Node(None, None, 4), Node(None, None, 5), 2), Node(None, None, 3), 1)
 # print(tree_by_sum(node))
+
+
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#
+# class Solution:
+#     def isSameTree(self, p, q):
+#         # Если оба узла равны None, значит на этом этапе они одинаковы
+#         if not p and not q:
+#             return True
+#         # Если один из узлов равен None, или их значения не совпадают, деревья не одинаковы
+#         if not p or not q or p.val != q.val:
+#             return False
+#         # Рекурсивно проверяем левых и правых потомков
+#         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+#
+#
+# p = TreeNode(1)
+# p.left = TreeNode(2)
+# p.right = TreeNode(3)
+#
+# q = TreeNode(1)
+# q.left = TreeNode(2)
+# q.right = TreeNode(3)
+#
+# solution = Solution()
+# print(solution.isSameTree(p, q))
 
 
 # class Node:
