@@ -545,6 +545,39 @@ from collections import defaultdict
 # print(longest_slide_down([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]))
 
 
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#
+# class Solution(object):
+#     def diameterOfBinaryTree(self, root):
+#         self.max_diameter = 0
+#
+#         def depth(node):
+#             if not node:
+#                 return 0
+#             left_depth = depth(node.left)
+#             right_depth = depth(node.right)
+#             self.max_diameter = max(self.max_diameter, left_depth + right_depth)
+#             return max(left_depth, right_depth) + 1
+#
+#         depth(root)
+#         return self.max_diameter
+#
+#
+# # Создаем узлы дерева
+# root = TreeNode(1)
+# root.left = TreeNode(2)
+# root.left.left = TreeNode(4)
+# root.left.right = TreeNode(5)
+# root.right = TreeNode(3)
+#
+# solution = Solution()
+# print(solution.diameterOfBinaryTree(root))
+
+
 # class Node:
 #     def __init__(self, L, R, n):
 #         self.left = L
