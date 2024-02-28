@@ -12,6 +12,7 @@ from itertools import groupby, product, permutations
 import math
 import random
 from collections import defaultdict
+from collections import deque
 
 
 # class Solution:
@@ -677,6 +678,44 @@ from collections import defaultdict
 #
 # node = Node(Node(None, Node(None, None, 4), 2), Node(Node(None, None, 5), Node(None, None, 6), 3), 1)
 # print(tree_by_levels(node))
+
+
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#
+#
+# def findBottomLeftValue(root):
+#     if not root:
+#         return None
+#
+#     queue = deque([(root, 0)])  # (узел, уровень)
+#     current_level = 0
+#     leftmost_value = root.val
+#
+#     while queue:
+#         node, level = queue.popleft()
+#
+#         # Когда достигаем нового уровня, обновляем самое левое значение
+#         if level > current_level:
+#             current_level = level
+#             leftmost_value = node.val
+#
+#         if node.left:
+#             queue.append((node.left, level + 1))
+#         if node.right:
+#             queue.append((node.right, level + 1))
+#
+#     return leftmost_value
+#
+#
+# root = TreeNode(1)
+# root.left = TreeNode(2, TreeNode(4))
+# root.right = TreeNode(3, TreeNode(5, TreeNode(7)), TreeNode(6))
+#
+# print(findBottomLeftValue(root))  # Вывод: 7
 
 
 # def strip_comments(string, markers):
