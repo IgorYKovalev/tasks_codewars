@@ -546,6 +546,55 @@ from collections import deque
 # print(longest_slide_down([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]))
 
 
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#
+#
+# def isEvenOddTree(root):
+#     if not root:
+#         return True
+#
+#     queue = deque([root])
+#
+#     level = 0
+#     while queue:
+#         level_size = len(queue)
+#         prev_value = None
+#
+#         for _ in range(level_size):
+#             node = queue.popleft()
+#
+#             # Проверка для уровней с четным индексом
+#             if level % 2 == 0:
+#                 # Значения должны быть нечетными и строго возрастающими
+#                 if node.val % 2 == 0 or (prev_value is not None and prev_value >= node.val):
+#                     return False
+#             else:
+#                 # Проверка для уровней с нечетным индексом
+#                 # Значения должны быть четными и строго убывающими
+#                 if node.val % 2 != 0 or (prev_value is not None and prev_value <= node.val):
+#                     return False
+#
+#             prev_value = node.val
+#
+#             if node.left:
+#                 queue.append(node.left)
+#             if node.right:
+#                 queue.append(node.right)
+#
+#         level += 1
+#
+#     return True
+#
+#
+# root = TreeNode(1, TreeNode(10, TreeNode(3, TreeNode(12), TreeNode(8)), TreeNode(7, None, TreeNode(6))),
+#                 TreeNode(4, TreeNode(9, None, TreeNode(2))))
+# print(isEvenOddTree(root))
+
+
 # class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
