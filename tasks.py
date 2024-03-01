@@ -15,6 +15,34 @@ from collections import defaultdict
 from collections import deque
 
 
+# def remove_duplicates(dicts):
+#     seen = set()
+#     unique_dicts = []
+#
+#     for d in dicts:
+#         # Преобразование словаря в кортеж (ключ, значение)
+#         hashable = tuple(d.items())
+#         # Проверяем, был ли уже такой "хешируемый" словарь
+#         if hashable not in seen:
+#             seen.add(hashable)
+#             unique_dicts.append(d)
+#
+#     return unique_dicts
+#
+#
+# dicts = [
+#     {"key1": "value1"},
+#     {"k1": "v1", "k2": "v2", "k3": "v3"},
+#     {},
+#     {},
+#     {"key1": "value1"},
+#     {"key1": "value1"},
+#     {"key2": "value2"}
+# ]
+#
+# print(remove_duplicates(dicts))
+
+
 # class Solution:
 #     def canTraverseAllPairs(self, nums):
 #         if len(nums) == 1: return True
