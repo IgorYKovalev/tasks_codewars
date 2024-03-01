@@ -15,6 +15,25 @@ from collections import defaultdict
 from collections import deque
 
 
+# class Solution(object):
+#     def maximumOddBinaryNumber(self, s):
+#         """
+#         :type s: str
+#         :rtype: str
+#         """
+#         ones = s.count('1')
+#         zeros = s.count('0')
+#         if ones == 1:
+#             return zeros * '0' + str(ones)
+#         return (ones - 1) * '1' + zeros * '0' + '1'
+#
+#
+# solution = Solution()
+# print(solution.maximumOddBinaryNumber('010'))
+# print(solution.maximumOddBinaryNumber('0101'))
+# print(solution.maximumOddBinaryNumber('1'))
+
+
 # def remove_duplicates(dicts):
 #     seen = set()
 #     unique_dicts = []
