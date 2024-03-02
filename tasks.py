@@ -15,6 +15,15 @@ from collections import defaultdict
 from collections import deque
 
 
+# def sortedSquares(nums):
+#     result = [i ** 2 for i in nums]
+#     return sorted(result)
+#
+#
+# print(sortedSquares([-4, -1, 0, 3, 10]))
+# print(sortedSquares([-7, -3, 2, 3, 11]))
+
+
 # class Solution(object):
 #     def maximumOddBinaryNumber(self, s):
 #         """
