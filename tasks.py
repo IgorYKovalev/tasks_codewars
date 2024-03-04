@@ -15,6 +15,35 @@ from collections import defaultdict
 from collections import deque
 
 
+# def maxScore(tokens, power):
+#     tokens.sort()  # Сортируем токены по возрастанию
+#     left, right = 0, len(tokens) - 1
+#     score = 0
+#     maxScore = 0
+#
+#     while left <= right:
+#         if power >= tokens[left]:
+#             # Играем токен лицевой стороной вверх
+#             power -= tokens[left]
+#             score += 1
+#             maxScore = max(maxScore, score)
+#             left += 1
+#         elif score > 0:
+#             # Играем токен лицевой стороной вниз
+#             power += tokens[right]
+#             score -= 1
+#             right -= 1
+#         else:
+#             break  # Не можем сыграть ни одним способом
+#
+#     return maxScore
+#
+#
+# print(maxScore([100], 50))  # Вывод: 0
+# print(maxScore([200, 100], 150))  # Вывод: 1
+# print(maxScore([100, 200, 300, 400], 200))  # Вывод: 2
+
+
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
