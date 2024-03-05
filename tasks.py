@@ -15,6 +15,31 @@ from collections import defaultdict
 from collections import deque
 
 
+# def minimumlength(s):
+#     left, right = 0, len(s) - 1
+#
+#     while left < right and s[left] == s[right]:
+#         char = s[left]
+#         while left <= right and s[left] == char:
+#             left += 1
+#         while right >= left and s[right] == char:
+#             right -= 1
+#
+#     return right - left + 1
+
+# или
+
+# def minimumlength(s):
+#     while len(s) >= 2 and s[0] == s[-1]:
+#         s = s.strip(s[0])
+#     return len(s)
+#
+#
+# print(minimumlength('aabccabba'))
+# print(minimumlength('cabaabac'))
+# print(minimumlength('ca'))
+
+
 # def maxScore(tokens, power):
 #     tokens.sort()  # Сортируем токены по возрастанию
 #     left, right = 0, len(tokens) - 1
