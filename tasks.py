@@ -15,6 +15,22 @@ from collections import defaultdict
 from collections import deque
 
 
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+#
+#
+# class Solution(object):
+#     def hasCycle(self, head):
+#         slow = fast = head
+#         while fast and fast.next:
+#             slow, fast = slow.next, fast.next.next
+#             if fast == slow:
+#                 return True
+#         return False
+
+
 # def minimumlength(s):
 #     left, right = 0, len(s) - 1
 #
