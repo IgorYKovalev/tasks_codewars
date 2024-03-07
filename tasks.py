@@ -16,6 +16,46 @@ from collections import deque
 
 
 # class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+#
+#
+# class Solution(object):
+#     def middleNode(self, head):
+#         slow = fast = head
+#         while fast and fast.next:
+#             slow = slow.next
+#             fast = fast.next.next
+#         return slow
+#
+#
+# # Вспомогательная функция для создания связного списка из списка значений
+# def createLinkedList(elements):
+#     head = ListNode(elements[0]) if elements else None
+#     current = head
+#     for element in elements[1:]:
+#         current.next = ListNode(element)
+#         current = current.next
+#     return head
+#
+#
+# # Функция для печати списка, начиная с заданного узла
+# def printList(node):
+#     current = node
+#     while current:
+#         print(current.val, end=" ")
+#         current = current.next
+#     print()
+#
+#
+# head = createLinkedList([1, 2, 3, 4, 5])
+# solution = Solution()
+# middleNode = solution.middleNode(head)
+# printList(middleNode)
+
+
+# class ListNode(object):
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
