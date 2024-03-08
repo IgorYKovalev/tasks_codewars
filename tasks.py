@@ -15,6 +15,18 @@ from collections import defaultdict
 from collections import deque
 
 
+# def maxFrequencyElements(nums):
+#     result = collections.Counter(nums).values()
+#     max_res = max(result)
+#     return sum([i for i in result if i == max_res])
+#
+#
+# print(maxFrequencyElements([1, 2, 2, 3, 1, 4]))
+# print(maxFrequencyElements([1, 2, 3, 4, 5]))
+# print(maxFrequencyElements([10, 12, 11, 9, 6, 19, 11]))
+# print(maxFrequencyElements([17, 17, 2, 12, 20, 17, 12]))
+
+
 # class ListNode(object):
 #     def __init__(self, val=0, next=None):
 #         self.val = val
