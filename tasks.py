@@ -15,6 +15,16 @@ from collections import defaultdict
 from collections import deque
 
 
+# def getCommon(nums1, nums2):
+#     result = set(nums1) & set(nums2)
+#     return min(result) if len(result) else - 1
+#
+#
+# print(getCommon([1, 2, 3], [2, 4]))
+# print(getCommon([1, 2, 3, 6], [2, 3, 4, 5]))
+# print(getCommon([2, 4], [1, 2]))
+
+
 # def maxFrequencyElements(nums):
 #     result = collections.Counter(nums).values()
 #     max_res = max(result)
