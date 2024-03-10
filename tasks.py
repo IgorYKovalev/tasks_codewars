@@ -15,6 +15,14 @@ from collections import defaultdict
 from collections import deque
 
 
+# def intersection(nums1, nums2):
+#     return list(set(nums1) & set(nums2))
+#
+#
+# print(intersection([4, 9, 5], [9, 4, 9, 8, 4]))
+# print(intersection([1, 2, 2, 1], [2, 2]))
+
+
 # def getCommon(nums1, nums2):
 #     result = set(nums1) & set(nums2)
 #     return min(result) if len(result) else - 1
