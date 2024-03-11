@@ -15,6 +15,25 @@ from collections import defaultdict
 from collections import deque
 
 
+# def customSortString(order, s):
+#     count = dict(collections.Counter(s))
+#     result = ''
+#     for i in order:
+#         if i in count:
+#             result += i * count[i]
+#             del count[i]
+#
+#     for i in count:
+#         result += i * count[i]
+#
+#     return result
+#
+#
+# print(customSortString("bcafg", "abcd"))  # bcad
+# print(customSortString("cba", "abcd"))  # cbad
+# print(customSortString("kqep", "pekeq"))  # kqeep
+
+
 # def intersection(nums1, nums2):
 #     return list(set(nums1) & set(nums2))
 #
