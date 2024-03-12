@@ -15,6 +15,58 @@ from collections import defaultdict
 from collections import deque
 
 
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+#
+#
+# def removeZeroSumSublists(head):
+#     dummy = ListNode(0)
+#     dummy.next = head
+#     prefix_sum = 0
+#     sum_to_node = {0: dummy}
+#
+#     current = head
+#     while current:
+#         prefix_sum += current.val
+#         sum_to_node[prefix_sum] = current
+#         current = current.next
+#
+#     current = dummy
+#     prefix_sum = 0
+#     # Второй проход: Используем отображение, чтобы пропустить узлы, формирующие последовательность с нулевой суммой
+#     while current:
+#         prefix_sum += current.val
+#         # Напрямую соединяем текущий узел с последним узлом, который имел такую же префиксную сумму
+#         current.next = sum_to_node[prefix_sum].next
+#         current = current.next
+#
+#     return dummy.next
+#
+#
+# # Вспомогательная функция для печати списка
+# def printList(node):
+#     while node:
+#         print(node.val, end=' ')
+#         node = node.next
+#     print()
+#
+#
+# # Пример использования
+# head = ListNode(1, ListNode(2, ListNode(-3, ListNode(3, ListNode(1)))))
+# result = removeZeroSumSublists(head)
+# printList(result)  # Ожидается: 3 1
+#
+# head = ListNode(1, ListNode(2, ListNode(3, ListNode(-3, ListNode(4)))))
+# result = removeZeroSumSublists(head)
+# printList(result)  # Ожидается: 1 2 4
+#
+# head = ListNode(1, ListNode(2, ListNode(3, ListNode(-3, ListNode(-2)))))
+# result = removeZeroSumSublists(head)
+# printList(result)  # Ожидается: 1
+
+
 # def customSortString(order, s):
 #     count = dict(collections.Counter(s))
 #     result = ''
