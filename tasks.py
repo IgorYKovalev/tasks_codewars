@@ -15,6 +15,23 @@ from collections import defaultdict
 from collections import deque
 
 
+# def pivotInteger(n):
+#     left_sum = 0
+#     right_sum = sum(range(1, n + 1))
+#
+#     for i in range(n, 0, - 1):
+#         left_sum += i
+#         right_sum -= i
+#         if left_sum == right_sum + i:
+#             return i
+#     return - 1
+#
+#
+# print(pivotInteger(8))
+# print(pivotInteger(4))
+# print(pivotInteger(1))
+
+
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
