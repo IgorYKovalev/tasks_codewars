@@ -15,6 +15,21 @@ from collections import defaultdict
 from collections import deque
 
 
+# def numSubarraysWithSum(nums, goal):
+#     count = 0
+#     current_sum = 0
+#     sum_counts = collections.Counter({0: 1})
+#     for num in nums:
+#         current_sum += num
+#         count += sum_counts[current_sum - goal]
+#         sum_counts[current_sum] += 1
+#     return count
+#
+#
+# print(numSubarraysWithSum([1, 0, 1, 0, 1], 2))
+# print(numSubarraysWithSum([0, 0, 0, 0, 0], 0))
+
+
 # def pivotInteger(n):
 #     left_sum = 0
 #     right_sum = sum(range(1, n + 1))
