@@ -15,6 +15,27 @@ from collections import defaultdict
 from collections import deque
 
 
+# def productExceptSelf(nums):
+#     left_products = [1] * len(nums)
+#     right_products = [1] * len(nums)
+#     result = [1] * len(nums)
+#
+#     for i in range(1, len(nums)):
+#         left_products[i] = nums[i - 1] * left_products[i - 1]
+#
+#     for i in range(len(nums) - 2, -1, -1):
+#         right_products[i] = nums[i + 1] * right_products[i + 1]
+#
+#     for i in range(len(nums)):
+#         result[i] = left_products[i] * right_products[i]
+#
+#     return result
+#
+#
+# print(productExceptSelf([1, 2, 3, 4]))
+# print(productExceptSelf([-1, 1, 0, -3, 3]))
+
+
 # def numSubarraysWithSum(nums, goal):
 #     count = 0
 #     current_sum = 0
