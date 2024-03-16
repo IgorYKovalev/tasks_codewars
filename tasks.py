@@ -15,6 +15,25 @@ from collections import defaultdict
 from collections import deque
 
 
+# def findMaxLength(nums):
+#     count = 0
+#     max_length = 0
+#     table = {0: -1}
+#     for index, num in enumerate(nums):
+#         count += -1 if num == 0 else 1
+#
+#         if count in table:
+#             max_length = max(max_length, index - table[count])
+#         else:
+#             table[count] = index
+#
+#     return max_length
+#
+#
+# print(findMaxLength([0, 1]))
+# print(findMaxLength([0, 1, 0]))
+
+
 # def productExceptSelf(nums):
 #     left_products = [1] * len(nums)
 #     right_products = [1] * len(nums)
