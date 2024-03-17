@@ -15,6 +15,25 @@ from collections import defaultdict
 from collections import deque
 
 
+# def insert(intervals, newInterval):
+#     start, end = newInterval[0], newInterval[-1]
+#     left, right = [], []
+#     for i in intervals:
+#         if i[-1] < start:
+#             left.append(i)
+#         elif i[0] > end:
+#             right.append(i)
+#         else:
+#             start = min(i[0], start)
+#             end = max(i[-1], end)
+#
+#     return left + [[start, end]] + right
+#
+#
+# print(insert([[1, 3], [6, 9]], [2, 5]))
+# print(insert([[1, 2], [3, 5], [6, 7], [8, 10], [12, 16]], [4, 8]))
+
+
 # def findMaxLength(nums):
 #     count = 0
 #     max_length = 0
