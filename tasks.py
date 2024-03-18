@@ -15,6 +15,27 @@ from collections import defaultdict
 from collections import deque
 
 
+# def findMinArrowShots(points):
+#     if not points:
+#         return 0
+#
+#     points.sort(key=lambda x: x[1])
+#     arrows = 1
+#     current_arrow_position = points[0][1]
+#
+#     for start, end in points:
+#         if start <= current_arrow_position:
+#             continue
+#         arrows += 1
+#         current_arrow_position = end
+#
+#     return arrows
+#
+#
+# print(findMinArrowShots([[10, 16], [2, 8], [1, 6], [7, 12]]))
+# print(findMinArrowShots([[1, 2], [3, 4], [5, 6], [7, 8]]))
+
+
 # def insert(intervals, newInterval):
 #     start, end = newInterval[0], newInterval[-1]
 #     left, right = [], []
