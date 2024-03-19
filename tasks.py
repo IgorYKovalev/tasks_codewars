@@ -15,6 +15,19 @@ from collections import defaultdict
 from collections import deque
 
 
+# def leastInterval(tasks, n):
+#     task_counts = collections.Counter(tasks).values()
+#     max_val = max(task_counts)
+#     max_count = sum(count == max_val for count in task_counts)
+#
+#     return max(len(tasks), (n + 1) * (max_val - 1) + max_count)
+#
+#
+# print(leastInterval(["A", "A", "A", "B", "B", "B"], 2))  # Выведет: 8
+# print(leastInterval(["A", "C", "A", "B", "D", "B"], 1))  # Выведет: 6
+# print(leastInterval(["A", "A", "A", "B", "B", "B"], 3))  # Выведет: 10
+
+
 # def findMinArrowShots(points):
 #     if not points:
 #         return 0
