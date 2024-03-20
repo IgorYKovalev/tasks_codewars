@@ -15,6 +15,64 @@ from collections import defaultdict
 from collections import deque
 
 
+# class ListNode:
+#     def __init__(self, value=0, next=None):
+#         self.value = value
+#         self.next = next
+#
+#
+# def mergeInBetween(list1, a, b, list2):
+#     # Шаг 1: Найти узел перед `a`
+#     dummy = ListNode(-1)
+#     dummy.next = list1
+#     prev = dummy
+#     for i in range(a):
+#         prev = prev.next
+#
+#     # Шаг 2: Найти узел на позиции `b` и сохранить узел после `b`
+#     afterB = prev
+#     for i in range(b - a + 2):
+#         afterB = afterB.next
+#
+#     # Шаг 3: Соединить `prev` с головой `list2`
+#     prev.next = list2
+#
+#     # Шаг 4: Найти хвост `list2`
+#     while list2.next:
+#         list2 = list2.next
+#
+#     # Шаг 5: Соединить хвост `list2` с `afterB`
+#     list2.next = afterB
+#
+#     return dummy.next
+#
+#
+# # Вспомогательная функция для создания связного списка из списка
+# def createLinkedList(lst):
+#     dummy = ListNode()
+#     current = dummy
+#     for value in lst:
+#         current.next = ListNode(value)
+#         current = current.next
+#     return dummy.next
+#
+#
+# # Вспомогательная функция для печати связного списка
+# def printLinkedList(head):
+#     current = head
+#     while current:
+#         print(current.value, end=" -> " if current.next else "")
+#         current = current.next
+#     print()
+#
+#
+# # Пример использования
+# list1 = createLinkedList([10, 1, 13, 6, 9, 5])
+# list2 = createLinkedList([1000000, 1000001, 1000002])
+# result = mergeInBetween(list1, 3, 4, list2)
+# printLinkedList(result)  # Ожидаемый результат: 10 -> 1 -> 13 -> 1000000 -> 1000001 -> 1000002 -> 5
+
+
 # def leastInterval(tasks, n):
 #     task_counts = collections.Counter(tasks).values()
 #     max_val = max(task_counts)
