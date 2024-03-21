@@ -21,6 +21,47 @@ from collections import deque
 #         self.next = next
 #
 #
+# class Solution(object):
+#     def reverseList(self, head):
+#         prev = None
+#         curr = head
+#         while curr:
+#             next_temp = curr.next  # Сохраняем следующий узел
+#             curr.next = prev  # Меняем указатель текущего узла на предыдущий
+#             prev = curr  # Перемещаем prev на один шаг вперед
+#             curr = next_temp  # Перемещаем curr на один шаг вперед
+#         return prev  # В конце prev будет указывать на новую голову списка
+#
+#
+# def createLinkedList(lst):
+#     dummy = ListNode()
+#     current = dummy
+#     for value in lst:
+#         current.next = ListNode(value)
+#         current = current.next
+#     return dummy.next
+#
+#
+# def printLinkedList(head):
+#     current = head
+#     while current:
+#         print(current.value, end=" -> " if current.next else "")
+#         current = current.next
+#     print()
+#
+#
+# solution = Solution()
+# list1 = createLinkedList([1, 2, 3, 4, 5])
+# reversed_list = solution.reverseList(list1)
+# printLinkedList(reversed_list)  # Ожидаемый вывод: 5 -> 4 -> 3 -> 2 -> 1
+
+
+# class ListNode:
+#     def __init__(self, value=0, next=None):
+#         self.value = value
+#         self.next = next
+#
+#
 # def mergeInBetween(list1, a, b, list2):
 #     # Шаг 1: Найти узел перед `a`
 #     dummy = ListNode(-1)
