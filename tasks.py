@@ -22,6 +22,66 @@ from collections import deque
 #
 #
 # class Solution(object):
+#     def reorderList(self, head):
+#         if not head or not head.next or not head.next.next:
+#             return head
+#
+#         # Шаг 1. Найти середину списка
+#         slow = fast = head
+#         while fast and fast.next:
+#             slow = slow.next
+#             fast = fast.next.next
+#
+#         # Шаг 2. Реверсировать вторую половину списка
+#         prev = None
+#         current = slow
+#         while current:
+#             next_temp = current.next
+#             current.next = prev
+#             prev = current
+#             current = next_temp
+#
+#         # Шаг 3. Слить две половины списка
+#         first, second = head, prev
+#         while second.next:
+#             temp1 = first.next
+#             first.next = second
+#             first = temp1
+#
+#             temp2 = second.next
+#             second.next = first
+#             second = temp2
+#
+#
+# def createLinkedList(lst):
+#     dummy = ListNode(0)
+#     current = dummy
+#     for value in lst:
+#         current.next = ListNode(value)
+#         current = current.next
+#     return dummy.next
+#
+#
+# def printList(head):
+#     while head:
+#         print(head.value, end=" -> " if head.next else "")
+#         head = head.next
+#     print()
+#
+#
+# solution = Solution()
+# head = createLinkedList([1, 2, 3, 4, 5])
+# solution.reorderList(head)
+# printList(head)  # Ожидаемый вывод: 1 -> 5 -> 2 -> 4 -> 3
+
+
+# class ListNode:
+#     def __init__(self, value=0, next=None):
+#         self.value = value
+#         self.next = next
+#
+#
+# class Solution(object):
 #     def isPalindrome(self, head):
 #         if head is None or head.next is None:
 #             return True
