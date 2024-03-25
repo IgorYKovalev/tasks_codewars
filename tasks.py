@@ -15,6 +15,21 @@ from collections import defaultdict
 from collections import deque
 
 
+# def findDuplicates(nums):
+#     seen = set()
+#     result = []
+#     for i in nums:
+#         if i in seen:
+#             result.append(i)
+#         seen.add(i)
+#     return result
+#
+#
+# print(findDuplicates([4, 3, 2, 7, 8, 2, 3, 1]))
+# print(findDuplicates([1, 1, 2]))
+# print(findDuplicates([1]))
+
+
 # def findDuplicate(nums):
 #     seen = set()
 #     for num in nums:
