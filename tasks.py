@@ -15,6 +15,19 @@ from collections import defaultdict
 from collections import deque
 
 
+# def firstMissingPositive(nums):
+#     nums = set(nums)
+#     for i in range(1, len(nums) + 2):
+#         if i not in nums:
+#             return i
+#
+#
+# print(firstMissingPositive([1]))
+# print(firstMissingPositive([1, 2, 0]))
+# print(firstMissingPositive([3, 4, -1, 1]))
+# print(firstMissingPositive([7, 8, 9, 11, 12]))
+
+
 # def findDuplicates(nums):
 #     seen = set()
 #     result = []
