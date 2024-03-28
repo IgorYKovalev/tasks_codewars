@@ -15,6 +15,24 @@ from collections import defaultdict
 from collections import deque
 
 
+# def maxSubarrayLength(nums, k):
+#     left, result = 0, 0
+#     freq = defaultdict(int)
+#
+#     for right in range(len(nums)):
+#         freq[nums[right]] += 1
+#         while freq[nums[right]] > k:
+#             freq[nums[left]] -= 1
+#             left += 1
+#         result = max(result, right - left + 1)
+#     return result
+#
+#
+# print(maxSubarrayLength([1, 2, 3, 1, 2, 3, 1, 2], 2))
+# print(maxSubarrayLength([1, 2, 1, 2, 1, 2, 1, 2], 1))
+# print(maxSubarrayLength([5, 5, 5, 5, 5, 5, 5], 4))
+
+
 # def numSubarrayProductLessThanK(nums, k):
 #     if k <= 1:
 #         return 0
