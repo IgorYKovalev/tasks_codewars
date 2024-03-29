@@ -15,6 +15,29 @@ from collections import defaultdict
 from collections import deque
 
 
+# def countSubarrays(nums, k):
+#     max_num = max(nums)
+#     max_count = 0
+#     count, left, right = 0, 0, 0
+#
+#     while right < len(nums):
+#         if nums[right] == max_num:
+#             max_count += 1
+#
+#         while max_count >= k:
+#             count += len(nums) - right
+#             if nums[left] == max_num:
+#                 max_count -= 1
+#
+#             left += 1
+#         right += 1
+#     return count
+#
+#
+# print(countSubarrays([1, 3, 2, 3, 3], 2))
+# print(countSubarrays([1, 4, 2, 1], 3))
+
+
 # def maxSubarrayLength(nums, k):
 #     left, result = 0, 0
 #     freq = defaultdict(int)
