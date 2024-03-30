@@ -15,6 +15,33 @@ from collections import defaultdict
 from collections import deque
 
 
+# class Solution(object):
+#     def subarraysWithKDistinct(self, nums, k):
+#         return self.subarraysWithAtMostKDistinct(nums, k) - self.subarraysWithAtMostKDistinct(nums, k - 1)
+#
+#     def subarraysWithAtMostKDistinct(self, nums, k):
+#         ans = 0
+#         count = [0] * (len(nums) + 1)
+#
+#         left = 0
+#         for right in range(len(nums)):
+#             count[nums[right]] += 1
+#             if count[nums[right]] == 1:
+#                 k -= 1
+#             while k == -1:
+#                 count[nums[left]] -= 1
+#                 if count[nums[left]] == 0:
+#                     k += 1
+#                 left += 1
+#             ans += right - left + 1
+#         return ans
+#
+#
+# solution = Solution()
+# print(solution.subarraysWithKDistinct([1, 2, 1, 2, 3], 2))
+# print(solution.subarraysWithKDistinct([1, 2, 1, 3, 4], 3))
+
+
 # def countSubarrays(nums, k):
 #     max_num = max(nums)
 #     max_count = 0
