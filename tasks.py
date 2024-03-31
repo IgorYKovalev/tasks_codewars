@@ -15,6 +15,25 @@ from collections import defaultdict
 from collections import deque
 
 
+# def countSubarrays(nums, minK, maxK):
+#     ans = 0
+#     min_i = max_i = waste_i = -1
+#     for i in range(len(nums)):
+#         if nums[i] < minK or nums[i] > maxK:
+#             waste_i = i
+#         if nums[i] == minK:
+#             min_i = i
+#         if nums[i] == maxK:
+#             max_i = i
+#         temp = min(max_i, min_i) - waste_i
+#         ans += max(0, temp)
+#     return ans
+#
+#
+# print(countSubarrays([1, 3, 5, 2, 7, 5], 1, 5))  # Output: 2
+# print(countSubarrays([1, 1, 1, 1], 1, 1))  # Output: 10
+
+
 # class Solution(object):
 #     def subarraysWithKDistinct(self, nums, k):
 #         return self.subarraysWithAtMostKDistinct(nums, k) - self.subarraysWithAtMostKDistinct(nums, k - 1)
