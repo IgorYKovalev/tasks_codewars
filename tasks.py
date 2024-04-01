@@ -15,6 +15,16 @@ from collections import defaultdict
 from collections import deque
 
 
+# def lengthOfLastWord(s):
+#     result = s.split()
+#     return len(result[-1])
+#
+#
+# print(lengthOfLastWord("Hello World"))
+# print(lengthOfLastWord("   fly me   to   the moon  "))
+# print(lengthOfLastWord("luffy is still joyboy"))
+
+
 # def countSubarrays(nums, minK, maxK):
 #     ans = 0
 #     min_i = max_i = waste_i = -1
