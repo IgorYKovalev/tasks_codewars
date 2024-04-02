@@ -15,6 +15,23 @@ from collections import defaultdict
 from collections import deque
 
 
+# def isIsomorphic(s, t):
+#     # result_s = [(s.count(k), len(list(v))) for k, v in groupby(s)]
+#     # result_t = [(t.count(k), len(list(v))) for k, v in groupby(t)]
+#     # return result_s == result_t
+#
+#     # но круче так
+#
+#     return len(set(s)) == len(set(t)) == len(set(zip(s, t)))
+#
+#
+# print(isIsomorphic("egg", "add"))
+# print(isIsomorphic("foo", "bar"))
+# print(isIsomorphic("paper", "title"))
+# print(isIsomorphic("bbbaaaba", "aaabbbba"))
+# print(isIsomorphic("badc", "baba"))
+
+
 # def lengthOfLastWord(s):
 #     result = s.split()
 #     return len(result[-1])
