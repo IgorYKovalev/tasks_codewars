@@ -15,6 +15,23 @@ from collections import defaultdict
 from collections import deque
 
 
+# def maxDepth(s):
+#     current_depth = 0
+#     max_depth = 0
+#     for i in s:
+#         if i == '(':
+#             current_depth += 1
+#             max_depth = max(max_depth, current_depth)
+#         elif i == ')':
+#             current_depth -= 1
+#
+#     return max_depth
+#
+#
+# print(maxDepth("(1+(2*3)+((8)/4))+1"))
+# print(maxDepth("(1)+((2))+(((3)))"))
+
+
 # def exist(board, word):
 #     if not board:
 #         return False
