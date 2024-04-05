@@ -15,6 +15,22 @@ from collections import defaultdict
 from collections import deque
 
 
+# def makeGood(s):
+#     stack = []
+#     for i in s:
+#         if stack and abs(ord(stack[-1]) - ord(i)) == 32:
+#             stack.pop()
+#         else:
+#             stack.append(i)
+#     return ''.join(stack)
+#
+#
+# print(makeGood("mC"))
+# print(makeGood("leEeetcode"))
+# print(makeGood("abBAcC"))
+# print(makeGood("s"))
+
+
 # def maxDepth(s):
 #     current_depth = 0
 #     max_depth = 0
