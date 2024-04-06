@@ -15,6 +15,31 @@ from collections import defaultdict
 from collections import deque
 
 
+# def minRemoveToMakeValid(s):
+#     stack = []
+#     to_remove = set()
+#     for i, char in enumerate(s):
+#         if char == '(':
+#             stack.append(i)
+#         elif char == ')':
+#             if stack:
+#                 stack.pop()
+#             else:
+#                 to_remove.add(i)
+#
+#     to_remove.update(stack)
+#     result = ''
+#     for i, char in enumerate(s):
+#         if i not in to_remove:
+#             result += char
+#     return result
+#
+#
+# print(minRemoveToMakeValid("lee(t(c)o)de)"))
+# print(minRemoveToMakeValid("a)b(c)d"))
+# print(minRemoveToMakeValid("))(("))
+
+
 # def makeGood(s):
 #     stack = []
 #     for i in s:
