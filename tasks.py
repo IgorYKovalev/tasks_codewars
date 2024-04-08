@@ -15,6 +15,17 @@ from collections import defaultdict
 from collections import deque
 
 
+# def countStudents(students, sandwiches):
+#     while sandwiches and students.count(sandwiches[0]):
+#         students.pop(students.index(sandwiches[0]))
+#         sandwiches.pop(0)
+#     return len(students)
+#
+#
+# print(countStudents([1, 1, 0, 0], [0, 1, 0, 1]))
+# print(countStudents([1, 1, 1, 0, 0, 1], [1, 0, 0, 0, 1, 1]))
+
+
 # def checkValidString(s):
 #     leftMin, leftMax = 0, 0
 #     for i in s:
