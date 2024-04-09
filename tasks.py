@@ -15,6 +15,20 @@ from collections import defaultdict
 from collections import deque
 
 
+# def timeRequiredToBuy(tickets, k):
+#     total = 0
+#     for i, x in enumerate(tickets):
+#         if i <= k:
+#             total += min(tickets[i], tickets[k])
+#         else:
+#             total += min(tickets[i], tickets[k] - 1)
+#     return total
+#
+#
+# print(timeRequiredToBuy([2, 3, 2], 2))
+# print(timeRequiredToBuy([5, 1, 1, 1], 0))
+
+
 # def countStudents(students, sandwiches):
 #     while sandwiches and students.count(sandwiches[0]):
 #         students.pop(students.index(sandwiches[0]))
