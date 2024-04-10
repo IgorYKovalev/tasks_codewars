@@ -15,6 +15,22 @@ from collections import defaultdict
 from collections import deque
 
 
+# def deckRevealedIncreasing(deck):
+#     deck.sort()
+#     result = [0] * len(deck)
+#     indexes = list(range(len(deck)))
+#
+#     while deck:
+#         result[indexes.pop(0)] = deck.pop(0)
+#         if deck:
+#             indexes.append(indexes.pop(0))
+#     return result
+#
+#
+# print(deckRevealedIncreasing([17, 13, 11, 2, 3, 5, 7]))
+# print(deckRevealedIncreasing([1, 1000]))
+
+
 # def timeRequiredToBuy(tickets, k):
 #     total = 0
 #     for i, x in enumerate(tickets):
