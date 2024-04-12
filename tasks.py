@@ -15,6 +15,32 @@ from collections import defaultdict
 from collections import deque
 
 
+# def trap(height):
+#     if not height:
+#         return 0
+#
+#     n = len(height)
+#     left, right = 0, n - 1
+#     left_max, right_max = height[0], height[n - 1]
+#     water = 0
+#     while left <= right:
+#         left_max = max(left_max, height[left])
+#         right_max = max(right_max, height[right])
+#
+#         if left_max < right_max:
+#             water += left_max - height[left]
+#             left += 1
+#         else:
+#             water += right_max - height[right]
+#             right -= 1
+#
+#     return water
+#
+#
+# print(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
+# print(trap([4, 2, 0, 3, 2, 5]))
+
+
 # def removeKdigits(num, k):
 #     stack = []
 #     for i in num:
