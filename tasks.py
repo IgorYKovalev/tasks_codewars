@@ -15,6 +15,45 @@ from collections import defaultdict
 from collections import deque
 
 
+# class Solution(object):
+#     def maximalRectangle(self, matrix):
+#         if not matrix:
+#             return 0
+#
+#         def maxArea(heights):
+#             stack = [-1]
+#             max_area = 0
+#             for i in range(len(heights)):
+#                 while stack[-1] != -1 and heights[stack[-1]] >= heights[i]:
+#                     h = heights[stack.pop()]
+#                     w = i - stack[-1] - 1
+#                     max_area = max(max_area, h * w)
+#                 stack.append(i)
+#             while stack[-1] != -1:
+#                 h = heights[stack.pop()]
+#                 w = len(heights) - stack[-1] - 1
+#                 max_area = max(max_area, h * w)
+#             return max_area
+#
+#         max_area = 0
+#         heights = [0] * len(matrix[0])
+#         for row in matrix:
+#             for i in range(len(row)):
+#                 heights[i] = heights[i] + 1 if row[i] == '1' else 0
+#             max_area = max(max_area, maxArea(heights))
+#         return max_area
+#
+#
+# matrix1 = [["1", "0", "1", "0", "0"],
+#            ["1", "0", "1", "1", "1"],
+#            ["1", "1", "1", "1", "1"],
+#            ["1", "0", "0", "1", "0"]]
+#
+#
+# solution = Solution()
+# print(solution.maximalRectangle(matrix1))
+
+
 # def trap(height):
 #     if not height:
 #         return 0
