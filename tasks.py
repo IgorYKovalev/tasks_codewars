@@ -1720,6 +1720,47 @@ from collections import deque
 # print(sumOfLeftLeaves(root))
 
 
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#
+#
+# class Solution(object):
+#     def addOneRow(self, root, val, depth):
+#         if depth == 1:
+#             new_root = TreeNode(val)
+#             new_root.left = root
+#             return new_root
+#
+#         def dfs(node, current_depth):
+#             if not node:
+#                 return
+#
+#             if current_depth == depth - 1:
+#                 left_child, right_child = TreeNode(val), TreeNode(val)
+#                 left_child.left, right_child.right = node.left, node.right
+#                 node.left, node.right = left_child, right_child
+#             else:
+#                 dfs(node.left, current_depth + 1)
+#                 dfs(node.right, current_depth + 1)
+#
+#         dfs(root, 1)
+#         return root
+#
+#
+# root = TreeNode(4)
+# root.left = TreeNode(2)
+# root.right = TreeNode(6)
+# root.right.left = TreeNode(3)
+# root.right.right = TreeNode(1)
+# root.right.left.left = TreeNode(5)
+#
+# solution = Solution()
+# print(solution.addOneRow(root, 1, 2))
+
+
 # class Node:
 #     def __init__(self, L, R, n):
 #         self.left = L
