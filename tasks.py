@@ -1684,7 +1684,6 @@ from collections import deque
 #         return self.max_diameter
 #
 #
-# # Создаем узлы дерева
 # root = TreeNode(1)
 # root.left = TreeNode(2)
 # root.left.left = TreeNode(4)
