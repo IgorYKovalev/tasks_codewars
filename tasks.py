@@ -15,6 +15,32 @@ from collections import defaultdict
 from collections import deque
 
 
+# def islandPerimeter(grid):
+#     rows = len(grid)
+#     cols = len(grid[0])
+#     perimeter = 0
+#
+#     for i in range(rows):
+#         for j in range(cols):
+#             if grid[i][j] == 1:
+#                 perimeter += 4
+#
+#                 if i > 0 and grid[i - 1][j] == 1:
+#                     perimeter -= 2
+#
+#                 if j > 0 and grid[i][j - 1] == 1:
+#                     perimeter -= 2
+#
+#     return perimeter
+#
+#
+# print(islandPerimeter([[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 0], [1, 1, 0, 0]]))
+# print(islandPerimeter([[1, 0]]))
+# print(islandPerimeter([[1]]))
+# print(islandPerimeter([[1, 1]]))
+# print(islandPerimeter([[1, 0, 1]]))
+
+
 # class Solution(object):
 #     def maximalRectangle(self, matrix):
 #         if not matrix:
