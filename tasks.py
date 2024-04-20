@@ -15,6 +15,36 @@ from collections import defaultdict
 from collections import deque
 
 
+# def findFarmland(land):
+#     rows, cols = len(land), len(land[0])
+#     farmland = []
+#
+#     def dfs(i, j):
+#         if i < 0 or j < 0 or i >= rows or j >= cols or land[i][j] != 1:
+#             return
+#
+#         land[i][j] = 0
+#         farmland[-1][2] = max(farmland[-1][2], i)
+#         farmland[-1][3] = max(farmland[-1][3], j)
+#         dfs(i + 1, j)
+#         dfs(i - 1, j)
+#         dfs(i, j + 1)
+#         dfs(i, j - 1)
+#
+#     for i in range(rows):
+#         for j in range(cols):
+#             if land[i][j] == 1:
+#                 farmland.append([i, j, i, j])
+#                 dfs(i, j)
+#
+#     return farmland
+#
+#
+# print(findFarmland([[1, 0, 0], [0, 1, 1], [0, 1, 1]]))
+# print(findFarmland([[1, 1], [1, 1]]))
+# print(findFarmland([[0]]))
+
+
 # def numIslands(grid):
 #     if not grid:
 #         return 0
