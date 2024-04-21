@@ -15,6 +15,34 @@ from collections import defaultdict
 from collections import deque
 
 
+# def validPath(n, edges, source, destination):
+#     graph = {i: [] for i in range(n)}
+#     for k, v in edges:
+#         graph[k].append(v)
+#         graph[v].append(k)
+#
+#     visited = set()
+#
+#     def dfs(node):
+#         if node == destination:
+#             return True
+#         visited.add(node)
+#         for neighbor in graph[node]:
+#             if neighbor not in visited:
+#                 if dfs(neighbor):
+#                     return True
+#
+#         return False
+#
+#     return dfs(source)
+#
+#
+# print(validPath(3, [[0, 1], [1, 2], [2, 0]], 0, 2))
+# print(validPath(6, [[0, 1], [0, 2], [3, 5], [5, 4], [4, 3]], 0, 5))
+# print(validPath(5, [[0, 4]], 0, 4))
+# print(validPath(1, [], 0, 0))
+
+
 # def findFarmland(land):
 #     rows, cols = len(land), len(land[0])
 #     farmland = []
