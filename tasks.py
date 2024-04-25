@@ -15,6 +15,31 @@ from collections import defaultdict
 from collections import deque
 
 
+# def longestIdealString(s, k):
+#     result = [0] * 128
+#     for i in s:
+#         x = ord(i)
+#         result[x] = max(result[x - k: x + k + 1]) + 1
+#     return max(result)
+#
+#
+# print(longestIdealString("acfgbd", 2))  # "acbd" это 4
+# print(longestIdealString("abcd", 3))
+
+
+# def tribonacci(n):
+#     # if n == 0:
+#     #     return 0
+#     # if n in (1, 2):
+#     #     return 1
+#     # return tribonacci(n - 1) + tribonacci(n - 2) + tribonacci(n - 3)
+#     return reduce(lambda x, _: x[1:] + [sum(x)], range(n), [0, 1, 1])[0]
+#
+#
+# print(tribonacci(4))  # 4
+# print(tribonacci(25))  # 1389537
+
+
 # def validPath(n, edges, source, destination):
 #     graph = {i: [] for i in range(n)}
 #     for k, v in edges:
