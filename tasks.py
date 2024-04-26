@@ -1,6 +1,5 @@
 import asyncio
 import collections
-import heapq
 import itertools
 import operator
 import re
@@ -8,11 +7,24 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import datetime
 from functools import reduce
+from heapq import nsmallest
 from itertools import groupby, product, permutations
 import math
 import random
 from collections import defaultdict
 from collections import deque
+
+
+# def minFallingPathSum(grid):
+#     m = [(0, -1)]
+#     for r in grid:
+#         grid = ((v + m[j == m[0][1]][0], j) for j, v in enumerate(r))
+#         m = nsmallest(2, grid)
+#
+#     return m[0][0]
+#
+#
+# print(minFallingPathSum([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
 
 
 # def longestIdealString(s, k):
