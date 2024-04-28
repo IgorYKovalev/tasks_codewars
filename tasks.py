@@ -15,6 +15,39 @@ from collections import defaultdict
 from collections import deque
 
 
+# def sumOfDistancesInTree(n, edges):
+#     graph = defaultdict(list)
+#     for u, v in edges:
+#         graph[u].append(v)
+#         graph[v].append(u)
+#
+#     path_length = [0 for _ in range(n)]
+#     size = [1 for _ in range(n)]
+#
+#     def dfs(node, parent=-1, length=0):
+#         path_length[0] += length
+#         for neighbor in graph[node]:
+#             if neighbor != parent:
+#                 dfs(neighbor, node, length + 1)
+#                 size[node] += size[neighbor]
+#         return
+#
+#     def change_viewpoint(node, parent=-1):
+#         for neighbor in graph[node]:
+#             if neighbor != parent:
+#                 path_length[neighbor] = path_length[node] + (n - size[neighbor]) - size[neighbor]
+#                 change_viewpoint(neighbor, parent=node)
+#
+#         return
+#
+#     dfs(node=0, parent=-1, length=0)
+#     change_viewpoint(node=0, parent=-1)
+#     return path_length
+#
+#
+# print(sumOfDistancesInTree(6, [[0, 1], [0, 2], [2, 3], [2, 4], [2, 5]]))  # [8,12,6,10,10,10]
+
+
 # def findRotateSteps(ring, key):
 #     memo = {}
 #
