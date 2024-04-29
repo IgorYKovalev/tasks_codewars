@@ -15,6 +15,20 @@ from collections import defaultdict
 from collections import deque
 
 
+# def minOperations(nums, k):
+#     xor = 0
+#     for i in nums:
+#         xor ^= i
+#     if xor == k:
+#         return 0
+#     flips = bin(xor ^ k).count('1')
+#     return flips
+#
+#
+# print(minOperations([2, 1, 3, 4], 1))  # 2
+# print(minOperations([2, 0, 2, 0], 0))  # 0
+
+
 # def sumOfDistancesInTree(n, edges):
 #     graph = defaultdict(list)
 #     for u, v in edges:
