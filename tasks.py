@@ -15,6 +15,24 @@ from collections import defaultdict
 from collections import deque
 
 
+# def wonderfulSubstrings(word):
+#     count = [0] * 1024
+#     mask = 0
+#     count[0] = 1
+#     result = 0
+#     for c in word:
+#         mask ^= 1 << (ord(c) - ord('a'))
+#         result += count[mask]
+#         for i in range(10):
+#             result += count[mask ^ (1 << i)]
+#         count[mask] += 1
+#     return result
+#
+#
+# print(wonderfulSubstrings('aba'))  # 4
+# print(wonderfulSubstrings('aabb'))  # 9
+
+
 # def minOperations(nums, k):
 #     xor = 0
 #     for i in nums:
