@@ -15,6 +15,19 @@ from collections import defaultdict
 from collections import deque
 
 
+# def reversePrefix(word, ch):
+#     if ch in word:
+#         ind = word.index(ch) + 1
+#         sub = word[:ind]
+#         return sub[::-1] + word[ind:]
+#     return word
+#
+#
+# print(reversePrefix("abcdefd", "d"))
+# print(reversePrefix("xyxzxe", "z"))
+# print(reversePrefix("abcd", "z"))
+
+
 # def wonderfulSubstrings(word):
 #     count = [0] * 1024
 #     mask = 0
