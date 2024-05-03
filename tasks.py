@@ -1,6 +1,5 @@
 import asyncio
 import collections
-import itertools
 import operator
 import re
 from collections.abc import Iterator
@@ -8,11 +7,36 @@ from contextlib import contextmanager
 from datetime import datetime
 from functools import reduce
 from heapq import nsmallest
-from itertools import groupby, product, permutations
+from itertools import groupby, product, permutations, zip_longest
 import math
 import random
 from collections import defaultdict
 from collections import deque
+
+
+# def compareVersion(version1, version2):
+#     v1, v2 = (map(int, v.split('.')) for v in (version1, version2))
+#     v1, v2 = zip(*zip_longest(v1, v2, fillvalue=0))
+#     return (0, 1, -1)[(v1 > v2) - (v1 < v2)]
+#
+#
+# print(compareVersion("1.01", "1.001"))
+# print(compareVersion("1.0", "1.0.0"))
+# print(compareVersion("0.1", "1.1"))
+# print(compareVersion("1.0.1", "1"))
+# print(compareVersion("1.1", "1.10"))
+
+
+# def findMaxK(nums):
+#     result = [abs(i) for i in nums if i < 0 and abs(i) in nums]
+#     if result:
+#         return max(result)
+#     return -1
+#
+#
+# print(findMaxK([-1, 2, -3, 3]))
+# print(findMaxK([-1, 10, 6, 7, -7, 1]))
+# print(findMaxK([-10, 8, 6, 7, -2, -3]))
 
 
 # def reversePrefix(word, ch):
