@@ -14,6 +14,22 @@ from collections import defaultdict
 from collections import deque
 
 
+# def numRescueBoats(people, limit):
+#     people.sort()
+#     i, boat, s = 0, 0, len(people) - 1
+#     while i <= s:
+#         if people[i] + people[s] <= limit:
+#             i += 1
+#         s -= 1
+#         boat += 1
+#     return boat
+#
+#
+# print(numRescueBoats([3, 5, 3, 4], 5))
+# print(numRescueBoats([3, 2, 2, 1], 3))
+# print(numRescueBoats([1, 2], 3))
+
+
 # def compareVersion(version1, version2):
 #     v1, v2 = (map(int, v.split('.')) for v in (version1, version2))
 #     v1, v2 = zip(*zip_longest(v1, v2, fillvalue=0))
