@@ -1220,6 +1220,23 @@ from collections import deque
 
 
 # class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+#
+#
+# class Solution(object):
+#     def removeNodes(self, head):
+#         if not head:
+#             return head
+#
+#         head.next = self.removeNodes(head.next)
+#         if head.next and head.next.val > head.val:
+#             return head.next
+#         return head
+
+
+# class ListNode(object):
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
