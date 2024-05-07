@@ -1237,6 +1237,25 @@ from collections import deque
 
 
 # class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+#
+#
+# class Solution(object):
+#     def doubleIt(self, head):
+#         if head.val > 4:
+#             head = ListNode(0, head)
+#         curr = head
+#         while curr:
+#             curr.val = (curr.val * 2) % 10
+#             if curr.next and curr.next.val > 4:
+#                 curr.vall += 1
+#             curr = curr.next
+#         return head
+
+
+# class ListNode(object):
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
