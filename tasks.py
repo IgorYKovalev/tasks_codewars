@@ -14,6 +14,25 @@ from collections import defaultdict
 from collections import deque
 
 
+# def findRelativeRanks(score):
+#     rank_dict = {}
+#     for k, v in enumerate(sorted(score, reverse=True)):
+#         if k == 0:
+#             rank_dict[v] = "Gold Medal"
+#         elif k == 1:
+#             rank_dict[v] = "Silver Medal"
+#         elif k == 2:
+#             rank_dict[v] = "Bronze Medal"
+#         else:
+#             rank_dict[v] = str(k + 1)
+#
+#     return [rank_dict[i] for i in score]
+#
+#
+# print(findRelativeRanks([10, 3, 8, 9, 4]))
+# print(findRelativeRanks([5, 4, 3, 2, 1]))
+
+
 # def numRescueBoats(people, limit):
 #     people.sort()
 #     i, boat, s = 0, 0, len(people) - 1
