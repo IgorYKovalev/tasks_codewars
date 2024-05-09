@@ -14,6 +14,21 @@ from collections import defaultdict
 from collections import deque
 
 
+# def maximumHappinessSum(happiness, k):
+#     happiness.sort(reverse=True)
+#     total = 0
+#     for turn in range(k):
+#         current = max(happiness[turn] - turn, 0)
+#         total += current
+#
+#     return total
+#
+#
+# print(maximumHappinessSum([1, 2, 3], 2))
+# print(maximumHappinessSum([1, 1, 1, 1], 2))
+# print(maximumHappinessSum([2, 3, 4, 5], 1))
+
+
 # def findRelativeRanks(score):
 #     rank_dict = {}
 #     for k, v in enumerate(sorted(score, reverse=True)):
