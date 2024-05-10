@@ -14,6 +14,13 @@ from collections import defaultdict
 from collections import deque
 
 
+# def kthSmallestPrimeFraction(arr, k):
+#     return nsmallest(k, product(arr, arr), lambda q: q[0]/q[1])[-1]
+#
+#
+# print(kthSmallestPrimeFraction([1, 2, 3, 5], 3))
+
+
 # def maximumHappinessSum(happiness, k):
 #     happiness.sort(reverse=True)
 #     total = 0
