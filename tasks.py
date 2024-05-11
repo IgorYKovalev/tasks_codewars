@@ -1,5 +1,6 @@
 import asyncio
 import collections
+import heapq
 import operator
 import re
 from collections.abc import Iterator
@@ -12,6 +13,24 @@ import math
 import random
 from collections import defaultdict
 from collections import deque
+
+
+# def mincostToHireWorkers(quality, wage, k):
+#     workers = sorted((w / q, q) for w, q in zip(wage, quality))
+#     maxheap = []
+#     ans = math.inf
+#     qualsum = 0
+#     for wpq, q in workers:
+#         heapq.heappush(maxheap, -q)
+#         qualsum += q
+#         if len(maxheap) > k:
+#             qualsum += heapq.heappop(maxheap)
+#         if len(maxheap) == k:
+#             ans = min(ans, qualsum * wpq)
+#     return ans
+#
+#
+# print(mincostToHireWorkers([10, 20, 5], [70, 50, 30], 2))
 
 
 # def kthSmallestPrimeFraction(arr, k):
