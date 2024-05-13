@@ -15,6 +15,18 @@ from collections import defaultdict
 from collections import deque
 
 
+# def matrixScore(grid):
+#     n, m = len(grid), len(grid[0])
+#     res = 0
+#     for i in range(m):
+#         set_count = sum(grid[j][i] == grid[j][0] for j in range(n))
+#         res += max(set_count, n - set_count) * (1 << (m - 1 - i))
+#     return res
+#
+#
+# print(matrixScore([[0, 0, 1, 1], [1, 0, 1, 0], [1, 1, 0, 0]]))
+
+
 # def largestLocal(grid):
 #     n = len(grid)
 #     ans = [[0] * (n - 2) for _ in range(n - 2)]
