@@ -15,6 +15,31 @@ from collections import defaultdict
 from collections import deque
 
 
+# def getMaximumGold(grid):
+#     row, col = len(grid), len(grid[0])
+#
+#     def dfs(i, j, s):
+#         if i < 0 or i >= row or j < 0 or j >= col or grid[i][j] == 0:
+#             return s
+#         tmp = grid[i][j]
+#         s += tmp
+#         grid[i][j] = 0
+#         ans = max(dfs(i + 1, j, s), dfs(i - 1, j, s), dfs(i, j + 1, s), dfs(i, j - 1, s))
+#         grid[i][j] = tmp
+#         return ans
+#
+#     gold = 0
+#     for i in range(row):
+#         for j in range(col):
+#             if grid[i][j] != 0:
+#                 gold = max(gold, dfs(i, j, 0))
+#
+#     return gold
+#
+#
+# print(getMaximumGold([[0, 6, 0], [5, 8, 7], [0, 9, 0]]))
+
+
 # def matrixScore(grid):
 #     n, m = len(grid), len(grid[0])
 #     res = 0
