@@ -15,6 +15,69 @@ from collections import defaultdict
 from collections import deque
 
 
+# def maximumSafenessFactor(grid):
+#     n = len(grid)
+#     directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+#
+#     # Шаг 1: Вычисляем расстояния от каждой ячейки до ближайшего вора
+#     dist = [[float('inf')] * n for _ in range(n)]
+#     queue = deque()
+#
+#     for r in range(n):
+#         for c in range(n):
+#             if grid[r][c] == 1:
+#                 dist[r][c] = 0
+#                 queue.append((r, c))
+#
+#     while queue:
+#         r, c = queue.popleft()
+#         for dr, dc in directions:
+#             nr, nc = r + dr, c + dc
+#             if 0 <= nr < n and 0 <= nc < n and dist[nr][nc] == float('inf'):
+#                 dist[nr][nc] = dist[r][c] + 1
+#                 queue.append((nr, nc))
+#
+#     # Шаг 2: Бинарный поиск по максимальному фактору безопасности
+#     def canReachEndWithSafeness(min_safeness):
+#         if dist[0][0] < min_safeness or dist[n - 1][n - 1] < min_safeness:
+#             return False
+#         visited = [[False] * n for _ in range(n)]
+#         queue = deque([(0, 0)])
+#         visited[0][0] = True
+#
+#         while queue:
+#             r, c = queue.popleft()
+#             if r == n - 1 and c == n - 1:
+#                 return True
+#             for dr, dc in directions:
+#                 nr, nc = r + dr, c + dc
+#                 if 0 <= nr < n and 0 <= nc < n and not visited[nr][nc] and dist[nr][nc] >= min_safeness:
+#                     visited[nr][nc] = True
+#                     queue.append((nr, nc))
+#
+#         return False
+#
+#     low, high = 0, max(max(row) for row in dist)
+#     result = 0
+#
+#     while low <= high:
+#         mid = (low + high) // 2
+#         if canReachEndWithSafeness(mid):
+#             result = mid
+#             low = mid + 1
+#         else:
+#             high = mid - 1
+#
+#     return result
+#
+#
+# grid1 = [[1, 0, 0], [0, 0, 0], [0, 0, 1]]
+# print(maximumSafenessFactor(grid1))  # Вывод: 0
+#
+# grid2 = [[0, 0, 1], [0, 0, 0], [0, 0, 0]]
+# print(maximumSafenessFactor(grid2))  # Вывод: 2
+
+
 # def getMaximumGold(grid):
 #     row, col = len(grid), len(grid[0])
 #
