@@ -15,6 +15,33 @@ from collections import defaultdict
 from collections import deque
 
 
+# def subsets(nums):
+#     def backtrack(start, path):
+#         result.append(path)
+#         for i in range(start, len(nums)):
+#             backtrack(i + 1, path + [nums[i]])
+#
+#     result = []
+#     backtrack(0, [])
+#     return result
+#
+#
+# print(subsets([1, 2, 3]))
+# print(subsets([0]))
+
+
+# def subsetXORSum(nums):
+#         sumTotal = 0
+#
+#         for num in nums:
+#             sumTotal |= num
+#         return sumTotal << (len(nums) - 1)
+#
+#
+# print(subsetXORSum([1, 3]))
+# print(subsetXORSum([5, 1, 6]))
+
+
 # def maximumSafenessFactor(grid):
 #     n = len(grid)
 #     directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
