@@ -15,6 +15,24 @@ from collections import defaultdict
 from collections import deque
 
 
+# def beautifulSubsets(nums, k):
+#     q = deque([([], -1)])
+#     res = 0
+#
+#     while q:
+#         cur, ind = q.popleft()
+#         res += 1
+#         for i in range(ind + 1, len(nums)):
+#             if nums[i] - k in cur or nums[i] + k in cur:
+#                 continue
+#             q.append((cur + [nums[i]], i))
+#     return res - 1
+#
+#
+# print(beautifulSubsets([2, 4, 6], 2))
+# print(beautifulSubsets([1], 1))
+
+
 # def partition(s):
 #     def is_palindrome(sub):
 #         return sub == sub[::-1]
