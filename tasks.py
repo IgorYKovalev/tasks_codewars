@@ -15,6 +15,38 @@ from collections import defaultdict
 from collections import deque
 
 
+# def maxScoreWords(words, letters, score):
+#     letterCount = [0] * 26
+#     for l in letters:
+#         letterCount[ord(l) - ord('a')] += 1
+#     return dfs(words, score, letterCount, 0)
+#
+#
+# def dfs(words, score, letterCount, index):
+#     if index == len(words):
+#         return 0
+#     skipScore = dfs(words, score, letterCount, index + 1)
+#     wordScore = 0
+#     newLetterCount = letterCount[:]
+#     valid = True
+#     for c in words[index]:
+#         if newLetterCount[ord(c) - ord('a')] == 0:
+#             valid = False
+#             break
+#         newLetterCount[ord(c) - ord('a')] -= 1
+#         wordScore += score[ord(c) - ord('a')]
+#     takeScore = 0
+#     if valid:
+#         takeScore = wordScore + dfs(words, score, newLetterCount, index + 1)
+#     return max(skipScore, takeScore)
+#
+#
+# words = ["dog", "cat", "dad", "good"]
+# letters = ["a", "a", "c", "d", "d", "d", "g", "o", "o"]
+# score = [1, 0, 9, 5, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+# print(maxScoreWords(words, letters, score))
+
+
 # def beautifulSubsets(nums, k):
 #     q = deque([([], -1)])
 #     res = 0
