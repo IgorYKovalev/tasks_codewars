@@ -15,6 +15,23 @@ from collections import defaultdict
 from collections import deque
 
 
+# def wordBreak(s, wordDict):
+#
+#     def f(i):
+#         result = [s[i:]] if s[i:] in wordDict else []
+#         for j in range(i + 1, len(s)):
+#             if s[i:j] in wordDict:
+#                 for t in f(j):
+#                     result.append(s[i:j] + ' ' + t)
+#
+#         return result
+#
+#     return f(0)
+#
+#
+# print(wordBreak("catsanddog", ["cat", "cats", "and", "sand", "dog"]))
+
+
 # def maxScoreWords(words, letters, score):
 #     letterCount = [0] * 26
 #     for l in letters:
