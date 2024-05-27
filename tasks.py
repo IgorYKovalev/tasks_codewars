@@ -15,6 +15,25 @@ from collections import defaultdict
 from collections import deque
 
 
+# def specialArray(nums):
+#     nums.sort()
+#     n = len(nums)
+#     for x in range(1, n + 1):
+#         count = 0
+#         for num in nums:
+#             if num >= x:
+#                 count += 1
+#         if count == x:
+#             return x
+#     return - 1
+#
+#
+# print(specialArray([3, 5]))
+# print(specialArray([0, 4, 3, 0, 4]))
+# print(specialArray([0, 0]))
+# print(specialArray([3, 6, 7, 7, 0]))
+
+
 # def checkRecord(n):
 #     dp = [[[-1] * 3 for _ in range(2)] for _ in range(n + 1)]
 #     mod = 10 ** 9 + 7
