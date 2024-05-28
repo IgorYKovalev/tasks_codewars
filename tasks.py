@@ -15,6 +15,24 @@ from collections import defaultdict
 from collections import deque
 
 
+# def equalSubstring(s, t, maxCost):
+#     l, cost = 0, 0
+#     result = 0
+#     for r in range(len(s)):
+#         cost += abs(ord(s[r]) - ord(t[r]))
+#
+#         while cost > maxCost:
+#             cost -= abs(ord(s[l]) - ord(t[l]))
+#             l += 1
+#
+#         result = max(result, r - l + 1)
+#
+#     return result
+#
+#
+# print(equalSubstring("abcd", "bcdf", 3))
+
+
 # def specialArray(nums):
 #     nums.sort()
 #     n = len(nums)
