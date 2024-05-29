@@ -15,6 +15,25 @@ from collections import defaultdict
 from collections import deque
 
 
+# def numSteps(s):
+#     result = 0
+#     res = int(s, 2)
+#     while res != 1:
+#         if res % 2 == 0:
+#             res //= 2
+#         else:
+#             res += 1
+#         result += 1
+#
+#     return result
+#
+#
+# print(numSteps("1111011110000011100000110001011011110010111001010111110001"))
+# print(numSteps("1101"))
+# print(numSteps("10"))
+# print(numSteps("1"))
+
+
 # def equalSubstring(s, t, maxCost):
 #     l, cost = 0, 0
 #     result = 0
