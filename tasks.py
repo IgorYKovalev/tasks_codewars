@@ -15,6 +15,25 @@ from collections import defaultdict
 from collections import deque
 
 
+# def countTriplets(arr):
+#     n = len(arr)
+#     count = 0
+#     prefixXOR = [0] * (n + 1)
+#
+#     for i in range(n):
+#         prefixXOR[i + 1] = prefixXOR[i] ^ arr[i]
+#
+#     for i in range(n):
+#         for j in range(i + 1, n):
+#             if (prefixXOR[i]) == (prefixXOR[j + 1]):
+#                 count += j - i
+#
+#     return count
+#
+#
+# print(countTriplets([2, 3, 1, 6, 7]))
+
+
 # def numSteps(s):
 #     result = 0
 #     res = int(s, 2)
