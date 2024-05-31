@@ -15,6 +15,20 @@ from collections import defaultdict
 from collections import deque
 
 
+# def singleNumber(nums):
+#     res = []
+#     count = collections.Counter(nums)
+#     for k, v in enumerate(count):
+#         if count.get(v) == 1:
+#             res.append(v)
+#
+#     return res
+#
+#
+# print(singleNumber([1, 2, 1, 3, 2, 5]))
+# print(singleNumber([-1, 0]))
+
+
 # def countTriplets(arr):
 #     n = len(arr)
 #     count = 0
