@@ -15,6 +15,19 @@ from collections import defaultdict
 from collections import deque
 
 
+# def scoreOfString(s):
+#     result = []
+#     asc = [ord(i) for i in s]
+#     for k, v in enumerate(asc):
+#         if k < len(asc) - 1:
+#             result.append(abs(v - asc[k + 1]))
+#     return sum(result)
+#
+#
+# print(scoreOfString('hello'))
+# print(scoreOfString('zaz'))
+
+
 # def singleNumber(nums):
 #     res = []
 #     count = collections.Counter(nums)
