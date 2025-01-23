@@ -16,6 +16,34 @@ from collections import deque
 
 
 # class Solution:
+#     def countServers(self, grid):
+#         m, n = len(grid), len(grid[0])
+#         row_cnt = [0] * m
+#         col_cnt = [0] * n
+#
+#         for i in range(m):
+#             for j in range(n):
+#                 if grid[i][j] == 1:
+#                     row_cnt[i] += 1
+#                     col_cnt[j] += 1
+#
+#         cnt = 0
+#         for i in range(m):
+#             for j in range(n):
+#                 if grid[i][j] == 1:
+#                     if row_cnt[i] > 1 or col_cnt[j] > 1:
+#                         cnt += 1
+#
+#         return cnt
+#
+#
+# grid = [[1,0],[1,1]]
+# solution = Solution()
+# result = solution.countServers(grid)
+# print(result)
+
+
+# class Solution:
 #     def highestPeak(self, isWater):
 #         R = len(isWater)
 #         C = len(isWater[0])
