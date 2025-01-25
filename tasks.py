@@ -17,36 +17,65 @@ from typing import List
 
 
 class Solution:
-    def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
-        n = len(graph)
-        res = []
-        visited = set()
-        memo = [0] * n
+    def lexicographicallySmallestArray(self, nums, limit):
+        value_index = [(nums[i], i) for i in range(len(nums))]
+        value_index.sort()
+        grouped_pairs = [[value_index[0]]]
 
-        def dfs(i):
-            if memo[i] == 1 or len(graph[i]) == 0:
-                return True
-            elif memo[i] == -1 or i in visited:
-                return False
-            visited.add(i)
+        for i in range(1, len(value_index)):
+            if value_index[i][0] - value_index[i - 1][0] <= limit:
+                grouped_pairs[-1].append(value_index[i])
+            else:
+                grouped_pairs.append([value_index[i]])
 
-            for neighbour in graph[i]:
-                if not dfs(neighbour):
-                    memo[i] = -1
-                    return False
-            memo[i] = 1
-            return True
+        for group in grouped_pairs:
+            indices = [index for _, index in group]
+            indices.sort()
+            sorted_values = sorted(group)
+            for i in range(len(indices)):
+                nums[indices[i]] = sorted_values[i][0]
 
-        for i in range(n):
-            if dfs(i):
-                res.append(i)
-        return res
+        return nums
 
 
-graph = [[1,2,3,4],[1,2],[3,4],[0,4],[]]
+nums = [5, 100, 44, 45, 16, 30, 14, 65, 83, 64]
+limit = 15
 solution = Solution()
-result = solution.eventualSafeNodes(graph)
+result = solution.lexicographicallySmallestArray(nums, limit)
 print(result)
+
+
+# class Solution:
+#     def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+#         n = len(graph)
+#         res = []
+#         visited = set()
+#         memo = [0] * n
+#
+#         def dfs(i):
+#             if memo[i] == 1 or len(graph[i]) == 0:
+#                 return True
+#             elif memo[i] == -1 or i in visited:
+#                 return False
+#             visited.add(i)
+#
+#             for neighbour in graph[i]:
+#                 if not dfs(neighbour):
+#                     memo[i] = -1
+#                     return False
+#             memo[i] = 1
+#             return True
+#
+#         for i in range(n):
+#             if dfs(i):
+#                 res.append(i)
+#         return res
+#
+#
+# graph = [[1,2,3,4],[1,2],[3,4],[0,4],[]]
+# solution = Solution()
+# result = solution.eventualSafeNodes(graph)
+# print(result)
 
 
 # class Solution:
