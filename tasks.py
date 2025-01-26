@@ -17,32 +17,80 @@ from typing import List
 
 
 class Solution:
-    def lexicographicallySmallestArray(self, nums, limit):
-        value_index = [(nums[i], i) for i in range(len(nums))]
-        value_index.sort()
-        grouped_pairs = [[value_index[0]]]
+    def maxInvitations(self, favorit):
+        n = len(favorit)
+        in_degree = [0] * n
+        chain_len = [0] * n
+        visited = [False] * n
+        for fav in favorit:
+            in_degree[fav] += 1
 
-        for i in range(1, len(value_index)):
-            if value_index[i][0] - value_index[i - 1][0] <= limit:
-                grouped_pairs[-1].append(value_index[i])
-            else:
-                grouped_pairs.append([value_index[i]])
+        q = deque()
+        for i in range(n):
+            if in_degree[i] == 0:
+                q.append(i)
 
-        for group in grouped_pairs:
-            indices = [index for _, index in group]
-            indices.sort()
-            sorted_values = sorted(group)
-            for i in range(len(indices)):
-                nums[indices[i]] = sorted_values[i][0]
+        while q:
+            node = q.popleft()
+            visited[node] = True
+            next_node = favorit[node]
+            chain_len[next_node] = chain_len[node] + 1
+            in_degree[next_node] -= 1
+            if in_degree[next_node] == 0:
+                q.append(next_node)
 
-        return nums
+        max_cycle = 0
+        total_chains = 0
+        for i in range(n):
+            if not visited[i]:
+                current = i
+                cycle_length = 0
+                while not visited[current]:
+                    visited[current] = True
+                    current = favorit[current]
+                    cycle_length += 1
+
+                if cycle_length == 2:
+                    total_chains += 2 + chain_len[i] + chain_len[favorit[i]]
+                else:
+                    max_cycle = max(max_cycle, cycle_length)
+
+        return max(max_cycle, total_chains)
 
 
-nums = [5, 100, 44, 45, 16, 30, 14, 65, 83, 64]
-limit = 15
+favorite = [2,2,1,2]
 solution = Solution()
-result = solution.lexicographicallySmallestArray(nums, limit)
+result = solution.maxInvitations(favorite)
 print(result)
+
+
+# class Solution:
+#     def lexicographicallySmallestArray(self, nums, limit):
+#         value_index = [(nums[i], i) for i in range(len(nums))]
+#         value_index.sort()
+#         grouped_pairs = [[value_index[0]]]
+#
+#         for i in range(1, len(value_index)):
+#             if value_index[i][0] - value_index[i - 1][0] <= limit:
+#                 grouped_pairs[-1].append(value_index[i])
+#             else:
+#                 grouped_pairs.append([value_index[i]])
+#
+#         for group in grouped_pairs:
+#             indices = [index for _, index in group]
+#             indices.sort()
+#             sorted_values = sorted(group)
+#             for i in range(len(indices)):
+#                 nums[indices[i]] = sorted_values[i][0]
+#
+#         return nums
+#
+#
+# nums = [5, 100, 44, 45, 16, 30, 14, 65, 83, 64]
+# limit = 15
+# solution = Solution()
+# result = solution.lexicographicallySmallestArray(nums, limit)
+# print(result)
 
 
 # class Solution:
