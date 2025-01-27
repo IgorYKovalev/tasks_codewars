@@ -17,51 +17,78 @@ from typing import List
 
 
 class Solution:
-    def maxInvitations(self, favorit):
-        n = len(favorit)
-        in_degree = [0] * n
-        chain_len = [0] * n
-        visited = [False] * n
-        for fav in favorit:
-            in_degree[fav] += 1
+    def checkIfPrerequisite(self, numCourses, prerequisites, queries):
+        reachable = defaultdict(set)
+        for prereq in prerequisites:
+            reachable[prereq[1]].add(prereq[0])
 
-        q = deque()
-        for i in range(n):
-            if in_degree[i] == 0:
-                q.append(i)
+        for i in range(numCourses):
+            for j in range(numCourses):
+                if i in reachable[j]:
+                    reachable[j].update(reachable[i])
 
-        while q:
-            node = q.popleft()
-            visited[node] = True
-            next_node = favorit[node]
-            chain_len[next_node] = chain_len[node] + 1
-            in_degree[next_node] -= 1
-            if in_degree[next_node] == 0:
-                q.append(next_node)
+        result = []
+        for query in queries:
+            result.append(query[0] in reachable[query[1]])
 
-        max_cycle = 0
-        total_chains = 0
-        for i in range(n):
-            if not visited[i]:
-                current = i
-                cycle_length = 0
-                while not visited[current]:
-                    visited[current] = True
-                    current = favorit[current]
-                    cycle_length += 1
-
-                if cycle_length == 2:
-                    total_chains += 2 + chain_len[i] + chain_len[favorit[i]]
-                else:
-                    max_cycle = max(max_cycle, cycle_length)
-
-        return max(max_cycle, total_chains)
+        return result
 
 
-favorite = [2,2,1,2]
+numCourses = 2
+prerequisites = [[1, 0]]
+queries = [[0, 1], [1, 0]]
 solution = Solution()
-result = solution.maxInvitations(favorite)
+result = solution.checkIfPrerequisite(numCourses, prerequisites, queries)
 print(result)
+# Output: [false, true]
+
+
+# class Solution:
+#     def maxInvitations(self, favorit):
+#         n = len(favorit)
+#         in_degree = [0] * n
+#         chain_len = [0] * n
+#         visited = [False] * n
+#         for fav in favorit:
+#             in_degree[fav] += 1
+#
+#         q = deque()
+#         for i in range(n):
+#             if in_degree[i] == 0:
+#                 q.append(i)
+#
+#         while q:
+#             node = q.popleft()
+#             visited[node] = True
+#             next_node = favorit[node]
+#             chain_len[next_node] = chain_len[node] + 1
+#             in_degree[next_node] -= 1
+#             if in_degree[next_node] == 0:
+#                 q.append(next_node)
+#
+#         max_cycle = 0
+#         total_chains = 0
+#         for i in range(n):
+#             if not visited[i]:
+#                 current = i
+#                 cycle_length = 0
+#                 while not visited[current]:
+#                     visited[current] = True
+#                     current = favorit[current]
+#                     cycle_length += 1
+#
+#                 if cycle_length == 2:
+#                     total_chains += 2 + chain_len[i] + chain_len[favorit[i]]
+#                 else:
+#                     max_cycle = max(max_cycle, cycle_length)
+#
+#         return max(max_cycle, total_chains)
+#
+#
+# favorite = [2,2,1,2]
+# solution = Solution()
+# result = solution.maxInvitations(favorite)
+# print(result)
 
 
 # class Solution:
