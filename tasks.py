@@ -17,29 +17,60 @@ from typing import List
 
 
 class Solution:
-    def checkIfPrerequisite(self, numCourses, prerequisites, queries):
-        reachable = defaultdict(set)
-        for prereq in prerequisites:
-            reachable[prereq[1]].add(prereq[0])
+    def findMaxFish(self, grid):
+        def dfs(x, y):
+            if x < 0 or x >= len(grid) or y < 0 or y >= len(grid[0]) or grid[x][y] == 0:
+                return 0
 
-        for i in range(numCourses):
-            for j in range(numCourses):
-                if i in reachable[j]:
-                    reachable[j].update(reachable[i])
+            fish_count = grid[x][y]
+            grid[x][y] = 0
 
-        result = []
-        for query in queries:
-            result.append(query[0] in reachable[query[1]])
+            fish_count += dfs(x - 1, y)
+            fish_count += dfs(x + 1, y)
+            fish_count += dfs(x, y - 1)
+            fish_count += dfs(x, y + 1)
 
-        return result
+            return fish_count
+
+        Max = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] > 0:
+                    Max = max(Max, dfs(i, j))
+
+        return Max
 
 
-numCourses = 2
-prerequisites = [[1, 0]]
-queries = [[0, 1], [1, 0]]
+grid = [[0,2,1,0],[4,0,0,3],[1,0,0,4],[0,3,2,0]]
 solution = Solution()
-result = solution.checkIfPrerequisite(numCourses, prerequisites, queries)
+result = solution.findMaxFish(grid)
 print(result)
+
+
+# class Solution:
+#     def checkIfPrerequisite(self, numCourses, prerequisites, queries):
+#         reachable = defaultdict(set)
+#         for prereq in prerequisites:
+#             reachable[prereq[1]].add(prereq[0])
+#
+#         for i in range(numCourses):
+#             for j in range(numCourses):
+#                 if i in reachable[j]:
+#                     reachable[j].update(reachable[i])
+#
+#         result = []
+#         for query in queries:
+#             result.append(query[0] in reachable[query[1]])
+#
+#         return result
+#
+#
+# numCourses = 2
+# prerequisites = [[1, 0]]
+# queries = [[0, 1], [1, 0]]
+# solution = Solution()
+# result = solution.checkIfPrerequisite(numCourses, prerequisites, queries)
+# print(result)
 # Output: [false, true]
 
 
