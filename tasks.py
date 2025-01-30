@@ -11,38 +11,71 @@ from heapq import nsmallest
 from itertools import groupby, product, permutations, zip_longest
 import math
 import random
-from collections import defaultdict
-from collections import deque
+from collections import defaultdict, deque
 from typing import List
 
 
-class Solution:
-    def findRedundantConnection(self, edges):
-        parent = {}
-        def find(node):
-            if parent[node] != node:
-                parent[node] = find(parent[node])
-            return parent[node]
+def magnificentSets(n, edges):
+    adj = [[] for _ in range(n)]
+    for a, b in edges:
+        adj[a - 1].append(b - 1)
+        adj[b - 1].append(a - 1)
+    max_depths = defaultdict(int)
 
-        for u, v in edges:
-            if u not in parent:
-                parent[u] = u
-            if v not in parent:
-                parent[v] = v
+    for start in range(n):
+        q = deque([start])
+        dist = [0] * n
+        dist[start] = max_depth = 1
+        root = start
 
-            root_u = find(u)
-            root_v = find(v)
-            if root_u == root_v:
-                return [u, v]
+        while q:
+            curr = q.popleft()
+            root = min(root, curr)
+            for nbr in adj[curr]:
+                if dist[nbr] == 0:
+                    dist[nbr] = dist[curr] + 1
+                    max_depth = max(max_depth, dist[nbr])
+                    q.append(nbr)
+                elif abs(dist[nbr] - dist[curr]) != 1:
+                    return -1
 
-            parent[root_u] = root_v
-        return []
+        max_depths[root] = max(max_depths[root], max_depth)
+    return sum(max_depths.values())
 
 
-edges = [[1,2],[2,3],[3,4],[1,4],[1,5]]
-solution = Solution()
-result = solution.findRedundantConnection(edges)
+n = 6
+edges = [[1,2],[1,4],[1,5],[2,6],[2,3],[4,6]]
+result = magnificentSets(n, edges)
 print(result)
+
+
+# class Solution:
+#     def findRedundantConnection(self, edges):
+#         parent = {}
+#         def find(node):
+#             if parent[node] != node:
+#                 parent[node] = find(parent[node])
+#             return parent[node]
+#
+#         for u, v in edges:
+#             if u not in parent:
+#                 parent[u] = u
+#             if v not in parent:
+#                 parent[v] = v
+#
+#             root_u = find(u)
+#             root_v = find(v)
+#             if root_u == root_v:
+#                 return [u, v]
+#
+#             parent[root_u] = root_v
+#         return []
+#
+#
+# edges = [[1,2],[2,3],[3,4],[1,4],[1,5]]
+# solution = Solution()
+# result = solution.findRedundantConnection(edges)
+# print(result)
 
 
 # class Solution:
