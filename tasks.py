@@ -15,38 +15,85 @@ from collections import defaultdict, deque
 from typing import List
 
 
-def magnificentSets(n, edges):
-    adj = [[] for _ in range(n)]
-    for a, b in edges:
-        adj[a - 1].append(b - 1)
-        adj[b - 1].append(a - 1)
-    max_depths = defaultdict(int)
+class Solution:
+    def largestIsland(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        island_id = 2
+        island_size = {}
 
-    for start in range(n):
-        q = deque([start])
-        dist = [0] * n
-        dist[start] = max_depth = 1
-        root = start
+        def dfs(x, y):
+            if x < 0 or x >= n or y < 0 or y >= n or grid[x][y] != 1:
+                return 0
+            grid[x][y] = island_id
+            size = 1
+            for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                size += dfs(x + dx, y + dy)
+            return size
 
-        while q:
-            curr = q.popleft()
-            root = min(root, curr)
-            for nbr in adj[curr]:
-                if dist[nbr] == 0:
-                    dist[nbr] = dist[curr] + 1
-                    max_depth = max(max_depth, dist[nbr])
-                    q.append(nbr)
-                elif abs(dist[nbr] - dist[curr]) != 1:
-                    return -1
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    size = dfs(i, j)
+                    island_size[island_id] = size
+                    island_id += 1
 
-        max_depths[root] = max(max_depths[root], max_depth)
-    return sum(max_depths.values())
+        max_size = max(island_size.values(), default=0)
+
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j] == 0:
+                    seen = set()
+                    current_size = 1
+                    for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                        ni, nj = i + dx, j + dy
+                        if 0 <= ni < n and 0 <= nj < n and grid[ni][nj] > 1:
+                            island_id = grid[ni][nj]
+                            if island_id not in seen:
+                                current_size += island_size[island_id]
+                                seen.add(island_id)
+                    max_size = max(max_size, current_size)
+
+        return max_size if max_size > 0 else 1
 
 
-n = 6
-edges = [[1,2],[1,4],[1,5],[2,6],[2,3],[4,6]]
-result = magnificentSets(n, edges)
+grid = [[1,0],[0,1]]
+solution = Solution()
+result = solution.largestIsland(grid)
 print(result)
+
+
+# def magnificentSets(n, edges):
+#     adj = [[] for _ in range(n)]
+#     for a, b in edges:
+#         adj[a - 1].append(b - 1)
+#         adj[b - 1].append(a - 1)
+#     max_depths = defaultdict(int)
+#
+#     for start in range(n):
+#         q = deque([start])
+#         dist = [0] * n
+#         dist[start] = max_depth = 1
+#         root = start
+#
+#         while q:
+#             curr = q.popleft()
+#             root = min(root, curr)
+#             for nbr in adj[curr]:
+#                 if dist[nbr] == 0:
+#                     dist[nbr] = dist[curr] + 1
+#                     max_depth = max(max_depth, dist[nbr])
+#                     q.append(nbr)
+#                 elif abs(dist[nbr] - dist[curr]) != 1:
+#                     return -1
+#
+#         max_depths[root] = max(max_depths[root], max_depth)
+#     return sum(max_depths.values())
+#
+#
+# n = 6
+# edges = [[1,2],[1,4],[1,5],[2,6],[2,3],[4,6]]
+# result = magnificentSets(n, edges)
+# print(result)
 
 
 # class Solution:
