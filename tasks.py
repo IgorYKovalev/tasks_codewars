@@ -16,50 +16,64 @@ from typing import List
 
 
 class Solution:
-    def largestIsland(self, grid: List[List[int]]) -> int:
-        n = len(grid)
-        island_id = 2
-        island_size = {}
-
-        def dfs(x, y):
-            if x < 0 or x >= n or y < 0 or y >= n or grid[x][y] != 1:
-                return 0
-            grid[x][y] = island_id
-            size = 1
-            for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-                size += dfs(x + dx, y + dy)
-            return size
-
-        for i in range(n):
-            for j in range(n):
-                if grid[i][j] == 1:
-                    size = dfs(i, j)
-                    island_size[island_id] = size
-                    island_id += 1
-
-        max_size = max(island_size.values(), default=0)
-
-        for i in range(n):
-            for j in range(n):
-                if grid[i][j] == 0:
-                    seen = set()
-                    current_size = 1
-                    for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-                        ni, nj = i + dx, j + dy
-                        if 0 <= ni < n and 0 <= nj < n and grid[ni][nj] > 1:
-                            island_id = grid[ni][nj]
-                            if island_id not in seen:
-                                current_size += island_size[island_id]
-                                seen.add(island_id)
-                    max_size = max(max_size, current_size)
-
-        return max_size if max_size > 0 else 1
+    def isArraySpecial(self, nums):
+        for i in range(len(nums) - 1):
+            if nums[i] % 2 == nums[i + 1] % 2:
+                return False
+        return True
 
 
-grid = [[1,0],[0,1]]
+nums = [2,1,4]
 solution = Solution()
-result = solution.largestIsland(grid)
+result = solution.isArraySpecial(nums)
 print(result)
+
+
+# class Solution:
+#     def largestIsland(self, grid: List[List[int]]) -> int:
+#         n = len(grid)
+#         island_id = 2
+#         island_size = {}
+#
+#         def dfs(x, y):
+#             if x < 0 or x >= n or y < 0 or y >= n or grid[x][y] != 1:
+#                 return 0
+#             grid[x][y] = island_id
+#             size = 1
+#             for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+#                 size += dfs(x + dx, y + dy)
+#             return size
+#
+#         for i in range(n):
+#             for j in range(n):
+#                 if grid[i][j] == 1:
+#                     size = dfs(i, j)
+#                     island_size[island_id] = size
+#                     island_id += 1
+#
+#         max_size = max(island_size.values(), default=0)
+#
+#         for i in range(n):
+#             for j in range(n):
+#                 if grid[i][j] == 0:
+#                     seen = set()
+#                     current_size = 1
+#                     for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+#                         ni, nj = i + dx, j + dy
+#                         if 0 <= ni < n and 0 <= nj < n and grid[ni][nj] > 1:
+#                             island_id = grid[ni][nj]
+#                             if island_id not in seen:
+#                                 current_size += island_size[island_id]
+#                                 seen.add(island_id)
+#                     max_size = max(max_size, current_size)
+#
+#         return max_size if max_size > 0 else 1
+#
+#
+# grid = [[1,0],[0,1]]
+# solution = Solution()
+# result = solution.largestIsland(grid)
+# print(result)
 
 
 # def magnificentSets(n, edges):
