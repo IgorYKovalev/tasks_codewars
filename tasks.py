@@ -16,17 +16,30 @@ from typing import List
 
 
 class Solution:
-    def isArraySpecial(self, nums):
-        for i in range(len(nums) - 1):
-            if nums[i] % 2 == nums[i + 1] % 2:
-                return False
-        return True
+    def check(self, nums):
+        count, n = 0, len(nums)
+        count = [count + 1 for i in range(n) if nums[i] > nums[(i + 1) % n]]
+        return len(count) <= 1
 
 
-nums = [2,1,4]
+nums = [3,4,5,1,2]
 solution = Solution()
-result = solution.isArraySpecial(nums)
+result = solution.check(nums)
 print(result)
+
+
+# class Solution:
+#     def isArraySpecial(self, nums):
+#         for i in range(len(nums) - 1):
+#             if nums[i] % 2 == nums[i + 1] % 2:
+#                 return False
+#         return True
+#
+#
+# nums = [2,1,4]
+# solution = Solution()
+# result = solution.isArraySpecial(nums)
+# print(result)
 
 
 # class Solution:
