@@ -16,16 +16,40 @@ from typing import List
 
 
 class Solution:
-    def check(self, nums):
-        count, n = 0, len(nums)
-        count = [count + 1 for i in range(n) if nums[i] > nums[(i + 1) % n]]
-        return len(count) <= 1
+    def longestMonotonicSubarray(self, nums: List[int]) -> int:
+        max_len, increasing, decreasing = 1, 1, 1
+        for i in range(1, len(nums)):
+            if nums[i] < nums[i - 1]:
+                decreasing += 1
+                increasing = 1
+            elif nums[i] > nums[i - 1]:
+                increasing += 1
+                decreasing = 1
+            else:
+                increasing = 1
+                decreasing = 1
+
+            max_len = max(max_len, increasing, decreasing)
+        return max_len
 
 
-nums = [3,4,5,1,2]
+nums = [1,4,3,3,2]
 solution = Solution()
-result = solution.check(nums)
+result = solution.longestMonotonicSubarray(nums)
 print(result)
+
+
+# class Solution:
+#     def check(self, nums):
+#         count, n = 0, len(nums)
+#         count = [count + 1 for i in range(n) if nums[i] > nums[(i + 1) % n]]
+#         return len(count) <= 1
+#
+#
+# nums = [3,4,5,1,2]
+# solution = Solution()
+# result = solution.check(nums)
+# print(result)
 
 
 # class Solution:
