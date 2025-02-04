@@ -16,27 +16,42 @@ from typing import List
 
 
 class Solution:
-    def longestMonotonicSubarray(self, nums: List[int]) -> int:
-        max_len, increasing, decreasing = 1, 1, 1
+    def maxAscendingSum(self, nums: List[int]) -> int:
+        curr = ans = nums[0]
         for i in range(1, len(nums)):
-            if nums[i] < nums[i - 1]:
-                decreasing += 1
-                increasing = 1
-            elif nums[i] > nums[i - 1]:
-                increasing += 1
-                decreasing = 1
-            else:
-                increasing = 1
-                decreasing = 1
-
-            max_len = max(max_len, increasing, decreasing)
-        return max_len
+            curr = curr + nums[i] if nums[i] > nums[i - 1] else nums[i]
+            ans = max(curr, ans)
+        return ans
 
 
-nums = [1,4,3,3,2]
+nums = [10, 20, 30, 5, 10, 50]
 solution = Solution()
-result = solution.longestMonotonicSubarray(nums)
+result = solution.maxAscendingSum(nums)
 print(result)
+
+
+# class Solution:
+#     def longestMonotonicSubarray(self, nums: List[int]) -> int:
+#         max_len, increasing, decreasing = 1, 1, 1
+#         for i in range(1, len(nums)):
+#             if nums[i] < nums[i - 1]:
+#                 decreasing += 1
+#                 increasing = 1
+#             elif nums[i] > nums[i - 1]:
+#                 increasing += 1
+#                 decreasing = 1
+#             else:
+#                 increasing = 1
+#                 decreasing = 1
+#
+#             max_len = max(max_len, increasing, decreasing)
+#         return max_len
+#
+#
+# nums = [1,4,3,3,2]
+# solution = Solution()
+# result = solution.longestMonotonicSubarray(nums)
+# print(result)
 
 
 # class Solution:
