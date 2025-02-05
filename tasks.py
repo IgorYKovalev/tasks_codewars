@@ -16,18 +16,31 @@ from typing import List
 
 
 class Solution:
-    def maxAscendingSum(self, nums: List[int]) -> int:
-        curr = ans = nums[0]
-        for i in range(1, len(nums)):
-            curr = curr + nums[i] if nums[i] > nums[i - 1] else nums[i]
-            ans = max(curr, ans)
-        return ans
+    def areAlmostEqual(self, s1: str, s2: str) -> bool:
+        res = [(x, y) for x, y in zip(s1, s2) if x != y]
+        return len(res) == 0 or (len(res) == 2 and res[0][0] == res[1][1] and res[0][1] == res[1][0])
 
 
-nums = [10, 20, 30, 5, 10, 50]
+s1 = "bank"
+s2 = "kanb"
 solution = Solution()
-result = solution.maxAscendingSum(nums)
+result = solution.areAlmostEqual(s1, s2)
 print(result)
+
+
+# class Solution:
+#     def maxAscendingSum(self, nums: List[int]) -> int:
+#         curr = ans = nums[0]
+#         for i in range(1, len(nums)):
+#             curr = curr + nums[i] if nums[i] > nums[i - 1] else nums[i]
+#             ans = max(curr, ans)
+#         return ans
+#
+#
+# nums = [10, 20, 30, 5, 10, 50]
+# solution = Solution()
+# result = solution.maxAscendingSum(nums)
+# print(result)
 
 
 # class Solution:
