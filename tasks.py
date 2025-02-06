@@ -16,16 +16,36 @@ from typing import List
 
 
 class Solution:
-    def areAlmostEqual(self, s1: str, s2: str) -> bool:
-        res = [(x, y) for x, y in zip(s1, s2) if x != y]
-        return len(res) == 0 or (len(res) == 2 and res[0][0] == res[1][1] and res[0][1] == res[1][0])
+    def tupleSameProduct(self, nums):
+        product_count = defaultdict(int)
+        ans = 0
+
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                product = nums[i] * nums[j]
+                ans += 8 * product_count[product]
+                product_count[product] += 1
+
+        return ans
 
 
-s1 = "bank"
-s2 = "kanb"
+nums = [2,3,4,6]
 solution = Solution()
-result = solution.areAlmostEqual(s1, s2)
+result = solution.tupleSameProduct(nums)
 print(result)
+
+
+# class Solution:
+#     def areAlmostEqual(self, s1: str, s2: str) -> bool:
+#         res = [(x, y) for x, y in zip(s1, s2) if x != y]
+#         return len(res) == 0 or (len(res) == 2 and res[0][0] == res[1][1] and res[0][1] == res[1][0])
+#
+#
+# s1 = "bank"
+# s2 = "kanb"
+# solution = Solution()
+# result = solution.areAlmostEqual(s1, s2)
+# print(result)
 
 
 # class Solution:
