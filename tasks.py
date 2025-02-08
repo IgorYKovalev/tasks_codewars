@@ -13,29 +13,50 @@ import math
 import random
 from collections import defaultdict, deque
 from typing import List
+import heapq
 
 
-class Solution:
-    def queryResults(self, limit, queries):
-        ball, color, ans, distinct = {}, {}, [], 0
-        for pos, c in queries:
-            if pos in ball:
-                color[ball[pos]] -= 1
-                if color[ball[pos]] == 0:
-                    del color[ball[pos]]
-                    distinct -= 1
-            ball[pos] = c
-            color[c] = color.get(c, 0) + 1
-            if color[c] == 1: distinct += 1
-            ans.append(distinct)
-        return ans
+class NumberContainers:
+    def __init__(self):
+        self.m = {}
+        self.d = {}
+
+    def change(self, index: int, number: int) -> None:
+        if index in self.m and self.m[index] == number:
+            return
+        self.m[index] = number
+        self.d.setdefault(number, [])
+        heapq.heappush(self.d[number], index)
+
+    def find(self, number):
+        if number not in self.d:
+            return -1
+        while self.d[number] and self.m.get(self.d[number][0]) != number:
+            heapq.heappop(self.d[number])
+        return self.d[number][0] if self.d[number] else -1
 
 
-limit = 4
-queries = [[1,4],[2,5],[1,3],[3,4]]
-solution = Solution()
-result = solution.queryResults(limit, queries)
-print(result)
+# class Solution:
+#     def queryResults(self, limit, queries):
+#         ball, color, ans, distinct = {}, {}, [], 0
+#         for pos, c in queries:
+#             if pos in ball:
+#                 color[ball[pos]] -= 1
+#                 if color[ball[pos]] == 0:
+#                     del color[ball[pos]]
+#                     distinct -= 1
+#             ball[pos] = c
+#             color[c] = color.get(c, 0) + 1
+#             if color[c] == 1: distinct += 1
+#             ans.append(distinct)
+#         return ans
+#
+#
+# limit = 4
+# queries = [[1,4],[2,5],[1,3],[3,4]]
+# solution = Solution()
+# result = solution.queryResults(limit, queries)
+# print(result)
 
 
 # class Solution:
