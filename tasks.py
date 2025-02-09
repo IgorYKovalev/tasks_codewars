@@ -16,24 +16,44 @@ from typing import List
 import heapq
 
 
-class NumberContainers:
-    def __init__(self):
-        self.m = {}
-        self.d = {}
 
-    def change(self, index: int, number: int) -> None:
-        if index in self.m and self.m[index] == number:
-            return
-        self.m[index] = number
-        self.d.setdefault(number, [])
-        heapq.heappush(self.d[number], index)
+class Solution:
+    def countBadPairs(self, nums: List[int]) -> int:
+        count = 0
+        good_pairs = defaultdict(int)
 
-    def find(self, number):
-        if number not in self.d:
-            return -1
-        while self.d[number] and self.m.get(self.d[number][0]) != number:
-            heapq.heappop(self.d[number])
-        return self.d[number][0] if self.d[number] else -1
+        for i in range(len(nums)):
+            good_key = i - nums[i]
+            count += i - good_pairs[good_key]
+            good_pairs[good_key] += 1
+
+        return count
+
+
+nums = [4, 1, 3, 3]
+solution = Solution()
+result = solution.countBadPairs(nums)
+print(result)
+
+
+# class NumberContainers:
+#     def __init__(self):
+#         self.m = {}
+#         self.d = {}
+#
+#     def change(self, index: int, number: int) -> None:
+#         if index in self.m and self.m[index] == number:
+#             return
+#         self.m[index] = number
+#         self.d.setdefault(number, [])
+#         heapq.heappush(self.d[number], index)
+#
+#     def find(self, number):
+#         if number not in self.d:
+#             return -1
+#         while self.d[number] and self.m.get(self.d[number][0]) != number:
+#             heapq.heappop(self.d[number])
+#         return self.d[number][0] if self.d[number] else -1
 
 
 # class Solution:
