@@ -16,24 +16,41 @@ from typing import List
 import heapq
 
 
-
 class Solution:
-    def countBadPairs(self, nums: List[int]) -> int:
-        count = 0
-        good_pairs = defaultdict(int)
+    def clearDigits(self, s: str) -> str:
+        result = []
+        for i in s:
+            if i.isdigit():
+                if result:
+                    result.pop()
+            else:
+                result.append(i)
+        return ''.join(result)
 
-        for i in range(len(nums)):
-            good_key = i - nums[i]
-            count += i - good_pairs[good_key]
-            good_pairs[good_key] += 1
 
-        return count
-
-
-nums = [4, 1, 3, 3]
+s = "cb34"
 solution = Solution()
-result = solution.countBadPairs(nums)
+result = solution.clearDigits(s)
 print(result)
+
+
+# class Solution:
+#     def countBadPairs(self, nums: List[int]) -> int:
+#         count = 0
+#         good_pairs = defaultdict(int)
+#
+#         for i in range(len(nums)):
+#             good_key = i - nums[i]
+#             count += i - good_pairs[good_key]
+#             good_pairs[good_key] += 1
+#
+#         return count
+#
+#
+# nums = [4, 1, 3, 3]
+# solution = Solution()
+# result = solution.countBadPairs(nums)
+# print(result)
 
 
 # class NumberContainers:
