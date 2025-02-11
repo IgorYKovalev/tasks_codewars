@@ -17,21 +17,44 @@ import heapq
 
 
 class Solution:
-    def clearDigits(self, s: str) -> str:
+    def removeOccurrences(self, s: str, part: str) -> str:
         result = []
-        for i in s:
-            if i.isdigit():
-                if result:
-                    result.pop()
-            else:
-                result.append(i)
-        return ''.join(result)
+        target_len = len(part)
+        target_end_char = part[-1]
+
+        for cur_char in s:
+            result.append(cur_char)
+
+            if cur_char == target_end_char and len(result) >= target_len:
+                if "".join(result[-target_len:]) == part:
+                    del result[-target_len:]
+
+        return "".join(result)
 
 
-s = "cb34"
+s = "daabcbaabcbc"
+part = "abc"
 solution = Solution()
-result = solution.clearDigits(s)
+result = solution.removeOccurrences(s, part)
 print(result)
+
+
+# class Solution:
+#     def clearDigits(self, s: str) -> str:
+#         result = []
+#         for i in s:
+#             if i.isdigit():
+#                 if result:
+#                     result.pop()
+#             else:
+#                 result.append(i)
+#         return ''.join(result)
+#
+#
+# s = "cb34"
+# solution = Solution()
+# result = solution.clearDigits(s)
+# print(result)
 
 
 # class Solution:
