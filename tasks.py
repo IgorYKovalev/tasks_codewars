@@ -17,26 +17,44 @@ import heapq
 
 
 class Solution:
-    def removeOccurrences(self, s: str, part: str) -> str:
-        result = []
-        target_len = len(part)
-        target_end_char = part[-1]
+    def maximumSum(self, nums: List[int]) -> int:
+        max_arr = [0] * 82
+        ans = -1
+        for x in nums:
+            digit_sum = sum(int(d) for d in str(x))
+            if max_arr[digit_sum] != 0:
+                ans = max(ans, x + max_arr[digit_sum])
+            max_arr[digit_sum] = max(max_arr[digit_sum], x)
+        return ans
+    
 
-        for cur_char in s:
-            result.append(cur_char)
-
-            if cur_char == target_end_char and len(result) >= target_len:
-                if "".join(result[-target_len:]) == part:
-                    del result[-target_len:]
-
-        return "".join(result)
-
-
-s = "daabcbaabcbc"
-part = "abc"
+nums = [18, 43, 36, 13, 7]
 solution = Solution()
-result = solution.removeOccurrences(s, part)
+result = solution.maximumSum(nums)
 print(result)
+
+
+# class Solution:
+#     def removeOccurrences(self, s: str, part: str) -> str:
+#         result = []
+#         target_len = len(part)
+#         target_end_char = part[-1]
+#
+#         for cur_char in s:
+#             result.append(cur_char)
+#
+#             if cur_char == target_end_char and len(result) >= target_len:
+#                 if "".join(result[-target_len:]) == part:
+#                     del result[-target_len:]
+#
+#         return "".join(result)
+#
+#
+# s = "daabcbaabcbc"
+# part = "abc"
+# solution = Solution()
+# result = solution.removeOccurrences(s, part)
+# print(result)
 
 
 # class Solution:
