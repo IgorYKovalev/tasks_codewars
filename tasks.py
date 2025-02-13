@@ -16,22 +16,44 @@ from typing import List
 import heapq
 
 
-class Solution:
-    def maximumSum(self, nums: List[int]) -> int:
-        max_arr = [0] * 82
-        ans = -1
-        for x in nums:
-            digit_sum = sum(int(d) for d in str(x))
-            if max_arr[digit_sum] != 0:
-                ans = max(ans, x + max_arr[digit_sum])
-            max_arr[digit_sum] = max(max_arr[digit_sum], x)
-        return ans
-    
+class Solution(object):
+    def minOperations(self, nums, k):
+        heapq.heapify(nums)
+        res = 0
+        for i in range(0, len(nums)):
+            x = heapq.heappop(nums)
+            if x < k:
+                res += 1
+                y = heapq.heappop(nums)
+                heapq.heappush(nums, x * 2 + y)
+            else:
+                break
+        return res
 
-nums = [18, 43, 36, 13, 7]
+
+nums = [2, 11, 10, 1, 3]
+k = 10
 solution = Solution()
-result = solution.maximumSum(nums)
+result = solution.minOperations(nums, k)
 print(result)
+
+
+# class Solution:
+#     def maximumSum(self, nums: List[int]) -> int:
+#         max_arr = [0] * 82
+#         ans = -1
+#         for x in nums:
+#             digit_sum = sum(int(d) for d in str(x))
+#             if max_arr[digit_sum] != 0:
+#                 ans = max(ans, x + max_arr[digit_sum])
+#             max_arr[digit_sum] = max(max_arr[digit_sum], x)
+#         return ans
+#
+#
+# nums = [18, 43, 36, 13, 7]
+# solution = Solution()
+# result = solution.maximumSum(nums)
+# print(result)
 
 
 # class Solution:
