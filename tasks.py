@@ -16,26 +16,62 @@ from typing import List
 import heapq
 
 
-class Solution(object):
-    def minOperations(self, nums, k):
-        heapq.heapify(nums)
-        res = 0
-        for i in range(0, len(nums)):
-            x = heapq.heappop(nums)
-            if x < k:
-                res += 1
-                y = heapq.heappop(nums)
-                heapq.heappush(nums, x * 2 + y)
-            else:
-                break
-        return res
+class ProductOfNumbers:
+    def __init__(self):
+        self.list = []
+        self.prod = 1
+
+    def add(self, num: int) -> None:
+        if num == 0:
+            self.list = []
+            self.prod = 1
+        else:
+            self.prod *= num
+            self.list.append(self.prod)
+
+    def getProduct(self, k: int) -> int:
+        if len(self.list) < k:
+            return 0
+        if len(self.list) == k:
+            return self.list[-1]
+        return self.list[-1] // self.list[-k - 1]
 
 
-nums = [2, 11, 10, 1, 3]
-k = 10
-solution = Solution()
-result = solution.minOperations(nums, k)
-print(result)
+num = ["ProductOfNumbers", "add", "add", "add", "add", "add", "getProduct", "getProduct", "getProduct", "add", "getProduct"]
+k = [[], [3], [0], [2], [5], [4], [2], [3], [4], [8], [2]]
+
+obj = ProductOfNumbers()
+results = []
+for command, value in zip(num, k):
+    if command == "add":
+        obj.add(value[0])
+    elif command == "getProduct":
+        result = obj.getProduct(value[0])
+        results.append(result)
+
+print(results)
+
+
+# class Solution(object):
+#     def minOperations(self, nums, k):
+#         heapq.heapify(nums)
+#         res = 0
+#         for i in range(0, len(nums)):
+#             x = heapq.heappop(nums)
+#             if x < k:
+#                 res += 1
+#                 y = heapq.heappop(nums)
+#                 heapq.heappush(nums, x * 2 + y)
+#             else:
+#                 break
+#         return res
+#
+#
+# nums = [2, 11, 10, 1, 3]
+# k = 10
+# solution = Solution()
+# result = solution.minOperations(nums, k)
+# print(result)
 
 
 # class Solution:
