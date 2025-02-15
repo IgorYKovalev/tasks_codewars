@@ -16,40 +16,60 @@ from typing import List
 import heapq
 
 
-class ProductOfNumbers:
-    def __init__(self):
-        self.list = []
-        self.prod = 1
-
-    def add(self, num: int) -> None:
-        if num == 0:
-            self.list = []
-            self.prod = 1
-        else:
-            self.prod *= num
-            self.list.append(self.prod)
-
-    def getProduct(self, k: int) -> int:
-        if len(self.list) < k:
-            return 0
-        if len(self.list) == k:
-            return self.list[-1]
-        return self.list[-1] // self.list[-k - 1]
+class Solution:
+    def punishmentNumber(self, n: int) -> int:
+        def partition(x, target):
+            if x == target:
+                return True
+            if x == 0:
+                return target == 0
+            for i in (10, 100, 1000):
+                if partition(x // i, target - x % i):
+                    return True
+            return False
+        return sum(x for j in range(1, n + 1) if partition(x := j * j, j))
 
 
-num = ["ProductOfNumbers", "add", "add", "add", "add", "add", "getProduct", "getProduct", "getProduct", "add", "getProduct"]
-k = [[], [3], [0], [2], [5], [4], [2], [3], [4], [8], [2]]
+n = 10
+solution = Solution()
+result = solution.punishmentNumber(n)
+print(result)
 
-obj = ProductOfNumbers()
-results = []
-for command, value in zip(num, k):
-    if command == "add":
-        obj.add(value[0])
-    elif command == "getProduct":
-        result = obj.getProduct(value[0])
-        results.append(result)
 
-print(results)
+# class ProductOfNumbers:
+#     def __init__(self):
+#         self.list = []
+#         self.prod = 1
+#
+#     def add(self, num: int) -> None:
+#         if num == 0:
+#             self.list = []
+#             self.prod = 1
+#         else:
+#             self.prod *= num
+#             self.list.append(self.prod)
+#
+#     def getProduct(self, k: int) -> int:
+#         if len(self.list) < k:
+#             return 0
+#         if len(self.list) == k:
+#             return self.list[-1]
+#         return self.list[-1] // self.list[-k - 1]
+#
+#
+# num = ["ProductOfNumbers", "add", "add", "add", "add", "add", "getProduct", "getProduct", "getProduct", "add", "getProduct"]
+# k = [[], [3], [0], [2], [5], [4], [2], [3], [4], [8], [2]]
+#
+# obj = ProductOfNumbers()
+# results = []
+# for command, value in zip(num, k):
+#     if command == "add":
+#         obj.add(value[0])
+#     elif command == "getProduct":
+#         result = obj.getProduct(value[0])
+#         results.append(result)
+#
+# print(results)
 
 
 # class Solution(object):
