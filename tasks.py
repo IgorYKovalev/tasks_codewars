@@ -17,23 +17,65 @@ import heapq
 
 
 class Solution:
-    def punishmentNumber(self, n: int) -> int:
-        def partition(x, target):
-            if x == target:
+    def constructDistancedSequence(self, n: int):
+        result = None
+        arr = [-1] * (2 * n - 1)
+        used = [False] * (n + 1)
+
+        def backtrack(l):
+            nonlocal result
+            if l == len(arr):
+                result = arr[:]
                 return True
-            if x == 0:
-                return target == 0
-            for i in (10, 100, 1000):
-                if partition(x // i, target - x % i):
-                    return True
+
+            if arr[l] != -1:
+                return backtrack(l + 1)
+
+            for num in range(n, 0, -1):
+                if used[num]:
+                    continue
+
+                r = l + num if num > 1 else l
+                if r < len(arr) and arr[r] == -1:
+                    arr[l], arr[r] = num, num
+                    used[num] = True
+
+                    if backtrack(l + 1):
+                        return True
+
+                    arr[l], arr[r] = -1, -1
+                    used[num] = False
+
             return False
-        return sum(x for j in range(1, n + 1) if partition(x := j * j, j))
+
+        backtrack(0)
+        return result
 
 
-n = 10
+n = 3
 solution = Solution()
-result = solution.punishmentNumber(n)
-print(result)
+res = solution.constructDistancedSequence(n)
+print(res)
+
+
+# class Solution:
+#     def punishmentNumber(self, n: int) -> int:
+#         def partition(x, target):
+#             if x == target:
+#                 return True
+#             if x == 0:
+#                 return target == 0
+#             for i in (10, 100, 1000):
+#                 if partition(x // i, target - x % i):
+#                     return True
+#             return False
+#         return sum(x for j in range(1, n + 1) if partition(x := j * j, j))
+#
+#
+# n = 10
+# solution = Solution()
+# result = solution.punishmentNumber(n)
+# print(result)
 
 
 # class ProductOfNumbers:
