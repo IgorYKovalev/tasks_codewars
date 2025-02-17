@@ -8,7 +8,7 @@ from contextlib import contextmanager
 from datetime import datetime
 from functools import reduce
 from heapq import nsmallest
-from itertools import groupby, product, permutations, zip_longest
+from itertools import groupby, product, permutations, zip_longest, combinations
 import math
 import random
 from collections import defaultdict, deque
@@ -16,46 +16,69 @@ from typing import List
 import heapq
 
 
-class Solution:
-    def constructDistancedSequence(self, n: int):
-        result = None
-        arr = [-1] * (2 * n - 1)
-        used = [False] * (n + 1)
+class Solution(object):
+    def numTilePossibilities(self, tiles):
+        tiles = sorted(tiles)
+        used = [False] * len(tiles)
+        return self.backtrack(tiles, used)
 
-        def backtrack(l):
-            nonlocal result
-            if l == len(arr):
-                result = arr[:]
-                return True
-
-            if arr[l] != -1:
-                return backtrack(l + 1)
-
-            for num in range(n, 0, -1):
-                if used[num]:
-                    continue
-
-                r = l + num if num > 1 else l
-                if r < len(arr) and arr[r] == -1:
-                    arr[l], arr[r] = num, num
-                    used[num] = True
-
-                    if backtrack(l + 1):
-                        return True
-
-                    arr[l], arr[r] = -1, -1
-                    used[num] = False
-
-            return False
-
-        backtrack(0)
-        return result
+    def backtrack(self, tiles, used):
+        count = 0
+        for i in range(len(tiles)):
+            if used[i] or (i > 0 and tiles[i] == tiles[i - 1] and not used[i - 1]):
+                continue
+            used[i] = True
+            count += 1 + self.backtrack(tiles, used)
+            used[i] = False
+        return count
 
 
-n = 3
+tiles = "AAB"
 solution = Solution()
-res = solution.constructDistancedSequence(n)
-print(res)
+result = solution.numTilePossibilities(tiles)
+print(result)
+
+
+# class Solution:
+#     def constructDistancedSequence(self, n: int):
+#         result = None
+#         arr = [-1] * (2 * n - 1)
+#         used = [False] * (n + 1)
+#
+#         def backtrack(l):
+#             nonlocal result
+#             if l == len(arr):
+#                 result = arr[:]
+#                 return True
+#
+#             if arr[l] != -1:
+#                 return backtrack(l + 1)
+#
+#             for num in range(n, 0, -1):
+#                 if used[num]:
+#                     continue
+#
+#                 r = l + num if num > 1 else l
+#                 if r < len(arr) and arr[r] == -1:
+#                     arr[l], arr[r] = num, num
+#                     used[num] = True
+#
+#                     if backtrack(l + 1):
+#                         return True
+#
+#                     arr[l], arr[r] = -1, -1
+#                     used[num] = False
+#
+#             return False
+#
+#         backtrack(0)
+#         return result
+#
+#
+# n = 3
+# solution = Solution()
+# res = solution.constructDistancedSequence(n)
+# print(res)
 
 
 # class Solution:
