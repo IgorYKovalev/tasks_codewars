@@ -16,27 +16,46 @@ from typing import List
 import heapq
 
 
-class Solution(object):
-    def numTilePossibilities(self, tiles):
-        tiles = sorted(tiles)
-        used = [False] * len(tiles)
-        return self.backtrack(tiles, used)
-
-    def backtrack(self, tiles, used):
-        count = 0
-        for i in range(len(tiles)):
-            if used[i] or (i > 0 and tiles[i] == tiles[i - 1] and not used[i - 1]):
-                continue
-            used[i] = True
-            count += 1 + self.backtrack(tiles, used)
-            used[i] = False
-        return count
+class Solution:
+    def smallestNumber(self, pattern):
+        ans, temp = ["1"], []
+        for i, ch in enumerate(pattern):
+            if ch == 'I':
+                ans += temp[::-1] + [str(i + 2)]
+                temp = []
+            else:
+                temp.append(ans.pop())
+                ans.append(str(i + 2))
+        return "".join(ans + temp[::-1])
 
 
-tiles = "AAB"
+pattern = "IIIDIDDD"
 solution = Solution()
-result = solution.numTilePossibilities(tiles)
+result = solution.smallestNumber(pattern)
 print(result)
+
+
+# class Solution(object):
+#     def numTilePossibilities(self, tiles):
+#         tiles = sorted(tiles)
+#         used = [False] * len(tiles)
+#         return self.backtrack(tiles, used)
+#
+#     def backtrack(self, tiles, used):
+#         count = 0
+#         for i in range(len(tiles)):
+#             if used[i] or (i > 0 and tiles[i] == tiles[i - 1] and not used[i - 1]):
+#                 continue
+#             used[i] = True
+#             count += 1 + self.backtrack(tiles, used)
+#             used[i] = False
+#         return count
+#
+#
+# tiles = "AAB"
+# solution = Solution()
+# result = solution.numTilePossibilities(tiles)
+# print(result)
 
 
 # class Solution:
