@@ -17,22 +17,48 @@ import heapq
 
 
 class Solution:
-    def smallestNumber(self, pattern):
-        ans, temp = ["1"], []
-        for i, ch in enumerate(pattern):
-            if ch == 'I':
-                ans += temp[::-1] + [str(i + 2)]
-                temp = []
-            else:
-                temp.append(ans.pop())
-                ans.append(str(i + 2))
-        return "".join(ans + temp[::-1])
+    def getHappyString(self, n: int, k: int) -> str:
+        if k > (3 << (n - 1)):
+            return ''
+
+        queue = deque([''])
+        while k:
+            curr = queue.popleft()
+            for c in 'abc':
+                if not curr or curr[-1] != c:
+                    queue.append(curr + c)
+                    if len(curr) + 1 == n:
+                        k -= 1
+                if k == 0:
+                    break
+
+        return queue[-1]
 
 
-pattern = "IIIDIDDD"
+n = 1
+k = 3
 solution = Solution()
-result = solution.smallestNumber(pattern)
+result = solution.getHappyString(n, k)
 print(result)
+
+
+# class Solution:
+#     def smallestNumber(self, pattern):
+#         ans, temp = ["1"], []
+#         for i, ch in enumerate(pattern):
+#             if ch == 'I':
+#                 ans += temp[::-1] + [str(i + 2)]
+#                 temp = []
+#             else:
+#                 temp.append(ans.pop())
+#                 ans.append(str(i + 2))
+#         return "".join(ans + temp[::-1])
+#
+#
+# pattern = "IIIDIDDD"
+# solution = Solution()
+# result = solution.smallestNumber(pattern)
+# print(result)
 
 
 # class Solution(object):
