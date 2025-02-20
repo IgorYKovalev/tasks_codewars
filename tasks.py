@@ -17,29 +17,46 @@ import heapq
 
 
 class Solution:
-    def getHappyString(self, n: int, k: int) -> str:
-        if k > (3 << (n - 1)):
-            return ''
-
-        queue = deque([''])
-        while k:
-            curr = queue.popleft()
-            for c in 'abc':
-                if not curr or curr[-1] != c:
-                    queue.append(curr + c)
-                    if len(curr) + 1 == n:
-                        k -= 1
-                if k == 0:
-                    break
-
-        return queue[-1]
+    def findDifferentBinaryString(self, nums):
+        result = []
+        for i in range(len(nums)):
+            if nums[i][i] == '0':
+                result.append('1')
+            else:
+                result.append('0')
+        return ''.join(result)
 
 
-n = 1
-k = 3
+nums = ["01", "10"]
 solution = Solution()
-result = solution.getHappyString(n, k)
+result = solution.findDifferentBinaryString(nums)
 print(result)
+
+
+# class Solution:
+#     def getHappyString(self, n: int, k: int) -> str:
+#         if k > (3 << (n - 1)):
+#             return ''
+#
+#         queue = deque([''])
+#         while k:
+#             curr = queue.popleft()
+#             for c in 'abc':
+#                 if not curr or curr[-1] != c:
+#                     queue.append(curr + c)
+#                     if len(curr) + 1 == n:
+#                         k -= 1
+#                 if k == 0:
+#                     break
+#
+#         return queue[-1]
+#
+#
+# n = 1
+# k = 3
+# solution = Solution()
+# result = solution.getHappyString(n, k)
+# print(result)
 
 
 # class Solution:
