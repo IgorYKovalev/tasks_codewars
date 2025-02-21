@@ -16,21 +16,55 @@ from typing import List
 import heapq
 
 
-class Solution:
-    def findDifferentBinaryString(self, nums):
-        result = []
-        for i in range(len(nums)):
-            if nums[i][i] == '0':
-                result.append('1')
-            else:
-                result.append('0')
-        return ''.join(result)
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class FindElements:
+    def __init__(self, root):
+        self.recoveredValues = set()
+        root.val = 0
+        self.recoverTree(root)
+
+    def recoverTree(self, root):
+        if not root:
+            return
+        self.recoveredValues.add(root.val)
+        if root.left:
+            root.left.val = 2 * root.val + 1
+            self.recoverTree(root.left)
+        if root.right:
+            root.right.val = 2 * root.val + 2
+            self.recoverTree(root.right)
+
+    def find(self, target):
+        return target in self.recoveredValues
 
 
-nums = ["01", "10"]
-solution = Solution()
-result = solution.findDifferentBinaryString(nums)
-print(result)
+root = TreeNode(-1)
+root.right = TreeNode(-1)
+find_elements = FindElements(root)
+print(find_elements.find(1))
+print(find_elements.find(2))
+
+
+# class Solution:
+#     def findDifferentBinaryString(self, nums):
+#         result = []
+#         for i in range(len(nums)):
+#             if nums[i][i] == '0':
+#                 result.append('1')
+#             else:
+#                 result.append('0')
+#         return ''.join(result)
+#
+#
+# nums = ["01", "10"]
+# solution = Solution()
+# result = solution.findDifferentBinaryString(nums)
+# print(result)
 
 
 # class Solution:
