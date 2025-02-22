@@ -12,42 +12,95 @@ from itertools import groupby, product, permutations, zip_longest, combinations
 import math
 import random
 from collections import defaultdict, deque
-from typing import List
+from typing import List, Optional
 import heapq
 
 
+# 1028. Recover a Tree From Preorder Traversal
+
 class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
-class FindElements:
-    def __init__(self, root):
-        self.recoveredValues = set()
-        root.val = 0
-        self.recoverTree(root)
+class Solution:
+    def recoverFromPreorder(self, traversal: str) -> Optional[TreeNode]:
+        self.s = traversal
+        self.idx = 0
+        self.level = 0
+        node = TreeNode(-1)
+        self.helper(node, 0)
+        return node.left
 
-    def recoverTree(self, root):
-        if not root:
-            return
-        self.recoveredValues.add(root.val)
-        if root.left:
-            root.left.val = 2 * root.val + 1
-            self.recoverTree(root.left)
-        if root.right:
-            root.right.val = 2 * root.val + 2
-            self.recoverTree(root.right)
+    def helper(self, parent, lvl):
+        while self.idx < len(self.s) and lvl == self.level:
+            num = 0
+            while self.idx < len(self.s) and self.s[self.idx].isdigit():
+                num = num * 10 + int(self.s[self.idx])
+                self.idx += 1
+            node = TreeNode(num)
+            if not parent.left:
+                parent.left = node
+            else:
+                parent.right = node
+            self.level = 0
+            while self.idx < len(self.s) and self.s[self.idx] == '-':
+                self.level += 1
+                self.idx += 1
+            self.helper(node, lvl + 1)
 
-    def find(self, target):
-        return target in self.recoveredValues
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        self.preorderHelper(root, result)
+        return result
+
+    def preorderHelper(self, node: Optional[TreeNode], result: List[int]):
+        if node:
+            result.append(node.val)
+            self.preorderHelper(node.left, result)
+            self.preorderHelper(node.right, result)
 
 
-root = TreeNode(-1)
-root.right = TreeNode(-1)
-find_elements = FindElements(root)
-print(find_elements.find(1))
-print(find_elements.find(2))
+traversal = "1-2--3--4-5--6--7"
+solution = Solution()
+root = solution.recoverFromPreorder(traversal)
+result = solution.preorderTraversal(root)
+print(result)
+
+
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#
+# class FindElements:
+#     def __init__(self, root):
+#         self.recoveredValues = set()
+#         root.val = 0
+#         self.recoverTree(root)
+#
+#     def recoverTree(self, root):
+#         if not root:
+#             return
+#         self.recoveredValues.add(root.val)
+#         if root.left:
+#             root.left.val = 2 * root.val + 1
+#             self.recoverTree(root.left)
+#         if root.right:
+#             root.right.val = 2 * root.val + 2
+#             self.recoverTree(root.right)
+#
+#     def find(self, target):
+#         return target in self.recoveredValues
+#
+#
+# root = TreeNode(-1)
+# root.right = TreeNode(-1)
+# find_elements = FindElements(root)
+# print(find_elements.find(1))
+# print(find_elements.find(2))
 
 
 # class Solution:
