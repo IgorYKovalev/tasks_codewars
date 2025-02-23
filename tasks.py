@@ -16,7 +16,7 @@ from typing import List, Optional
 import heapq
 
 
-# 1028. Recover a Tree From Preorder Traversal
+# 889. Construct Binary Tree from Preorder and Postorder Traversal
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -25,48 +25,89 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    def recoverFromPreorder(self, traversal: str) -> Optional[TreeNode]:
-        self.s = traversal
-        self.idx = 0
-        self.level = 0
-        node = TreeNode(-1)
-        self.helper(node, 0)
-        return node.left
+    def constructFromPrePost(self, preorder, postorder):
+        def makeTree():
+            node = TreeNode(postorder.pop())
+            if node.val != preorder[-1]:
+                node.right = makeTree()
 
-    def helper(self, parent, lvl):
-        while self.idx < len(self.s) and lvl == self.level:
-            num = 0
-            while self.idx < len(self.s) and self.s[self.idx].isdigit():
-                num = num * 10 + int(self.s[self.idx])
-                self.idx += 1
-            node = TreeNode(num)
-            if not parent.left:
-                parent.left = node
-            else:
-                parent.right = node
-            self.level = 0
-            while self.idx < len(self.s) and self.s[self.idx] == '-':
-                self.level += 1
-                self.idx += 1
-            self.helper(node, lvl + 1)
+            if node.val != preorder[-1]:
+                node.left = makeTree()
 
-    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+            preorder.pop()
+            return node
+
+        return makeTree()
+
+    def printPreOrder(self, node):
         result = []
-        self.preorderHelper(root, result)
+        def traverse(n):
+            if n:
+                result.append(n.val)
+                traverse(n.left)
+                traverse(n.right)
+        traverse(node)
         return result
 
-    def preorderHelper(self, node: Optional[TreeNode], result: List[int]):
-        if node:
-            result.append(node.val)
-            self.preorderHelper(node.left, result)
-            self.preorderHelper(node.right, result)
 
-
-traversal = "1-2--3--4-5--6--7"
+preorder = [1,2,4,5,3,6,7]
+postorder = [4,5,2,6,7,3,1]
 solution = Solution()
-root = solution.recoverFromPreorder(traversal)
-result = solution.preorderTraversal(root)
-print(result)
+result = solution.constructFromPrePost(preorder, postorder)
+print(solution.printPreOrder(result))
+
+
+# 1028. Recover a Tree From Preorder Traversal
+
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#
+# class Solution:
+#     def recoverFromPreorder(self, traversal: str) -> Optional[TreeNode]:
+#         self.s = traversal
+#         self.idx = 0
+#         self.level = 0
+#         node = TreeNode(-1)
+#         self.helper(node, 0)
+#         return node.left
+#
+#     def helper(self, parent, lvl):
+#         while self.idx < len(self.s) and lvl == self.level:
+#             num = 0
+#             while self.idx < len(self.s) and self.s[self.idx].isdigit():
+#                 num = num * 10 + int(self.s[self.idx])
+#                 self.idx += 1
+#             node = TreeNode(num)
+#             if not parent.left:
+#                 parent.left = node
+#             else:
+#                 parent.right = node
+#             self.level = 0
+#             while self.idx < len(self.s) and self.s[self.idx] == '-':
+#                 self.level += 1
+#                 self.idx += 1
+#             self.helper(node, lvl + 1)
+#
+#     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+#         result = []
+#         self.preorderHelper(root, result)
+#         return result
+#
+#     def preorderHelper(self, node: Optional[TreeNode], result: List[int]):
+#         if node:
+#             result.append(node.val)
+#             self.preorderHelper(node.left, result)
+#             self.preorderHelper(node.right, result)
+#
+#
+# traversal = "1-2--3--4-5--6--7"
+# solution = Solution()
+# root = solution.recoverFromPreorder(traversal)
+# result = solution.preorderTraversal(root)
+# print(result)
 
 
 # class TreeNode:
