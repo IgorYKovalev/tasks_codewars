@@ -16,45 +16,97 @@ from typing import List, Optional
 import heapq
 
 
+class Solution:
+    def mostProfitablePath(self, edges, bob, amount):
+        n = len(edges) + 1
+        adj = [[] for _ in range(n)]
+        parent = [-1] * n
+        Bob = [float('inf')] * n
+
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+
+        def dfs(i, p):
+            parent[i] = p
+            for j in adj[i]:
+                if j == p: continue
+                dfs(j, i)
+
+        dfs(0, -1)
+        x = bob
+        move = 0
+        while x != -1:
+            Bob[x] = move
+            move += 1
+            x = parent[x]
+
+        def dfs_sum(i, dist, prev):
+            alice = 0
+            if dist < Bob[i]:
+                alice = amount[i]
+            elif dist == Bob[i]:
+                alice = amount[i] // 2
+
+            isLeaf = True
+            maxLeafSum = -float('inf')
+
+            for j in adj[i]:
+                if j == prev: continue
+                isLeaf = False
+                maxLeafSum = max(maxLeafSum, dfs_sum(j, dist + 1, i))
+
+            return alice if isLeaf else alice + maxLeafSum
+        return dfs_sum(0, 0, -1)
+
+
+edges = [[0,1],[1,2],[1,3],[3,4]]
+bob = 3
+amount = [-2,4,2,-4,6]
+solution = Solution()
+result = solution.mostProfitablePath(edges, bob, amount)
+print(result)
+
+
 # 889. Construct Binary Tree from Preorder and Postorder Traversal
 
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
-class Solution:
-    def constructFromPrePost(self, preorder, postorder):
-        def makeTree():
-            node = TreeNode(postorder.pop())
-            if node.val != preorder[-1]:
-                node.right = makeTree()
-
-            if node.val != preorder[-1]:
-                node.left = makeTree()
-
-            preorder.pop()
-            return node
-
-        return makeTree()
-
-    def printPreOrder(self, node):
-        result = []
-        def traverse(n):
-            if n:
-                result.append(n.val)
-                traverse(n.left)
-                traverse(n.right)
-        traverse(node)
-        return result
-
-
-preorder = [1,2,4,5,3,6,7]
-postorder = [4,5,2,6,7,3,1]
-solution = Solution()
-result = solution.constructFromPrePost(preorder, postorder)
-print(solution.printPreOrder(result))
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#
+# class Solution:
+#     def constructFromPrePost(self, preorder, postorder):
+#         def makeTree():
+#             node = TreeNode(postorder.pop())
+#             if node.val != preorder[-1]:
+#                 node.right = makeTree()
+#
+#             if node.val != preorder[-1]:
+#                 node.left = makeTree()
+#
+#             preorder.pop()
+#             return node
+#
+#         return makeTree()
+#
+#     def printPreOrder(self, node):
+#         result = []
+#         def traverse(n):
+#             if n:
+#                 result.append(n.val)
+#                 traverse(n.left)
+#                 traverse(n.right)
+#         traverse(node)
+#         return result
+#
+#
+# preorder = [1,2,4,5,3,6,7]
+# postorder = [4,5,2,6,7,3,1]
+# solution = Solution()
+# result = solution.constructFromPrePost(preorder, postorder)
+# print(solution.printPreOrder(result))
 
 
 # 1028. Recover a Tree From Preorder Traversal
