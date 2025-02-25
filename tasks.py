@@ -17,55 +17,71 @@ import heapq
 
 
 class Solution:
-    def mostProfitablePath(self, edges, bob, amount):
-        n = len(edges) + 1
-        adj = [[] for _ in range(n)]
-        parent = [-1] * n
-        Bob = [float('inf')] * n
-
-        for u, v in edges:
-            adj[u].append(v)
-            adj[v].append(u)
-
-        def dfs(i, p):
-            parent[i] = p
-            for j in adj[i]:
-                if j == p: continue
-                dfs(j, i)
-
-        dfs(0, -1)
-        x = bob
-        move = 0
-        while x != -1:
-            Bob[x] = move
-            move += 1
-            x = parent[x]
-
-        def dfs_sum(i, dist, prev):
-            alice = 0
-            if dist < Bob[i]:
-                alice = amount[i]
-            elif dist == Bob[i]:
-                alice = amount[i] // 2
-
-            isLeaf = True
-            maxLeafSum = -float('inf')
-
-            for j in adj[i]:
-                if j == prev: continue
-                isLeaf = False
-                maxLeafSum = max(maxLeafSum, dfs_sum(j, dist + 1, i))
-
-            return alice if isLeaf else alice + maxLeafSum
-        return dfs_sum(0, 0, -1)
+    def numOfSubarrays(self, arr: List[int]) -> int:
+        oddcount, prefixsum, mod = 0, 0, 1_000_000_007
+        for a in arr:
+            prefixsum += a
+            oddcount += prefixsum % 2
+        oddcount += (len(arr) - oddcount) * oddcount
+        return oddcount % mod
 
 
-edges = [[0,1],[1,2],[1,3],[3,4]]
-bob = 3
-amount = [-2,4,2,-4,6]
+arr = [1,3,5]
 solution = Solution()
-result = solution.mostProfitablePath(edges, bob, amount)
+result = solution.numOfSubarrays(arr)
 print(result)
+
+
+# class Solution:
+#     def mostProfitablePath(self, edges, bob, amount):
+#         n = len(edges) + 1
+#         adj = [[] for _ in range(n)]
+#         parent = [-1] * n
+#         Bob = [float('inf')] * n
+#
+#         for u, v in edges:
+#             adj[u].append(v)
+#             adj[v].append(u)
+#
+#         def dfs(i, p):
+#             parent[i] = p
+#             for j in adj[i]:
+#                 if j == p: continue
+#                 dfs(j, i)
+#
+#         dfs(0, -1)
+#         x = bob
+#         move = 0
+#         while x != -1:
+#             Bob[x] = move
+#             move += 1
+#             x = parent[x]
+#
+#         def dfs_sum(i, dist, prev):
+#             alice = 0
+#             if dist < Bob[i]:
+#                 alice = amount[i]
+#             elif dist == Bob[i]:
+#                 alice = amount[i] // 2
+#
+#             isLeaf = True
+#             maxLeafSum = -float('inf')
+#
+#             for j in adj[i]:
+#                 if j == prev: continue
+#                 isLeaf = False
+#                 maxLeafSum = max(maxLeafSum, dfs_sum(j, dist + 1, i))
+#
+#             return alice if isLeaf else alice + maxLeafSum
+#         return dfs_sum(0, 0, -1)
+#
+#
+# edges = [[0,1],[1,2],[1,3],[3,4]]
+# bob = 3
+# amount = [-2,4,2,-4,6]
+# solution = Solution()
+# result = solution.mostProfitablePath(edges, bob, amount)
+# print(result)
 
 
 # 889. Construct Binary Tree from Preorder and Postorder Traversal
