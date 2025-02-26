@@ -17,19 +17,35 @@ import heapq
 
 
 class Solution:
-    def numOfSubarrays(self, arr: List[int]) -> int:
-        oddcount, prefixsum, mod = 0, 0, 1_000_000_007
-        for a in arr:
-            prefixsum += a
-            oddcount += prefixsum % 2
-        oddcount += (len(arr) - oddcount) * oddcount
-        return oddcount % mod
+    def maxAbsoluteSum(self, nums):
+        summa = minsum = maxsum = 0
+        for num in nums:
+            summa += num
+            maxsum = max(maxsum, summa)
+            minsum = min(minsum, summa)
+        return abs(maxsum - minsum)
 
 
-arr = [1,3,5]
+nums = [1,-3,2,3,-4]
 solution = Solution()
-result = solution.numOfSubarrays(arr)
+result = solution.maxAbsoluteSum(nums)
 print(result)
+
+
+# class Solution:
+#     def numOfSubarrays(self, arr: List[int]) -> int:
+#         oddcount, prefixsum, mod = 0, 0, 1_000_000_007
+#         for a in arr:
+#             prefixsum += a
+#             oddcount += prefixsum % 2
+#         oddcount += (len(arr) - oddcount) * oddcount
+#         return oddcount % mod
+#
+#
+# arr = [1,3,5]
+# solution = Solution()
+# result = solution.numOfSubarrays(arr)
+# print(result)
 
 
 # class Solution:
