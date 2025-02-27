@@ -17,19 +17,45 @@ import heapq
 
 
 class Solution:
-    def maxAbsoluteSum(self, nums):
-        summa = minsum = maxsum = 0
-        for num in nums:
-            summa += num
-            maxsum = max(maxsum, summa)
-            minsum = min(minsum, summa)
-        return abs(maxsum - minsum)
+    def lenLongestFibSubseq(self, arr):
+        if len(arr) <= 2:
+            return 0
+
+        index_map = {num: i for i, num in enumerate(arr)}
+        maxi = 0
+
+        for i in range(len(arr)):
+            for j in range(i + 1, len(arr)):
+                prev, prevv = arr[j], arr[i]
+                length = 2
+                while prev + prevv in index_map:
+                    length += 1
+                    maxi = max(maxi, length)
+                    prev, prevv = prev + prevv, prev
+
+        return maxi if maxi > 2 else 0
 
 
-nums = [1,-3,2,3,-4]
+arr = [1,2,3,4,5,6,7,8]
 solution = Solution()
-result = solution.maxAbsoluteSum(nums)
+result = solution.lenLongestFibSubseq(arr)
 print(result)
+
+
+# class Solution:
+#     def maxAbsoluteSum(self, nums):
+#         summa = minsum = maxsum = 0
+#         for num in nums:
+#             summa += num
+#             maxsum = max(maxsum, summa)
+#             minsum = min(minsum, summa)
+#         return abs(maxsum - minsum)
+#
+#
+# nums = [1,-3,2,3,-4]
+# solution = Solution()
+# result = solution.maxAbsoluteSum(nums)
+# print(result)
 
 
 # class Solution:
