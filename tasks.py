@@ -17,29 +17,74 @@ import heapq
 
 
 class Solution:
-    def lenLongestFibSubseq(self, arr):
-        if len(arr) <= 2:
-            return 0
+    def shortestCommonSupersequence(self, str1: str, str2: str) -> str:
+        m, n = len(str1), len(str2)
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
 
-        index_map = {num: i for i, num in enumerate(arr)}
-        maxi = 0
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if str1[i - 1] == str2[j - 1]:
+                    dp[i][j] = 1 + dp[i - 1][j - 1]
+                else:
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
 
-        for i in range(len(arr)):
-            for j in range(i + 1, len(arr)):
-                prev, prevv = arr[j], arr[i]
-                length = 2
-                while prev + prevv in index_map:
-                    length += 1
-                    maxi = max(maxi, length)
-                    prev, prevv = prev + prevv, prev
+        i, j = m, n
+        result = []
 
-        return maxi if maxi > 2 else 0
+        while i > 0 and j > 0:
+            if str1[i - 1] == str2[j - 1]:
+                result.append(str1[i - 1])
+                i -= 1
+                j -= 1
+            elif dp[i - 1][j] > dp[i][j - 1]:
+                result.append(str1[i - 1])
+                i -= 1
+            else:
+                result.append(str2[j - 1])
+                j -= 1
+
+        while i > 0:
+            result.append(str1[i - 1])
+            i -= 1
+
+        while j > 0:
+            result.append(str2[j - 1])
+            j -= 1
+
+        return ''.join(result[::-1])
 
 
-arr = [1,2,3,4,5,6,7,8]
+str1 = "abac"
+str2 = "cab"
 solution = Solution()
-result = solution.lenLongestFibSubseq(arr)
+result = solution.shortestCommonSupersequence(str1, str2)
 print(result)
+
+
+# class Solution:
+#     def lenLongestFibSubseq(self, arr):
+#         if len(arr) <= 2:
+#             return 0
+#
+#         index_map = {num: i for i, num in enumerate(arr)}
+#         maxi = 0
+#
+#         for i in range(len(arr)):
+#             for j in range(i + 1, len(arr)):
+#                 prev, prevv = arr[j], arr[i]
+#                 length = 2
+#                 while prev + prevv in index_map:
+#                     length += 1
+#                     maxi = max(maxi, length)
+#                     prev, prevv = prev + prevv, prev
+#
+#         return maxi if maxi > 2 else 0
+#
+#
+# arr = [1,2,3,4,5,6,7,8]
+# solution = Solution()
+# result = solution.lenLongestFibSubseq(arr)
+# print(result)
 
 
 # class Solution:
