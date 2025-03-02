@@ -17,29 +17,57 @@ import heapq
 
 
 class Solution:
-    def applyOperations(self, nums):
-        for i in range(len(nums) - 1):
-            if nums[i] == nums[i + 1]:
-                nums[i] *= 2
-                nums[i + 1] = 0
+    def mergeArrays(self, nums1, nums2):
+        i, j = 0, 0
+        result = []
+        n1, n2 = len(nums1), len(nums2)
 
-        index = 0
-        for i in range(len(nums)):
-            if nums[i] != 0:
-                nums[index] = nums[i]
-                index += 1
+        while i < n1 or j < n2:
+            if i < n1 and (j >= n2 or nums1[i][0] < nums2[j][0]):
+                result.append(nums1[i])
+                i += 1
+            elif j < n2 and (i >= n1 or nums1[i][0] > nums2[j][0]):
+                result.append(nums2[j])
+                j += 1
+            else:
+                result.append([nums1[i][0], nums1[i][1] + nums2[j][1]])
+                i += 1
+                j += 1
 
-        while index < len(nums):
-            nums[index] = 0
-            index += 1
-
-        return nums
+        return result
 
 
-nums = [1,2,2,1,1,0]
+nums1 = [[1,2],[2,3],[4,5]]
+nums2 = [[1,4],[3,2],[4,1]]
 solution = Solution()
-result = solution.applyOperations(nums)
+result = solution.mergeArrays(nums1, nums2)
 print(result)
+
+
+# class Solution:
+#     def applyOperations(self, nums):
+#         for i in range(len(nums) - 1):
+#             if nums[i] == nums[i + 1]:
+#                 nums[i] *= 2
+#                 nums[i + 1] = 0
+#
+#         index = 0
+#         for i in range(len(nums)):
+#             if nums[i] != 0:
+#                 nums[index] = nums[i]
+#                 index += 1
+#
+#         while index < len(nums):
+#             nums[index] = 0
+#             index += 1
+#
+#         return nums
+#
+#
+# nums = [1,2,2,1,1,0]
+# solution = Solution()
+# result = solution.applyOperations(nums)
+# print(result)
 
 
 # class Solution:
