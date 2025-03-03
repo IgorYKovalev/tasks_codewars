@@ -17,31 +17,52 @@ import heapq
 
 
 class Solution:
-    def mergeArrays(self, nums1, nums2):
-        i, j = 0, 0
-        result = []
-        n1, n2 = len(nums1), len(nums2)
-
-        while i < n1 or j < n2:
-            if i < n1 and (j >= n2 or nums1[i][0] < nums2[j][0]):
-                result.append(nums1[i])
-                i += 1
-            elif j < n2 and (i >= n1 or nums1[i][0] > nums2[j][0]):
-                result.append(nums2[j])
-                j += 1
+    def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
+        less, high, count = [], [], 0
+        for num in nums:
+            if num < pivot:
+                less.append(num)
+            elif num == pivot:
+                count += 1
             else:
-                result.append([nums1[i][0], nums1[i][1] + nums2[j][1]])
-                i += 1
-                j += 1
+                high.append(num)
 
-        return result
+        return less + [pivot] * count + high
 
 
-nums1 = [[1,2],[2,3],[4,5]]
-nums2 = [[1,4],[3,2],[4,1]]
+nums = [9,12,5,10,14,3,10]
+pivot = 10
 solution = Solution()
-result = solution.mergeArrays(nums1, nums2)
+result = solution.pivotArray(nums, pivot)
 print(result)
+
+
+# class Solution:
+#     def mergeArrays(self, nums1, nums2):
+#         i, j = 0, 0
+#         result = []
+#         n1, n2 = len(nums1), len(nums2)
+#
+#         while i < n1 or j < n2:
+#             if i < n1 and (j >= n2 or nums1[i][0] < nums2[j][0]):
+#                 result.append(nums1[i])
+#                 i += 1
+#             elif j < n2 and (i >= n1 or nums1[i][0] > nums2[j][0]):
+#                 result.append(nums2[j])
+#                 j += 1
+#             else:
+#                 result.append([nums1[i][0], nums1[i][1] + nums2[j][1]])
+#                 i += 1
+#                 j += 1
+#
+#         return result
+#
+#
+# nums1 = [[1,2],[2,3],[4,5]]
+# nums2 = [[1,4],[3,2],[4,1]]
+# solution = Solution()
+# result = solution.mergeArrays(nums1, nums2)
+# print(result)
 
 
 # class Solution:
