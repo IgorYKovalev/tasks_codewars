@@ -17,24 +17,40 @@ import heapq
 
 
 class Solution:
-    def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
-        less, high, count = [], [], 0
-        for num in nums:
-            if num < pivot:
-                less.append(num)
-            elif num == pivot:
-                count += 1
-            else:
-                high.append(num)
+    def checkPowersOfThree(self, n: int) -> bool:
+        while n > 0:
+            if n % 3 == 2:
+                return False
+            n //= 3
 
-        return less + [pivot] * count + high
+        return True
 
 
-nums = [9,12,5,10,14,3,10]
-pivot = 10
+n = 12
 solution = Solution()
-result = solution.pivotArray(nums, pivot)
+result = solution.checkPowersOfThree(n)
 print(result)
+
+
+# class Solution:
+#     def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
+#         less, high, count = [], [], 0
+#         for num in nums:
+#             if num < pivot:
+#                 less.append(num)
+#             elif num == pivot:
+#                 count += 1
+#             else:
+#                 high.append(num)
+#
+#         return less + [pivot] * count + high
+#
+#
+# nums = [9,12,5,10,14,3,10]
+# pivot = 10
+# solution = Solution()
+# result = solution.pivotArray(nums, pivot)
+# print(result)
 
 
 # class Solution:
