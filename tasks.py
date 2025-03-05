@@ -17,19 +17,30 @@ import heapq
 
 
 class Solution:
-    def checkPowersOfThree(self, n: int) -> bool:
-        while n > 0:
-            if n % 3 == 2:
-                return False
-            n //= 3
-
-        return True
+    def coloredCells(self, n: int) -> int:
+        return 2 * n * (n - 1) + 1
 
 
-n = 12
+n = 1
 solution = Solution()
-result = solution.checkPowersOfThree(n)
+result = solution.coloredCells(n)
 print(result)
+
+
+# class Solution:
+#     def checkPowersOfThree(self, n: int) -> bool:
+#         while n > 0:
+#             if n % 3 == 2:
+#                 return False
+#             n //= 3
+#
+#         return True
+#
+#
+# n = 12
+# solution = Solution()
+# result = solution.checkPowersOfThree(n)
+# print(result)
 
 
 # class Solution:
