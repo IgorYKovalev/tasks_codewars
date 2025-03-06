@@ -17,14 +17,38 @@ import heapq
 
 
 class Solution:
-    def coloredCells(self, n: int) -> int:
-        return 2 * n * (n - 1) + 1
+    def findMissingAndRepeatedValues(self, grid):
+        n = len(grid)
+        size = n * n
+        count = [0] * (size + 1)
+        for i in range(n):
+            for j in range(n):
+                count[grid[i][j]] += 1
+
+        a, b = -1, -1
+        for num in range(1, size + 1):
+            if count[num] == 2:
+                a = num
+            elif count[num] == 0:
+                b = num
+        return [a, b]
 
 
-n = 1
+grid = [[1, 3], [2, 2]]
 solution = Solution()
-result = solution.coloredCells(n)
+result = solution.findMissingAndRepeatedValues(grid)
 print(result)
+
+
+# class Solution:
+#     def coloredCells(self, n: int) -> int:
+#         return 2 * n * (n - 1) + 1
+#
+#
+# n = 1
+# solution = Solution()
+# result = solution.coloredCells(n)
+# print(result)
 
 
 # class Solution:
