@@ -17,27 +17,58 @@ import heapq
 
 
 class Solution:
-    def findMissingAndRepeatedValues(self, grid):
-        n = len(grid)
-        size = n * n
-        count = [0] * (size + 1)
-        for i in range(n):
-            for j in range(n):
-                count[grid[i][j]] += 1
+    def closestPrimes(self, left: int, right: int) -> list[int]:
+        sieve = [True] * (right + 1)
+        sieve[0] = sieve[1] = False
+        for i in range(2, int(right ** 0.5) + 1):
+            if sieve[i]:
+                for j in range(i * i, right + 1, i):
+                    sieve[j] = False
 
-        a, b = -1, -1
-        for num in range(1, size + 1):
-            if count[num] == 2:
-                a = num
-            elif count[num] == 0:
-                b = num
-        return [a, b]
+        primes = [i for i in range(left, right + 1) if sieve[i]]
+        if len(primes) < 2:
+            return [-1, -1]
+
+        min_gap = float('inf')
+        result = [-1, -1]
+        for i in range(1, len(primes)):
+            gap = primes[i] - primes[i - 1]
+            if gap < min_gap:
+                min_gap = gap
+                result = [primes[i - 1], primes[i]]
+
+        return result
 
 
-grid = [[1, 3], [2, 2]]
+left = 10
+right = 19
 solution = Solution()
-result = solution.findMissingAndRepeatedValues(grid)
+result = solution.closestPrimes(left, right)
 print(result)
+
+
+# class Solution:
+#     def findMissingAndRepeatedValues(self, grid):
+#         n = len(grid)
+#         size = n * n
+#         count = [0] * (size + 1)
+#         for i in range(n):
+#             for j in range(n):
+#                 count[grid[i][j]] += 1
+#
+#         a, b = -1, -1
+#         for num in range(1, size + 1):
+#             if count[num] == 2:
+#                 a = num
+#             elif count[num] == 0:
+#                 b = num
+#         return [a, b]
+#
+#
+# grid = [[1, 3], [2, 2]]
+# solution = Solution()
+# result = solution.findMissingAndRepeatedValues(grid)
+# print(result)
 
 
 # class Solution:
