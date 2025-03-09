@@ -17,25 +17,48 @@ import heapq
 
 
 class Solution:
-    def minimumRecolors(self, blocks: str, k: int) -> int:
+    def numberOfAlternatingGroups(self, colors, k):
+        colors.extend(colors[:(k - 1)])
         count = 0
-        res = float("inf")
+        left = 0
 
-        for i in range(len(blocks)):
-            if i - k >= 0 and blocks[i - k] == 'B':
-                count -= 1
-            if blocks[i] == 'B':
+        for right in range(len(colors)):
+            if right > 0 and colors[right] == colors[right - 1]:
+                left = right
+
+            if right - left + 1 >= k:
                 count += 1
-            res = min(res, k - count)
 
-        return res
+        return count
 
 
-blocks = "WBBWWBBWBW"
-k = 7
+colors = [0,1,0,1,0]
+k = 3
 solution = Solution()
-result = solution.minimumRecolors(blocks, k)
+result = solution.numberOfAlternatingGroups(colors, k)
 print(result)
+
+
+# class Solution:
+#     def minimumRecolors(self, blocks: str, k: int) -> int:
+#         count = 0
+#         res = float("inf")
+#
+#         for i in range(len(blocks)):
+#             if i - k >= 0 and blocks[i - k] == 'B':
+#                 count -= 1
+#             if blocks[i] == 'B':
+#                 count += 1
+#             res = min(res, k - count)
+#
+#         return res
+#
+#
+# blocks = "WBBWWBBWBW"
+# k = 7
+# solution = Solution()
+# result = solution.minimumRecolors(blocks, k)
+# print(result)
 
 
 # class Solution:
