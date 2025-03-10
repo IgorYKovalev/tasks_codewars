@@ -16,27 +16,67 @@ from typing import List, Optional
 import heapq
 
 
-class Solution:
-    def numberOfAlternatingGroups(self, colors, k):
-        colors.extend(colors[:(k - 1)])
-        count = 0
-        left = 0
+class Solution(object):
+    def countOfSubstrings(self, word, k):
+        def isVowel(c):
+            return c in {'a', 'e', 'i', 'o', 'u'}
 
-        for right in range(len(colors)):
-            if right > 0 and colors[right] == colors[right - 1]:
-                left = right
+        def atLeastK(word, k):
+            n = len(word)
+            ans = 0
+            consonants = 0
+            left = 0
+            vowel_map = {}
 
-            if right - left + 1 >= k:
-                count += 1
+            for right in range(n):
+                if isVowel(word[right]):
+                    vowel_map[word[right]] = vowel_map.get(word[right], 0) + 1
+                else:
+                    consonants += 1
 
-        return count
+                while len(vowel_map) == 5 and consonants >= k:
+                    ans += n - right
+                    if isVowel(word[left]):
+                        vowel_map[word[left]] -= 1
+                        if vowel_map[word[left]] == 0:
+                            del vowel_map[word[left]]
+                    else:
+                        consonants -= 1
+                    left += 1
+
+            return ans
+
+        return atLeastK(word, k) - atLeastK(word, k + 1)
 
 
-colors = [0,1,0,1,0]
-k = 3
+word = "aeioqq"
+k = 1
 solution = Solution()
-result = solution.numberOfAlternatingGroups(colors, k)
+result = solution.countOfSubstrings(word, k)
 print(result)
+
+
+# class Solution:
+#     def numberOfAlternatingGroups(self, colors, k):
+#         colors.extend(colors[:(k - 1)])
+#         count = 0
+#         left = 0
+#
+#         for right in range(len(colors)):
+#             if right > 0 and colors[right] == colors[right - 1]:
+#                 left = right
+#
+#             if right - left + 1 >= k:
+#                 count += 1
+#
+#         return count
+#
+#
+# colors = [0,1,0,1,0]
+# k = 3
+# solution = Solution()
+# result = solution.numberOfAlternatingGroups(colors, k)
+# print(result)
 
 
 # class Solution:
