@@ -16,44 +16,62 @@ from typing import List, Optional
 import heapq
 
 
-class Solution(object):
-    def countOfSubstrings(self, word, k):
-        def isVowel(c):
-            return c in {'a', 'e', 'i', 'o', 'u'}
-
-        def atLeastK(word, k):
-            n = len(word)
-            ans = 0
-            consonants = 0
-            left = 0
-            vowel_map = {}
-
-            for right in range(n):
-                if isVowel(word[right]):
-                    vowel_map[word[right]] = vowel_map.get(word[right], 0) + 1
-                else:
-                    consonants += 1
-
-                while len(vowel_map) == 5 and consonants >= k:
-                    ans += n - right
-                    if isVowel(word[left]):
-                        vowel_map[word[left]] -= 1
-                        if vowel_map[word[left]] == 0:
-                            del vowel_map[word[left]]
-                    else:
-                        consonants -= 1
-                    left += 1
-
-            return ans
-
-        return atLeastK(word, k) - atLeastK(word, k + 1)
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        abc = [-1, -1, -1]
+        count, right = 0, 0
+        while right < len(s):
+            abc[ord(s[right]) - ord('a')] = right
+            min_index = min(abc)
+            count += (min_index + 1)
+            right += 1
+        return count
 
 
-word = "aeioqq"
-k = 1
+s = "abcabc"
 solution = Solution()
-result = solution.countOfSubstrings(word, k)
+result = solution.numberOfSubstrings(s)
 print(result)
+
+
+# class Solution(object):
+#     def countOfSubstrings(self, word, k):
+#         def isVowel(c):
+#             return c in {'a', 'e', 'i', 'o', 'u'}
+#
+#         def atLeastK(word, k):
+#             n = len(word)
+#             ans = 0
+#             consonants = 0
+#             left = 0
+#             vowel_map = {}
+#
+#             for right in range(n):
+#                 if isVowel(word[right]):
+#                     vowel_map[word[right]] = vowel_map.get(word[right], 0) + 1
+#                 else:
+#                     consonants += 1
+#
+#                 while len(vowel_map) == 5 and consonants >= k:
+#                     ans += n - right
+#                     if isVowel(word[left]):
+#                         vowel_map[word[left]] -= 1
+#                         if vowel_map[word[left]] == 0:
+#                             del vowel_map[word[left]]
+#                     else:
+#                         consonants -= 1
+#                     left += 1
+#
+#             return ans
+#
+#         return atLeastK(word, k) - atLeastK(word, k + 1)
+#
+#
+# word = "aeioqq"
+# k = 1
+# solution = Solution()
+# result = solution.countOfSubstrings(word, k)
+# print(result)
 
 
 # class Solution:
