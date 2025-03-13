@@ -16,35 +16,62 @@ from typing import List, Optional
 import heapq
 
 
-class Solution:
-    def maximumCount(self, nums):
+class Solution(object):
+    def minZeroArray(self, nums, queries):
         n = len(nums)
-        left, right = 0, n - 1
-
-        while left <= right:
-            mid = left + (right - left) // 2
-            if nums[mid] > 0:
-                right = mid - 1
-            else:
-                left = mid + 1
-
-        positive_count = n - left
-        left, right = 0, n - 1
-
-        while left <= right:
-            mid = left + (right - left) // 2
-            if nums[mid] < 0:
-                left = mid + 1
-            else:
-                right = mid - 1
-        negative_count = right + 1
-        return max(positive_count, negative_count)
+        sum_value = 0
+        query_count = 0
+        diff_array = [0] * (n + 1)
+        for i in range(n):
+            while sum_value + diff_array[i] < nums[i]:
+                query_count += 1
+                if query_count > len(queries):
+                    return -1
+                left, right, value = queries[query_count - 1]
+                if right >= i:
+                    diff_array[max(left, i)] += value
+                    if right + 1 < len(diff_array):
+                        diff_array[right + 1] -= value
+            sum_value += diff_array[i]
+        return query_count
 
 
-nums = [-2, -1, -1, 1, 2, 3]
+nums = [2, 0, 2]
+queries = [[0, 2, 1], [0, 2, 1], [1, 1, 3]]
 solution = Solution()
-result = solution.maximumCount(nums)
+result = solution.minZeroArray(nums, queries)
 print(result)
+
+
+# class Solution:
+#     def maximumCount(self, nums):
+#         n = len(nums)
+#         left, right = 0, n - 1
+#
+#         while left <= right:
+#             mid = left + (right - left) // 2
+#             if nums[mid] > 0:
+#                 right = mid - 1
+#             else:
+#                 left = mid + 1
+#
+#         positive_count = n - left
+#         left, right = 0, n - 1
+#
+#         while left <= right:
+#             mid = left + (right - left) // 2
+#             if nums[mid] < 0:
+#                 left = mid + 1
+#             else:
+#                 right = mid - 1
+#         negative_count = right + 1
+#         return max(positive_count, negative_count)
+#
+#
+# nums = [-2, -1, -1, 1, 2, 3]
+# solution = Solution()
+# result = solution.maximumCount(nums)
+# print(result)
 
 
 # class Solution:
