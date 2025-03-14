@@ -16,31 +16,55 @@ from typing import List, Optional
 import heapq
 
 
-class Solution(object):
-    def minZeroArray(self, nums, queries):
-        n = len(nums)
-        sum_value = 0
-        query_count = 0
-        diff_array = [0] * (n + 1)
-        for i in range(n):
-            while sum_value + diff_array[i] < nums[i]:
-                query_count += 1
-                if query_count > len(queries):
-                    return -1
-                left, right, value = queries[query_count - 1]
-                if right >= i:
-                    diff_array[max(left, i)] += value
-                    if right + 1 < len(diff_array):
-                        diff_array[right + 1] -= value
-            sum_value += diff_array[i]
-        return query_count
+class Solution:
+    def maximumCandies(self, candies: List[int], k: int) -> int:
+        left, right = 1, max(candies)
+        result = 0
+
+        while left <= right:
+            mid = (left + right) // 2
+            children_count = sum(pile // mid for pile in candies)
+
+            if children_count >= k:
+                result = mid
+                left = mid + 1
+            else:
+                right = mid - 1
+        return result
 
 
-nums = [2, 0, 2]
-queries = [[0, 2, 1], [0, 2, 1], [1, 1, 3]]
+candies = [5, 8, 6]
+k = 3
 solution = Solution()
-result = solution.minZeroArray(nums, queries)
+result = solution.maximumCandies(candies, k)
 print(result)
+
+
+# class Solution(object):
+#     def minZeroArray(self, nums, queries):
+#         n = len(nums)
+#         sum_value = 0
+#         query_count = 0
+#         diff_array = [0] * (n + 1)
+#         for i in range(n):
+#             while sum_value + diff_array[i] < nums[i]:
+#                 query_count += 1
+#                 if query_count > len(queries):
+#                     return -1
+#                 left, right, value = queries[query_count - 1]
+#                 if right >= i:
+#                     diff_array[max(left, i)] += value
+#                     if right + 1 < len(diff_array):
+#                         diff_array[right + 1] -= value
+#             sum_value += diff_array[i]
+#         return query_count
+#
+#
+# nums = [2, 0, 2]
+# queries = [[0, 2, 1], [0, 2, 1], [1, 1, 3]]
+# solution = Solution()
+# result = solution.minZeroArray(nums, queries)
+# print(result)
 
 
 # class Solution:
