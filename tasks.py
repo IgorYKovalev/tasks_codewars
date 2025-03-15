@@ -17,27 +17,57 @@ import heapq
 
 
 class Solution:
-    def maximumCandies(self, candies: List[int], k: int) -> int:
-        left, right = 1, max(candies)
-        result = 0
+    def minCapability(self, nums: List[int], k: int) -> int:
+        def can_steal_k_houses(capability):
+            count = 0
+            i = 0
+            while i < len(nums):
+                if nums[i] <= capability:
+                    count += 1
+                    i += 2
+                else:
+                    i += 1
+            return count >= k
 
-        while left <= right:
-            mid = (left + right) // 2
-            children_count = sum(pile // mid for pile in candies)
-
-            if children_count >= k:
-                result = mid
-                left = mid + 1
+        left, right = min(nums), max(nums)
+        while left < right:
+            mid = left + (right - left) // 2
+            if can_steal_k_houses(mid):
+                right = mid
             else:
-                right = mid - 1
-        return result
+                left = mid + 1
+        return left
 
 
-candies = [5, 8, 6]
-k = 3
+nums = [2, 3, 5, 9]
+k = 2
 solution = Solution()
-result = solution.maximumCandies(candies, k)
+result = solution.minCapability(nums, k)
 print(result)
+
+
+# class Solution:
+#     def maximumCandies(self, candies: List[int], k: int) -> int:
+#         left, right = 1, max(candies)
+#         result = 0
+#
+#         while left <= right:
+#             mid = (left + right) // 2
+#             children_count = sum(pile // mid for pile in candies)
+#
+#             if children_count >= k:
+#                 result = mid
+#                 left = mid + 1
+#             else:
+#                 right = mid - 1
+#         return result
+#
+#
+# candies = [5, 8, 6]
+# k = 3
+# solution = Solution()
+# result = solution.maximumCandies(candies, k)
+# print(result)
 
 
 # class Solution(object):
