@@ -16,34 +16,63 @@ from typing import List, Optional
 import heapq
 
 
+import math
+
 class Solution:
-    def minCapability(self, nums: List[int], k: int) -> int:
-        def can_steal_k_houses(capability):
-            count = 0
-            i = 0
-            while i < len(nums):
-                if nums[i] <= capability:
-                    count += 1
-                    i += 2
-                else:
-                    i += 1
-            return count >= k
+    def solve(self, res, ranks, cars):
+        cnt = 0
+        for rank in ranks:
+            cnt += int(math.sqrt(res / rank))
+        return cnt >= cars
 
-        left, right = min(nums), max(nums)
-        while left < right:
-            mid = left + (right - left) // 2
-            if can_steal_k_houses(mid):
-                right = mid
+    def repairCars(self, ranks, cars):
+        low, high = 1, max(ranks) * cars * cars
+        ans = high
+        while low <= high:
+            mid = (low + high) // 2
+            if self.solve(mid, ranks, cars):
+                ans = mid
+                high = mid - 1
             else:
-                left = mid + 1
-        return left
+                low = mid + 1
+        return ans
 
 
-nums = [2, 3, 5, 9]
-k = 2
+ranks = [4, 2, 3, 1]
+cars = 10
 solution = Solution()
-result = solution.minCapability(nums, k)
+result = solution.repairCars(ranks, cars)
 print(result)
+
+
+# class Solution:
+#     def minCapability(self, nums: List[int], k: int) -> int:
+#         def can_steal_k_houses(capability):
+#             count = 0
+#             i = 0
+#             while i < len(nums):
+#                 if nums[i] <= capability:
+#                     count += 1
+#                     i += 2
+#                 else:
+#                     i += 1
+#             return count >= k
+#
+#         left, right = min(nums), max(nums)
+#         while left < right:
+#             mid = left + (right - left) // 2
+#             if can_steal_k_houses(mid):
+#                 right = mid
+#             else:
+#                 left = mid + 1
+#         return left
+#
+#
+# nums = [2, 3, 5, 9]
+# k = 2
+# solution = Solution()
+# result = solution.minCapability(nums, k)
+# print(result)
 
 
 # class Solution:
