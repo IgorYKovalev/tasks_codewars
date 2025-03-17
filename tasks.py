@@ -16,33 +16,42 @@ from typing import List, Optional
 import heapq
 
 
-import math
-
 class Solution:
-    def solve(self, res, ranks, cars):
-        cnt = 0
-        for rank in ranks:
-            cnt += int(math.sqrt(res / rank))
-        return cnt >= cars
-
-    def repairCars(self, ranks, cars):
-        low, high = 1, max(ranks) * cars * cars
-        ans = high
-        while low <= high:
-            mid = (low + high) // 2
-            if self.solve(mid, ranks, cars):
-                ans = mid
-                high = mid - 1
-            else:
-                low = mid + 1
-        return ans
+    def divideArray(self, nums: List[int]) -> bool:
+        return all(nums.count(num) % 2 == 0 for num in set(nums))
 
 
-ranks = [4, 2, 3, 1]
-cars = 10
+nums = [3, 2, 3, 2, 2, 2]
 solution = Solution()
-result = solution.repairCars(ranks, cars)
+result = solution.divideArray(nums)
 print(result)
+
+
+# class Solution:
+#     def solve(self, res, ranks, cars):
+#         cnt = 0
+#         for rank in ranks:
+#             cnt += int(math.sqrt(res / rank))
+#         return cnt >= cars
+#
+#     def repairCars(self, ranks, cars):
+#         low, high = 1, max(ranks) * cars * cars
+#         ans = high
+#         while low <= high:
+#             mid = (low + high) // 2
+#             if self.solve(mid, ranks, cars):
+#                 ans = mid
+#                 high = mid - 1
+#             else:
+#                 low = mid + 1
+#         return ans
+#
+#
+# ranks = [4, 2, 3, 1]
+# cars = 10
+# solution = Solution()
+# result = solution.repairCars(ranks, cars)
+# print(result)
 
 
 # class Solution:
