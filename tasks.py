@@ -17,14 +17,37 @@ import heapq
 
 
 class Solution:
-    def divideArray(self, nums: List[int]) -> bool:
-        return all(nums.count(num) % 2 == 0 for num in set(nums))
+    def longestNiceSubarray(self, nums):
+        l = 0
+        usedbits = 0
+        maxlength = 0
+
+        for r in range(len(nums)):
+            while (usedbits & nums[r]) != 0:
+                usedbits ^= nums[l]
+                l += 1
+
+            usedbits |= nums[r]
+            maxlength = max(maxlength, r - l + 1)
+
+        return maxlength
 
 
-nums = [3, 2, 3, 2, 2, 2]
+nums = [1, 3, 8, 48, 10]
 solution = Solution()
-result = solution.divideArray(nums)
+result = solution.longestNiceSubarray(nums)
 print(result)
+
+
+# class Solution:
+#     def divideArray(self, nums: List[int]) -> bool:
+#         return all(nums.count(num) % 2 == 0 for num in set(nums))
+#
+#
+# nums = [3, 2, 3, 2, 2, 2]
+# solution = Solution()
+# result = solution.divideArray(nums)
+# print(result)
 
 
 # class Solution:
