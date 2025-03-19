@@ -17,26 +17,47 @@ import heapq
 
 
 class Solution:
-    def longestNiceSubarray(self, nums):
-        l = 0
-        usedbits = 0
-        maxlength = 0
+    def minOperations(self, nums: List[int]) -> int:
+        n = len(nums)
+        k = 0
 
-        for r in range(len(nums)):
-            while (usedbits & nums[r]) != 0:
-                usedbits ^= nums[l]
-                l += 1
+        for i in range(n - 2):
+            if nums[i] == 0:
+                nums[i] ^= 1
+                nums[i + 1] ^= 1
+                nums[i + 2] ^= 1
+                k += 1
 
-            usedbits |= nums[r]
-            maxlength = max(maxlength, r - l + 1)
-
-        return maxlength
+        return -1 if 0 in nums else k
 
 
-nums = [1, 3, 8, 48, 10]
+nums = [0, 1, 1, 1, 0, 0]
 solution = Solution()
-result = solution.longestNiceSubarray(nums)
+result = solution.minOperations(nums)
 print(result)
+
+
+# class Solution:
+#     def longestNiceSubarray(self, nums):
+#         l = 0
+#         usedbits = 0
+#         maxlength = 0
+#
+#         for r in range(len(nums)):
+#             while (usedbits & nums[r]) != 0:
+#                 usedbits ^= nums[l]
+#                 l += 1
+#
+#             usedbits |= nums[r]
+#             maxlength = max(maxlength, r - l + 1)
+#
+#         return maxlength
+#
+#
+# nums = [1, 3, 8, 48, 10]
+# solution = Solution()
+# result = solution.longestNiceSubarray(nums)
+# print(result)
 
 
 # class Solution:
