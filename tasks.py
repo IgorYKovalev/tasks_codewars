@@ -17,42 +17,76 @@ import heapq
 
 
 class Solution:
-    def minimumCost(self, n, edges, query):
-        parent = list(range(n))
-        min_path_cost = [-1] * n
-
-        def find_root(node):
-            if parent[node] != node:
-                parent[node] = find_root(parent[node])
-            return parent[node]
-
-        for source, target, weight in edges:
-            source_root = find_root(source)
-            target_root = find_root(target)
-            min_path_cost[target_root] &= weight
-
-            if source_root != target_root:
-                min_path_cost[target_root] &= min_path_cost[source_root]
-                parent[source_root] = target_root
-
+    def findAllRecipes(self, recipes, ingredients, supplies):
+        graph = defaultdict(list)
+        indegree = {}
         result = []
-        for start, end in query:
-            if start == end:
-                result.append(0)
-            elif find_root(start) != find_root(end):
-                result.append(-1)
-            else:
-                result.append(min_path_cost[find_root(start)])
+
+        for i, recipe in enumerate(recipes):
+            indegree[recipe] = len(ingredients[i])
+            for ing in ingredients[i]:
+                graph[ing].append(recipe)
+
+        queue = deque(supplies)
+        while queue:
+            item = queue.popleft()
+            if item not in graph:
+                continue
+
+            for recipe in graph[item]:
+                indegree[recipe] -= 1
+                if indegree[recipe] == 0:
+                    result.append(recipe)
+                    queue.append(recipe)
 
         return result
 
 
-n = 5
-edges = [[0, 1, 7], [1, 3, 7], [1, 2, 1]]
-query = [[0, 3], [3, 4]]
+recipes = ["bread"]
+ingredients = [["yeast", "flour"]]
+supplies = ["yeast", "flour", "corn"]
 solution = Solution()
-result = solution.minimumCost(n, edges, query)
+result = solution.findAllRecipes(recipes, ingredients, supplies)
 print(result)
+
+
+# class Solution:
+#     def minimumCost(self, n, edges, query):
+#         parent = list(range(n))
+#         min_path_cost = [-1] * n
+#
+#         def find_root(node):
+#             if parent[node] != node:
+#                 parent[node] = find_root(parent[node])
+#             return parent[node]
+#
+#         for source, target, weight in edges:
+#             source_root = find_root(source)
+#             target_root = find_root(target)
+#             min_path_cost[target_root] &= weight
+#
+#             if source_root != target_root:
+#                 min_path_cost[target_root] &= min_path_cost[source_root]
+#                 parent[source_root] = target_root
+#
+#         result = []
+#         for start, end in query:
+#             if start == end:
+#                 result.append(0)
+#             elif find_root(start) != find_root(end):
+#                 result.append(-1)
+#             else:
+#                 result.append(min_path_cost[find_root(start)])
+#
+#         return result
+#
+#
+# n = 5
+# edges = [[0, 1, 7], [1, 3, 7], [1, 2, 1]]
+# query = [[0, 3], [3, 4]]
+# solution = Solution()
+# result = solution.minimumCost(n, edges, query)
+# print(result)
 
 
 # class Solution:
