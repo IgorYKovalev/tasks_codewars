@@ -17,37 +17,73 @@ import heapq
 
 
 class Solution:
-    def findAllRecipes(self, recipes, ingredients, supplies):
-        graph = defaultdict(list)
-        indegree = {}
-        result = []
+    def countCompleteComponents(self, n, edges):
+        from collections import deque
+        adj = [[] for _ in range(n)]
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+        vis = [False] * n
+        ans = 0
+        def bfs(node):
+            q = deque([node])
+            vis[node] = True
+            comp = []
+            while q:
+                cur = q.popleft()
+                comp.append(cur)
+                for neighbor in adj[cur]:
+                    if not vis[neighbor]:
+                        vis[neighbor] = True
+                        q.append(neighbor)
+            return comp
+        for i in range(n):
+            if not vis[i]:
+                comp = bfs(i)
+                if all(len(adj[node]) == len(comp) - 1 for node in comp):
+                    ans += 1
+        return ans
 
-        for i, recipe in enumerate(recipes):
-            indegree[recipe] = len(ingredients[i])
-            for ing in ingredients[i]:
-                graph[ing].append(recipe)
 
-        queue = deque(supplies)
-        while queue:
-            item = queue.popleft()
-            if item not in graph:
-                continue
-
-            for recipe in graph[item]:
-                indegree[recipe] -= 1
-                if indegree[recipe] == 0:
-                    result.append(recipe)
-                    queue.append(recipe)
-
-        return result
-
-
-recipes = ["bread"]
-ingredients = [["yeast", "flour"]]
-supplies = ["yeast", "flour", "corn"]
+n = 6
+edges = [[0,1],[0,2],[1,2],[3,4]]
 solution = Solution()
-result = solution.findAllRecipes(recipes, ingredients, supplies)
+result = solution.countCompleteComponents(n, edges)
 print(result)
+
+
+# class Solution:
+#     def findAllRecipes(self, recipes, ingredients, supplies):
+#         graph = defaultdict(list)
+#         indegree = {}
+#         result = []
+#
+#         for i, recipe in enumerate(recipes):
+#             indegree[recipe] = len(ingredients[i])
+#             for ing in ingredients[i]:
+#                 graph[ing].append(recipe)
+#
+#         queue = deque(supplies)
+#         while queue:
+#             item = queue.popleft()
+#             if item not in graph:
+#                 continue
+#
+#             for recipe in graph[item]:
+#                 indegree[recipe] -= 1
+#                 if indegree[recipe] == 0:
+#                     result.append(recipe)
+#                     queue.append(recipe)
+#
+#         return result
+#
+#
+# recipes = ["bread"]
+# ingredients = [["yeast", "flour"]]
+# supplies = ["yeast", "flour", "corn"]
+# solution = Solution()
+# result = solution.findAllRecipes(recipes, ingredients, supplies)
+# print(result)
 
 
 # class Solution:
