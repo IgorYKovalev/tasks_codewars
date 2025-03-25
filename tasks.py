@@ -17,24 +17,49 @@ import heapq
 
 
 class Solution:
-    def countDays(self, days, meetings):
-        meetings.sort()
-        prevEnd = 0
+    def checkValidCuts(self, n: int, rec: List[List[int]]) -> bool:
+        xl = sorted([(i[0], i[2]) for i in rec], key=lambda x: x[0])
+        yl = sorted([(i[1], i[3]) for i in rec], key=lambda x: x[0])
 
-        for start, end in meetings:
-            start = max(start, prevEnd + 1)
-            length = end - start + 1
-            days -= max(length, 0)
-            prevEnd = max(prevEnd, end)
+        def has_valid_cut(intervals):
+            c = 0
+            ce = intervals[0][1]
+            for start, end in intervals[1:]:
+                if ce <= start:
+                    c += 1
+                ce = max(ce, end)
+                if c == 2:
+                    return True
+            return False
+        return has_valid_cut(xl) or has_valid_cut(yl)
 
-        return days
 
-
-days = 10
-meetings = [[5,7], [1,3], [9,10]]
+n = 5
+rectangles = [[1, 0, 5, 2], [0, 2, 2, 4], [3, 2, 5, 3], [0, 4, 4, 5]]
 solution = Solution()
-result = solution.countDays(days, meetings)
+result = solution.checkValidCuts(n, rectangles)
 print(result)
+
+
+# class Solution:
+#     def countDays(self, days, meetings):
+#         meetings.sort()
+#         prevEnd = 0
+#
+#         for start, end in meetings:
+#             start = max(start, prevEnd + 1)
+#             length = end - start + 1
+#             days -= max(length, 0)
+#             prevEnd = max(prevEnd, end)
+#
+#         return days
+#
+#
+# days = 10
+# meetings = [[5,7], [1,3], [9,10]]
+# solution = Solution()
+# result = solution.countDays(days, meetings)
+# print(result)
 
 
 # class Solution:
