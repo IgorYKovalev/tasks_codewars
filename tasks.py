@@ -17,28 +17,46 @@ import heapq
 
 
 class Solution:
-    def checkValidCuts(self, n: int, rec: List[List[int]]) -> bool:
-        xl = sorted([(i[0], i[2]) for i in rec], key=lambda x: x[0])
-        yl = sorted([(i[1], i[3]) for i in rec], key=lambda x: x[0])
-
-        def has_valid_cut(intervals):
-            c = 0
-            ce = intervals[0][1]
-            for start, end in intervals[1:]:
-                if ce <= start:
-                    c += 1
-                ce = max(ce, end)
-                if c == 2:
-                    return True
-            return False
-        return has_valid_cut(xl) or has_valid_cut(yl)
+    def minOperations(self, grid: List[List[int]], x: int) -> int:
+        arr = [num for row in grid for num in row]
+        arr.sort()
+        median = arr[len(arr) // 2]
+        for num in arr:
+            if (num - median) % x != 0:
+                return -1
+        return sum(abs(num - median) // x for num in arr)
 
 
-n = 5
-rectangles = [[1, 0, 5, 2], [0, 2, 2, 4], [3, 2, 5, 3], [0, 4, 4, 5]]
+grid = [[2, 4], [6, 8]]
+x = 2
 solution = Solution()
-result = solution.checkValidCuts(n, rectangles)
+result = solution.minOperations(grid, x)
 print(result)
+
+
+# class Solution:
+#     def checkValidCuts(self, n: int, rec: List[List[int]]) -> bool:
+#         xl = sorted([(i[0], i[2]) for i in rec], key=lambda x: x[0])
+#         yl = sorted([(i[1], i[3]) for i in rec], key=lambda x: x[0])
+#
+#         def has_valid_cut(intervals):
+#             c = 0
+#             ce = intervals[0][1]
+#             for start, end in intervals[1:]:
+#                 if ce <= start:
+#                     c += 1
+#                 ce = max(ce, end)
+#                 if c == 2:
+#                     return True
+#             return False
+#         return has_valid_cut(xl) or has_valid_cut(yl)
+#
+#
+# n = 5
+# rectangles = [[1, 0, 5, 2], [0, 2, 2, 4], [3, 2, 5, 3], [0, 4, 4, 5]]
+# solution = Solution()
+# result = solution.checkValidCuts(n, rectangles)
+# print(result)
 
 
 # class Solution:
