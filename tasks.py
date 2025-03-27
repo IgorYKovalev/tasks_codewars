@@ -17,21 +17,39 @@ import heapq
 
 
 class Solution:
-    def minOperations(self, grid: List[List[int]], x: int) -> int:
-        arr = [num for row in grid for num in row]
-        arr.sort()
-        median = arr[len(arr) // 2]
-        for num in arr:
-            if (num - median) % x != 0:
-                return -1
-        return sum(abs(num - median) // x for num in arr)
+    def minimumIndex(self, nums: List[int]) -> int:
+        lcount = 0
+        dominant, rcount = max(collections.Counter(nums).items(), key=lambda x: x[1])
+        for i, x in enumerate(nums):
+            lcount += x == dominant
+            rcount -= x == dominant
+            if lcount > (i + 1) // 2 and rcount > (len(nums) - (i + 1)) // 2:
+                return i
+        return -1
 
 
-grid = [[2, 4], [6, 8]]
-x = 2
+nums = [1, 2, 2, 2]
 solution = Solution()
-result = solution.minOperations(grid, x)
+result = solution.minimumIndex(nums)
 print(result)
+
+
+# class Solution:
+#     def minOperations(self, grid: List[List[int]], x: int) -> int:
+#         arr = [num for row in grid for num in row]
+#         arr.sort()
+#         median = arr[len(arr) // 2]
+#         for num in arr:
+#             if (num - median) % x != 0:
+#                 return -1
+#         return sum(abs(num - median) // x for num in arr)
+#
+#
+# grid = [[2, 4], [6, 8]]
+# x = 2
+# solution = Solution()
+# result = solution.minOperations(grid, x)
+# print(result)
 
 
 # class Solution:
