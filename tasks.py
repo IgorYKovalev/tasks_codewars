@@ -7,7 +7,7 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import datetime
 from functools import reduce
-from heapq import nsmallest, heappush, heappop
+from heapq import nsmallest, heappush, heappop, heapify
 from itertools import groupby, product, permutations, zip_longest, combinations
 import math
 import random
@@ -16,37 +16,89 @@ from typing import List, Optional
 
 
 class Solution:
-    def maxPoints(self, grid: list[list[int]], queries: list[int]) -> list[int]:
-        m, n = len(grid), len(grid[0])
-        ans = [0] * len(queries)
-        sortedQ = sorted([(val, i) for i, val in enumerate(queries)])
-        vis = [[False] * n for _ in range(m)]
+    def maximumScore(self, nums: List[int], k: int) -> int:
+        N = len(nums)
+        MOD = 10**9 + 7
 
-        pq = []
-        heappush(pq, (grid[0][0], 0, 0))
-        vis[0][0] = True
-        points = 0
+        def get_prime_score(n):
+            score = 0
+            for f in range(2, int(math.sqrt(n)) + 1):
+                if n % f == 0:
+                    while n % f == 0:
+                        n = n // f
+                    score += 1
+            if n >= 2:
+                score += 1
+            return score
 
-        directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+        prime_score = [get_prime_score(n) for n in nums]
+        left_bound = [-1] * N
+        right_bound = [N] * N
+        stack = []
 
-        for qVal, qIdx in sortedQ:
-            while pq and pq[0][0] < qVal:
-                _, r, c = heappop(pq)
-                points += 1
-                for dx, dy in directions:
-                    x, y = r + dx, c + dy
-                    if 0 <= x < m and 0 <= y < n and not vis[x][y]:
-                        heappush(pq, (grid[x][y], x, y))
-                        vis[x][y] = True
-            ans[qIdx] = points
-        return ans
+        for i, s in enumerate(prime_score):
+            while stack and prime_score[stack[-1]] < s:
+                index = stack.pop()
+                right_bound[index] = i
+            if stack:
+                left_bound[i] = stack[-1]
+            stack.append(i)
+
+        min_heap = [(-n, i) for i, n in enumerate(nums)]
+        heapify(min_heap)
+        res = 1
+
+        while k > 0:
+            n, index = heappop(min_heap)
+            n = -n
+            left_cnt = index - left_bound[index]
+            right_cnt = right_bound[index] - index
+            operations = left_cnt * right_cnt
+            operations = min(k, operations)
+            res = res * pow(n, operations, MOD) % MOD
+            k -= operations
+        return res
 
 
-grid = [[1, 2, 3], [2, 5, 7], [3, 5, 1]]
-queries = [5, 6, 2]
+nums = [8, 3, 9, 3, 8]
+k = 2
 solution = Solution()
-result = solution.maxPoints(grid, queries)
+result = solution.maximumScore(nums, k)
 print(result)
+
+
+# class Solution:
+#     def maxPoints(self, grid: list[list[int]], queries: list[int]) -> list[int]:
+#         m, n = len(grid), len(grid[0])
+#         ans = [0] * len(queries)
+#         sortedQ = sorted([(val, i) for i, val in enumerate(queries)])
+#         vis = [[False] * n for _ in range(m)]
+#
+#         pq = []
+#         heappush(pq, (grid[0][0], 0, 0))
+#         vis[0][0] = True
+#         points = 0
+#
+#         directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+#
+#         for qVal, qIdx in sortedQ:
+#             while pq and pq[0][0] < qVal:
+#                 _, r, c = heappop(pq)
+#                 points += 1
+#                 for dx, dy in directions:
+#                     x, y = r + dx, c + dy
+#                     if 0 <= x < m and 0 <= y < n and not vis[x][y]:
+#                         heappush(pq, (grid[x][y], x, y))
+#                         vis[x][y] = True
+#             ans[qIdx] = points
+#         return ans
+#
+#
+# grid = [[1, 2, 3], [2, 5, 7], [3, 5, 1]]
+# queries = [5, 6, 2]
+# solution = Solution()
+# result = solution.maxPoints(grid, queries)
+# print(result)
 
 
 # class Solution:
