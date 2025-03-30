@@ -16,55 +16,81 @@ from typing import List, Optional
 
 
 class Solution:
-    def maximumScore(self, nums: List[int], k: int) -> int:
-        N = len(nums)
-        MOD = 10**9 + 7
+    def partitionLabels(self, s: str) -> List[int]:
+        last_occurence = {}
 
-        def get_prime_score(n):
-            score = 0
-            for f in range(2, int(math.sqrt(n)) + 1):
-                if n % f == 0:
-                    while n % f == 0:
-                        n = n // f
-                    score += 1
-            if n >= 2:
-                score += 1
-            return score
+        for i, char in enumerate(s):
+            last_occurence[char] = i
 
-        prime_score = [get_prime_score(n) for n in nums]
-        left_bound = [-1] * N
-        right_bound = [N] * N
-        stack = []
+        result = []
+        start = 0
+        end = 0
 
-        for i, s in enumerate(prime_score):
-            while stack and prime_score[stack[-1]] < s:
-                index = stack.pop()
-                right_bound[index] = i
-            if stack:
-                left_bound[i] = stack[-1]
-            stack.append(i)
-
-        min_heap = [(-n, i) for i, n in enumerate(nums)]
-        heapify(min_heap)
-        res = 1
-
-        while k > 0:
-            n, index = heappop(min_heap)
-            n = -n
-            left_cnt = index - left_bound[index]
-            right_cnt = right_bound[index] - index
-            operations = left_cnt * right_cnt
-            operations = min(k, operations)
-            res = res * pow(n, operations, MOD) % MOD
-            k -= operations
-        return res
+        for i, char in enumerate(s):
+            end = max(end, last_occurence[char])
+            if i == end:
+                partition_length = end - start + 1
+                result.append(partition_length)
+                start = i + 1
+        return result
 
 
-nums = [8, 3, 9, 3, 8]
-k = 2
+s = "ababcbacadefegdehijhklij"
 solution = Solution()
-result = solution.maximumScore(nums, k)
+result = solution.partitionLabels(s)
 print(result)
+
+
+# class Solution:
+#     def maximumScore(self, nums: List[int], k: int) -> int:
+#         N = len(nums)
+#         MOD = 10**9 + 7
+#
+#         def get_prime_score(n):
+#             score = 0
+#             for f in range(2, int(math.sqrt(n)) + 1):
+#                 if n % f == 0:
+#                     while n % f == 0:
+#                         n = n // f
+#                     score += 1
+#             if n >= 2:
+#                 score += 1
+#             return score
+#
+#         prime_score = [get_prime_score(n) for n in nums]
+#         left_bound = [-1] * N
+#         right_bound = [N] * N
+#         stack = []
+#
+#         for i, s in enumerate(prime_score):
+#             while stack and prime_score[stack[-1]] < s:
+#                 index = stack.pop()
+#                 right_bound[index] = i
+#             if stack:
+#                 left_bound[i] = stack[-1]
+#             stack.append(i)
+#
+#         min_heap = [(-n, i) for i, n in enumerate(nums)]
+#         heapify(min_heap)
+#         res = 1
+#
+#         while k > 0:
+#             n, index = heappop(min_heap)
+#             n = -n
+#             left_cnt = index - left_bound[index]
+#             right_cnt = right_bound[index] - index
+#             operations = left_cnt * right_cnt
+#             operations = min(k, operations)
+#             res = res * pow(n, operations, MOD) % MOD
+#             k -= operations
+#         return res
+#
+#
+# nums = [8, 3, 9, 3, 8]
+# k = 2
+# solution = Solution()
+# result = solution.maximumScore(nums, k)
+# print(result)
 
 
 # class Solution:
