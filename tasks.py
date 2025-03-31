@@ -16,29 +16,51 @@ from typing import List, Optional
 
 
 class Solution:
-    def partitionLabels(self, s: str) -> List[int]:
-        last_occurence = {}
+    def putMarbles(self, weights: List[int], k: int) -> int:
+        if k == 1:
+            return 0
 
-        for i, char in enumerate(s):
-            last_occurence[char] = i
+        pair_sums = []
+        for i in range(len(weights) - 1):
+            pair_sums.append(weights[i] + weights[i + 1])
 
-        result = []
-        start = 0
-        end = 0
-
-        for i, char in enumerate(s):
-            end = max(end, last_occurence[char])
-            if i == end:
-                partition_length = end - start + 1
-                result.append(partition_length)
-                start = i + 1
-        return result
+        pair_sums.sort()
+        min_score = sum(pair_sums[:k - 1])
+        max_score = sum(pair_sums[-(k - 1):])
+        return max_score - min_score
 
 
-s = "ababcbacadefegdehijhklij"
+weights = [1, 3, 5, 1]
+k = 2
 solution = Solution()
-result = solution.partitionLabels(s)
+result = solution.putMarbles(weights, k)
 print(result)
+
+
+# class Solution:
+#     def partitionLabels(self, s: str) -> List[int]:
+#         last_occurence = {}
+#
+#         for i, char in enumerate(s):
+#             last_occurence[char] = i
+#
+#         result = []
+#         start = 0
+#         end = 0
+#
+#         for i, char in enumerate(s):
+#             end = max(end, last_occurence[char])
+#             if i == end:
+#                 partition_length = end - start + 1
+#                 result.append(partition_length)
+#                 start = i + 1
+#         return result
+#
+#
+# s = "ababcbacadefegdehijhklij"
+# solution = Solution()
+# result = solution.partitionLabels(s)
+# print(result)
 
 
 # class Solution:
