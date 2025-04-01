@@ -16,25 +16,46 @@ from typing import List, Optional
 
 
 class Solution:
-    def putMarbles(self, weights: List[int], k: int) -> int:
-        if k == 1:
-            return 0
+    def mostPoints(self, questions: List[List[int]]) -> int:
+        n = len(questions)
+        dp = [0] * n
+        dp[n-1] = questions[n-1][0]
 
-        pair_sums = []
-        for i in range(len(weights) - 1):
-            pair_sums.append(weights[i] + weights[i + 1])
+        for i in range(n-2,-1,-1):
+            points,brainpower = questions[i]
+            next_available_index = min(i + brainpower + 1 , n)
+            solve_points = points + (dp[next_available_index] if next_available_index < n else 0)
+            skip_points = dp[i+1]
+            dp[i] = max(solve_points , skip_points)
+        return dp[0]
 
-        pair_sums.sort()
-        min_score = sum(pair_sums[:k - 1])
-        max_score = sum(pair_sums[-(k - 1):])
-        return max_score - min_score
 
-
-weights = [1, 3, 5, 1]
-k = 2
+questions = [[3,2],[4,3],[4,4],[2,5]]
 solution = Solution()
-result = solution.putMarbles(weights, k)
+result = solution.mostPoints(questions)
 print(result)
+
+
+# class Solution:
+#     def putMarbles(self, weights: List[int], k: int) -> int:
+#         if k == 1:
+#             return 0
+#
+#         pair_sums = []
+#         for i in range(len(weights) - 1):
+#             pair_sums.append(weights[i] + weights[i + 1])
+#
+#         pair_sums.sort()
+#         min_score = sum(pair_sums[:k - 1])
+#         max_score = sum(pair_sums[-(k - 1):])
+#         return max_score - min_score
+#
+#
+# weights = [1, 3, 5, 1]
+# k = 2
+# solution = Solution()
+# result = solution.putMarbles(weights, k)
+# print(result)
 
 
 # class Solution:
