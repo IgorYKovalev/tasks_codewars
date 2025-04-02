@@ -16,24 +16,47 @@ from typing import List, Optional
 
 
 class Solution:
-    def mostPoints(self, questions: List[List[int]]) -> int:
-        n = len(questions)
-        dp = [0] * n
-        dp[n-1] = questions[n-1][0]
+    def maximumTripletValue(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n < 3:
+            return 0
 
-        for i in range(n-2,-1,-1):
-            points,brainpower = questions[i]
-            next_available_index = min(i + brainpower + 1 , n)
-            solve_points = points + (dp[next_available_index] if next_available_index < n else 0)
-            skip_points = dp[i+1]
-            dp[i] = max(solve_points , skip_points)
-        return dp[0]
+        max_result = 0
+        max_value = nums[0]
+        max_diff = 0
+
+        for i in range(1, n):
+            max_result = max(max_result, max_diff * nums[i])
+            max_diff = max(max_diff, max_value - nums[i])
+            max_value = max(max_value, nums[i])
+        return max_result
 
 
-questions = [[3,2],[4,3],[4,4],[2,5]]
+nums = [12,6,1,2,7]
 solution = Solution()
-result = solution.mostPoints(questions)
+result = solution.maximumTripletValue(nums)
 print(result)
+
+
+# class Solution:
+#     def mostPoints(self, questions: List[List[int]]) -> int:
+#         n = len(questions)
+#         dp = [0] * n
+#         dp[n-1] = questions[n-1][0]
+#
+#         for i in range(n-2,-1,-1):
+#             points,brainpower = questions[i]
+#             next_available_index = min(i + brainpower + 1 , n)
+#             solve_points = points + (dp[next_available_index] if next_available_index < n else 0)
+#             skip_points = dp[i+1]
+#             dp[i] = max(solve_points , skip_points)
+#         return dp[0]
+#
+#
+# questions = [[3,2],[4,3],[4,4],[2,5]]
+# solution = Solution()
+# result = solution.mostPoints(questions)
+# print(result)
 
 
 # class Solution:
