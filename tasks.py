@@ -18,24 +18,41 @@ from typing import List, Optional
 class Solution:
     def maximumTripletValue(self, nums: List[int]) -> int:
         n = len(nums)
-        if n < 3:
-            return 0
-
-        max_result = 0
-        max_value = nums[0]
-        max_diff = 0
-
-        for i in range(1, n):
-            max_result = max(max_result, max_diff * nums[i])
-            max_diff = max(max_diff, max_value - nums[i])
-            max_value = max(max_value, nums[i])
-        return max_result
+        L = [0] * n
+        R = [0] * n
+        for i in range(n - 1):
+            L[i + 1] = max(L[i], nums[i])
+            R[n - 2 - i] = max(R[n - i - 1], nums[n - i - 1])
+        return max(0, max((L[i] - nums[i]) * R[i] for i in range(1, n - 1)))
 
 
 nums = [12,6,1,2,7]
 solution = Solution()
 result = solution.maximumTripletValue(nums)
 print(result)
+
+
+# class Solution:
+#     def maximumTripletValue(self, nums: List[int]) -> int:
+#         n = len(nums)
+#         if n < 3:
+#             return 0
+#
+#         max_result = 0
+#         max_value = nums[0]
+#         max_diff = 0
+#
+#         for i in range(1, n):
+#             max_result = max(max_result, max_diff * nums[i])
+#             max_diff = max(max_diff, max_value - nums[i])
+#             max_value = max(max_value, nums[i])
+#         return max_result
+#
+#
+# nums = [12,6,1,2,7]
+# solution = Solution()
+# result = solution.maximumTripletValue(nums)
+# print(result)
 
 
 # class Solution:
