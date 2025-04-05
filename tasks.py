@@ -15,41 +15,51 @@ from collections import defaultdict, deque
 from typing import List, Optional
 
 
-
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
-
 class Solution:
-    def lcaDeepestLeaves(self, root):
-        def helper(node):
-            if not node:
-                return (0, None)
-            l_depth, l_lca = helper(node.left)
-            r_depth, r_lca = helper(node.right)
-            if l_depth == r_depth:
-                return (l_depth + 1, node)
-            elif l_depth > r_depth:
-                return (l_depth + 1, l_lca)
-            else:
-                return (r_depth + 1, r_lca)
-        return helper(root)[1]
+    def subsetXORSum(self, nums: List[int]) -> int:
+        return reduce(lambda x, y: x | y, nums) << (len(nums) - 1)
 
 
-root = TreeNode(1)
-root.left = TreeNode(2)
-root.right = TreeNode(3)
-root.left.left = TreeNode(4)
-root.left.right = TreeNode(5)
-root.right.right = TreeNode(6)
-root.left.left.left = TreeNode(7)
-root.left.right.right = TreeNode(8)
+nums = [5, 1, 6]
 solution = Solution()
-lca = solution.lcaDeepestLeaves(root)
-print(lca.val)
+result = solution.subsetXORSum(nums)
+print(result)
+
+
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+#
+#
+# class Solution:
+#     def lcaDeepestLeaves(self, root):
+#         def helper(node):
+#             if not node:
+#                 return (0, None)
+#             l_depth, l_lca = helper(node.left)
+#             r_depth, r_lca = helper(node.right)
+#             if l_depth == r_depth:
+#                 return (l_depth + 1, node)
+#             elif l_depth > r_depth:
+#                 return (l_depth + 1, l_lca)
+#             else:
+#                 return (r_depth + 1, r_lca)
+#         return helper(root)[1]
+#
+#
+# root = TreeNode(1)
+# root.left = TreeNode(2)
+# root.right = TreeNode(3)
+# root.left.left = TreeNode(4)
+# root.left.right = TreeNode(5)
+# root.right.right = TreeNode(6)
+# root.left.left.left = TreeNode(7)
+# root.left.right.right = TreeNode(8)
+# solution = Solution()
+# lca = solution.lcaDeepestLeaves(root)
+# print(lca.val)
 
 
 
