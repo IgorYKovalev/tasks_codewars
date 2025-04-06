@@ -16,14 +16,29 @@ from typing import List, Optional
 
 
 class Solution:
-    def subsetXORSum(self, nums: List[int]) -> int:
-        return reduce(lambda x, y: x | y, nums) << (len(nums) - 1)
+    def largestDivisibleSubset(self, a: List[int]) -> List[int]:
+        d = {1: []}
+        for q in sorted(a):
+            d[q] = max((d[p] for p in d if q % p == 0), key=len) + [q]
+
+        return max(d.values(), key=len)
 
 
-nums = [5, 1, 6]
+nums = [1, 2, 4, 8]
 solution = Solution()
-result = solution.subsetXORSum(nums)
+result = solution.largestDivisibleSubset(nums)
 print(result)
+
+
+# class Solution:
+#     def subsetXORSum(self, nums: List[int]) -> int:
+#         return reduce(lambda x, y: x | y, nums) << (len(nums) - 1)
+#
+#
+# nums = [5, 1, 6]
+# solution = Solution()
+# result = solution.subsetXORSum(nums)
+# print(result)
 
 
 # class TreeNode:
