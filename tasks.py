@@ -16,18 +16,41 @@ from typing import List, Optional
 
 
 class Solution:
-    def largestDivisibleSubset(self, a: List[int]) -> List[int]:
-        d = {1: []}
-        for q in sorted(a):
-            d[q] = max((d[p] for p in d if q % p == 0), key=len) + [q]
+    def canPartition(self, nums: List[int]) -> bool:
+        total = sum(nums)
+        if total % 2 != 0:
+            return False
 
-        return max(d.values(), key=len)
+        target = total // 2
+        dp = [False] * (target + 1)
+        dp[0] = True
+
+        for num in nums:
+            for i in range(target, num - 1, -1):
+                dp[i] = dp[i] or dp[i - num]
+
+        return dp[target]
 
 
-nums = [1, 2, 4, 8]
+nums = [1,5,11,5]
 solution = Solution()
-result = solution.largestDivisibleSubset(nums)
+result = solution.canPartition(nums)
 print(result)
+
+
+# class Solution:
+#     def largestDivisibleSubset(self, a: List[int]) -> List[int]:
+#         d = {1: []}
+#         for q in sorted(a):
+#             d[q] = max((d[p] for p in d if q % p == 0), key=len) + [q]
+#
+#         return max(d.values(), key=len)
+#
+#
+# nums = [1, 2, 4, 8]
+# solution = Solution()
+# result = solution.largestDivisibleSubset(nums)
+# print(result)
 
 
 # class Solution:
