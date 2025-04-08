@@ -16,26 +16,41 @@ from typing import List, Optional
 
 
 class Solution:
-    def canPartition(self, nums: List[int]) -> bool:
-        total = sum(nums)
-        if total % 2 != 0:
-            return False
-
-        target = total // 2
-        dp = [False] * (target + 1)
-        dp[0] = True
-
-        for num in nums:
-            for i in range(target, num - 1, -1):
-                dp[i] = dp[i] or dp[i - num]
-
-        return dp[target]
+    def minimumOperations(self, nums: List[int]) -> int:
+        count = 0
+        while len(nums) > len(set(nums)):
+            nums = nums[3:]
+            count += 1
+        return count
 
 
-nums = [1,5,11,5]
+nums = [1, 2, 3, 4, 2, 3, 3, 5, 7]
 solution = Solution()
-result = solution.canPartition(nums)
+result = solution.minimumOperations(nums)
 print(result)
+
+
+# class Solution:
+#     def canPartition(self, nums: List[int]) -> bool:
+#         total = sum(nums)
+#         if total % 2 != 0:
+#             return False
+#
+#         target = total // 2
+#         dp = [False] * (target + 1)
+#         dp[0] = True
+#
+#         for num in nums:
+#             for i in range(target, num - 1, -1):
+#                 dp[i] = dp[i] or dp[i - num]
+#
+#         return dp[target]
+#
+#
+# nums = [1,5,11,5]
+# solution = Solution()
+# result = solution.canPartition(nums)
+# print(result)
 
 
 # class Solution:
