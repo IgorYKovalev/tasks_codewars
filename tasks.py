@@ -16,18 +16,38 @@ from typing import List, Optional
 
 
 class Solution:
-    def minimumOperations(self, nums: List[int]) -> int:
-        count = 0
-        while len(nums) > len(set(nums)):
-            nums = nums[3:]
-            count += 1
-        return count
+    def minOperations(self, nums: List[int], k: int) -> int:
+        hasx = 0
+        xmin = 101
+        for x in nums:
+            hasx |= 1 << x
+            xmin = min(x, xmin)
+
+        if xmin < k: return -1
+        b = hasx.bit_count()
+        return b - 1 if xmin == k else b
 
 
-nums = [1, 2, 3, 4, 2, 3, 3, 5, 7]
+nums = [5, 2, 5, 4, 5]
+k = 2
 solution = Solution()
-result = solution.minimumOperations(nums)
+result = solution.minOperations(nums, k)
 print(result)
+
+
+# class Solution:
+#     def minimumOperations(self, nums: List[int]) -> int:
+#         count = 0
+#         while len(nums) > len(set(nums)):
+#             nums = nums[3:]
+#             count += 1
+#         return count
+#
+#
+# nums = [1, 2, 3, 4, 2, 3, 3, 5, 7]
+# solution = Solution()
+# result = solution.minimumOperations(nums)
+# print(result)
 
 
 # class Solution:
