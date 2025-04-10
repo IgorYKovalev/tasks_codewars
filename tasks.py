@@ -16,23 +16,60 @@ from typing import List, Optional
 
 
 class Solution:
-    def minOperations(self, nums: List[int], k: int) -> int:
-        hasx = 0
-        xmin = 101
-        for x in nums:
-            hasx |= 1 << x
-            xmin = min(x, xmin)
+    def numberOfPowerfulInt(self, start: int, finish: int, limit: int, s: str) -> int:
+        def normalize(N):
+            ans = 0
+            less = False  # whether the converted number is less than N
+            for n in map(int, str(N)):
+                if less:
+                    ans = ans * 10 + limit
+                elif n > limit:
+                    less = True
+                    ans = ans * 10 + limit
+                else:
+                    ans = ans * 10 + n
+            return ans
 
-        if xmin < k: return -1
-        b = hasx.bit_count()
-        return b - 1 if xmin == k else b
+        def count(N):
+            ans = 0
+            base = limit + 1
+            prefix = str(N)[:-len(s)]
+            for n in prefix:
+                ans = ans * base + int(n)
+            if int(prefix + s) <= N:
+                ans += 1
+            return ans
+
+        return count(normalize(finish)) - count(normalize(start-1))
 
 
-nums = [5, 2, 5, 4, 5]
-k = 2
+start = 1
+finish = 6000
+limit = 4
+s = "124"
 solution = Solution()
-result = solution.minOperations(nums, k)
+result =solution.numberOfPowerfulInt(start, finish, limit, s)
 print(result)
+
+
+# class Solution:
+#     def minOperations(self, nums: List[int], k: int) -> int:
+#         hasx = 0
+#         xmin = 101
+#         for x in nums:
+#             hasx |= 1 << x
+#             xmin = min(x, xmin)
+#
+#         if xmin < k: return -1
+#         b = hasx.bit_count()
+#         return b - 1 if xmin == k else b
+#
+#
+# nums = [5, 2, 5, 4, 5]
+# k = 2
+# solution = Solution()
+# result = solution.minOperations(nums, k)
+# print(result)
 
 
 # class Solution:
