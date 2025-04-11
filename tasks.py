@@ -16,40 +16,59 @@ from typing import List, Optional
 
 
 class Solution:
-    def numberOfPowerfulInt(self, start: int, finish: int, limit: int, s: str) -> int:
-        def normalize(N):
-            ans = 0
-            less = False  # whether the converted number is less than N
-            for n in map(int, str(N)):
-                if less:
-                    ans = ans * 10 + limit
-                elif n > limit:
-                    less = True
-                    ans = ans * 10 + limit
-                else:
-                    ans = ans * 10 + n
-            return ans
-
-        def count(N):
-            ans = 0
-            base = limit + 1
-            prefix = str(N)[:-len(s)]
-            for n in prefix:
-                ans = ans * base + int(n)
-            if int(prefix + s) <= N:
-                ans += 1
-            return ans
-
-        return count(normalize(finish)) - count(normalize(start-1))
+    def countSymmetricIntegers(self, low: int, high: int) -> int:
+        count = 0
+        for num in range(low, high + 1):
+            s = str(num)
+            if len(s) % 2 == 0:
+                mid = len(s) // 2
+                if sum(map(int, s[:mid])) == sum(map(int, s[mid:])):
+                    count += 1
+        return count
 
 
-start = 1
-finish = 6000
-limit = 4
-s = "124"
+low = 1
+high = 100
 solution = Solution()
-result =solution.numberOfPowerfulInt(start, finish, limit, s)
+result = solution.countSymmetricIntegers(low, high)
 print(result)
+
+
+# class Solution:
+#     def numberOfPowerfulInt(self, start: int, finish: int, limit: int, s: str) -> int:
+#         def normalize(N):
+#             ans = 0
+#             less = False  # whether the converted number is less than N
+#             for n in map(int, str(N)):
+#                 if less:
+#                     ans = ans * 10 + limit
+#                 elif n > limit:
+#                     less = True
+#                     ans = ans * 10 + limit
+#                 else:
+#                     ans = ans * 10 + n
+#             return ans
+#
+#         def count(N):
+#             ans = 0
+#             base = limit + 1
+#             prefix = str(N)[:-len(s)]
+#             for n in prefix:
+#                 ans = ans * base + int(n)
+#             if int(prefix + s) <= N:
+#                 ans += 1
+#             return ans
+#
+#         return count(normalize(finish)) - count(normalize(start-1))
+#
+#
+# start = 1
+# finish = 6000
+# limit = 4
+# s = "124"
+# solution = Solution()
+# result =solution.numberOfPowerfulInt(start, finish, limit, s)
+# print(result)
 
 
 # class Solution:
