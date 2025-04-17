@@ -16,26 +16,44 @@ from typing import List, Optional
 
 
 class Solution:
-    def countGood(self, nums: List[int], k: int) -> int:
-        n = len(nums)
-        freq = defaultdict(int)
-        ans, cnt, l = 0, 0, 0
-        for r, x in enumerate(nums):
-            cnt += freq[x]
-            freq[x] += 1
-            while cnt >= k:
-                ans += n - r
-                freq[nums[l]] -= 1
-                cnt -= freq[nums[l]]
-                l += 1
-        return ans
+    def countPairs(self, nums: List[int], k: int) -> int:
+        freq=[[] for _ in range(101)]
+        cnt = 0
+        for j, x in enumerate(nums):
+            for i in freq[x]:
+                cnt += (i * j % k == 0)
+            freq[x].append(j)
+        return cnt
 
 
-nums = [1,1,1,1,1]
-k = 10
+nums = [3, 1, 2, 2, 2, 1, 3]
+k = 2
 solution = Solution()
-result = solution.countGood(nums, k)
+result = solution.countPairs(nums,k)
 print(result)
+
+
+# class Solution:
+#     def countGood(self, nums: List[int], k: int) -> int:
+#         n = len(nums)
+#         freq = defaultdict(int)
+#         ans, cnt, l = 0, 0, 0
+#         for r, x in enumerate(nums):
+#             cnt += freq[x]
+#             freq[x] += 1
+#             while cnt >= k:
+#                 ans += n - r
+#                 freq[nums[l]] -= 1
+#                 cnt -= freq[nums[l]]
+#                 l += 1
+#         return ans
+#
+#
+# nums = [1,1,1,1,1]
+# k = 10
+# solution = Solution()
+# result = solution.countGood(nums, k)
+# print(result)
 
 
 # class Solution:
