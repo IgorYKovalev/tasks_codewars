@@ -16,21 +16,35 @@ from typing import List, Optional
 
 
 class Solution:
-    def countPairs(self, nums: List[int], k: int) -> int:
-        freq=[[] for _ in range(101)]
-        cnt = 0
-        for j, x in enumerate(nums):
-            for i in freq[x]:
-                cnt += (i * j % k == 0)
-            freq[x].append(j)
-        return cnt
+    def countAndSay(self, n: int) -> str:
+        s = '1'
+        for _ in range(n - 1):
+            s = ''.join(str(len([*g])) + ch for ch, g in groupby(s))
+        return s
 
 
-nums = [3, 1, 2, 2, 2, 1, 3]
-k = 2
+n = 4
 solution = Solution()
-result = solution.countPairs(nums,k)
+result = solution.countAndSay(n)
 print(result)
+
+
+# class Solution:
+#     def countPairs(self, nums: List[int], k: int) -> int:
+#         freq=[[] for _ in range(101)]
+#         cnt = 0
+#         for j, x in enumerate(nums):
+#             for i in freq[x]:
+#                 cnt += (i * j % k == 0)
+#             freq[x].append(j)
+#         return cnt
+#
+#
+# nums = [3, 1, 2, 2, 2, 1, 3]
+# k = 2
+# solution = Solution()
+# result = solution.countPairs(nums,k)
+# print(result)
 
 
 # class Solution:
