@@ -3,6 +3,7 @@ import collections
 import heapq
 import operator
 import re
+from bisect import bisect_left, bisect_right
 from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import datetime
@@ -16,17 +17,36 @@ from typing import List, Optional
 
 
 class Solution:
-    def countAndSay(self, n: int) -> str:
-        s = '1'
-        for _ in range(n - 1):
-            s = ''.join(str(len([*g])) + ch for ch, g in groupby(s))
-        return s
+    def countFairPairs(self, nums, lower, upper):
+        nums.sort()
+        res = 0
+        for i in range(len(nums)):
+            left = bisect_left(nums, lower - nums[i], i + 1)
+            right = bisect_right(nums, upper - nums[i], i + 1)
+            res += right - left
+        return res
 
 
-n = 4
+nums = [0, 1, 7, 4, 4, 5]
+lower = 3
+upper = 6
 solution = Solution()
-result = solution.countAndSay(n)
+result = solution.countFairPairs(nums, lower, upper)
 print(result)
+
+
+# class Solution:
+#     def countAndSay(self, n: int) -> str:
+#         s = '1'
+#         for _ in range(n - 1):
+#             s = ''.join(str(len([*g])) + ch for ch, g in groupby(s))
+#         return s
+#
+#
+# n = 4
+# solution = Solution()
+# result = solution.countAndSay(n)
+# print(result)
 
 
 # class Solution:
