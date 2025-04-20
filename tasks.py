@@ -1,5 +1,4 @@
 import asyncio
-import collections
 import heapq
 import operator
 import re
@@ -12,27 +11,38 @@ from heapq import nsmallest, heappush, heappop, heapify
 from itertools import groupby, product, permutations, zip_longest, combinations
 import math
 import random
-from collections import defaultdict, deque
+from collections import defaultdict, deque, Counter
 from typing import List, Optional
 
 
 class Solution:
-    def countFairPairs(self, nums, lower, upper):
-        nums.sort()
-        res = 0
-        for i in range(len(nums)):
-            left = bisect_left(nums, lower - nums[i], i + 1)
-            right = bisect_right(nums, upper - nums[i], i + 1)
-            res += right - left
-        return res
+    def numRabbits(self, answers: List[int]) -> int:
+        return sum((f + x) // (x + 1) * (x + 1) for x, f in Counter(answers).items())
 
 
-nums = [0, 1, 7, 4, 4, 5]
-lower = 3
-upper = 6
+answers = [1, 1, 2]
 solution = Solution()
-result = solution.countFairPairs(nums, lower, upper)
+result = solution.numRabbits(answers)
 print(result)
+
+
+# class Solution:
+#     def countFairPairs(self, nums, lower, upper):
+#         nums.sort()
+#         res = 0
+#         for i in range(len(nums)):
+#             left = bisect_left(nums, lower - nums[i], i + 1)
+#             right = bisect_right(nums, upper - nums[i], i + 1)
+#             res += right - left
+#         return res
+#
+#
+# nums = [0, 1, 7, 4, 4, 5]
+# lower = 3
+# upper = 6
+# solution = Solution()
+# result = solution.countFairPairs(nums, lower, upper)
+# print(result)
 
 
 # class Solution:
