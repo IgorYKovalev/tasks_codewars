@@ -8,7 +8,7 @@ from contextlib import contextmanager
 from datetime import datetime
 from functools import reduce
 from heapq import nsmallest, heappush, heappop, heapify
-from itertools import groupby, product, permutations, zip_longest, combinations
+from itertools import groupby, product, permutations, zip_longest, combinations, accumulate
 import math
 import random
 from collections import defaultdict, deque, Counter
@@ -16,14 +16,27 @@ from typing import List, Optional
 
 
 class Solution:
-    def numRabbits(self, answers: List[int]) -> int:
-        return sum((f + x) // (x + 1) * (x + 1) for x, f in Counter(answers).items())
+    def numberOfArrays(self, diff: List[int], lower: int, upper: int) -> int:
+        return (K := list(accumulate(diff, initial=0))) and max(0, upper - lower + 1 - max(K) + min(K))
 
 
-answers = [1, 1, 2]
+differences = [1,-3,4]
+lower = 1
+upper = 6
 solution = Solution()
-result = solution.numRabbits(answers)
+result = solution.numberOfArrays(differences, lower, upper)
 print(result)
+
+
+# class Solution:
+#     def numRabbits(self, answers: List[int]) -> int:
+#         return sum((f + x) // (x + 1) * (x + 1) for x, f in Counter(answers).items())
+#
+#
+# answers = [1, 1, 2]
+# solution = Solution()
+# result = solution.numRabbits(answers)
+# print(result)
 
 
 # class Solution:
