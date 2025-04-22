@@ -6,7 +6,7 @@ from bisect import bisect_left, bisect_right
 from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import datetime
-from functools import reduce
+from functools import reduce, cache
 from heapq import nsmallest, heappush, heappop, heapify
 from itertools import groupby, product, permutations, zip_longest, combinations, accumulate
 import math
@@ -16,16 +16,43 @@ from typing import List, Optional
 
 
 class Solution:
-    def numberOfArrays(self, diff: List[int], lower: int, upper: int) -> int:
-        return (K := list(accumulate(diff, initial=0))) and max(0, upper - lower + 1 - max(K) + min(K))
+    def idealArrays(self, n: int, maxValue: int) -> int:
+        MOD = 10 ** 9 + 7
+
+        @cache
+        def rec(k, val):
+            if k == n:
+                return math.comb(n - 1, k - 1)
+
+            count = math.comb(n - 1, k - 1)
+            for i in range(2, maxValue // val + 1):
+                count = (count + rec(k + 1, val * i)) % MOD
+            return count
+
+        total = 0
+        for i in range(1, maxValue + 1):
+            total = (total + rec(1, i)) % MOD
+        return total
 
 
-differences = [1,-3,4]
-lower = 1
-upper = 6
+n = 2
+maxValue = 5
 solution = Solution()
-result = solution.numberOfArrays(differences, lower, upper)
+result = solution.idealArrays(n, maxValue)
 print(result)
+
+
+# class Solution:
+#     def numberOfArrays(self, diff: List[int], lower: int, upper: int) -> int:
+#         return (K := list(accumulate(diff, initial=0))) and max(0, upper - lower + 1 - max(K) + min(K))
+#
+#
+# differences = [1,-3,4]
+# lower = 1
+# upper = 6
+# solution = Solution()
+# result = solution.numberOfArrays(differences, lower, upper)
+# print(result)
 
 
 # class Solution:
