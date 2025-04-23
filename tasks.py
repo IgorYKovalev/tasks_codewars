@@ -12,34 +12,46 @@ from itertools import groupby, product, permutations, zip_longest, combinations,
 import math
 import random
 from collections import defaultdict, deque, Counter
+from statistics import multimode
 from typing import List, Optional
 
 
 class Solution:
-    def idealArrays(self, n: int, maxValue: int) -> int:
-        MOD = 10 ** 9 + 7
-
-        @cache
-        def rec(k, val):
-            if k == n:
-                return math.comb(n - 1, k - 1)
-
-            count = math.comb(n - 1, k - 1)
-            for i in range(2, maxValue // val + 1):
-                count = (count + rec(k + 1, val * i)) % MOD
-            return count
-
-        total = 0
-        for i in range(1, maxValue + 1):
-            total = (total + rec(1, i)) % MOD
-        return total
+    def countLargestGroup(self, n: int) -> int:
+        return len(multimode(sum(map(int,str(v))) for v in range(1,n+1)))
 
 
-n = 2
-maxValue = 5
+n = 13
 solution = Solution()
-result = solution.idealArrays(n, maxValue)
+result = solution.countLargestGroup(n)
 print(result)
+
+
+# class Solution:
+#     def idealArrays(self, n: int, maxValue: int) -> int:
+#         MOD = 10 ** 9 + 7
+#
+#         @cache
+#         def rec(k, val):
+#             if k == n:
+#                 return math.comb(n - 1, k - 1)
+#
+#             count = math.comb(n - 1, k - 1)
+#             for i in range(2, maxValue // val + 1):
+#                 count = (count + rec(k + 1, val * i)) % MOD
+#             return count
+#
+#         total = 0
+#         for i in range(1, maxValue + 1):
+#             total = (total + rec(1, i)) % MOD
+#         return total
+#
+#
+# n = 2
+# maxValue = 5
+# solution = Solution()
+# result = solution.idealArrays(n, maxValue)
+# print(result)
 
 
 # class Solution:
