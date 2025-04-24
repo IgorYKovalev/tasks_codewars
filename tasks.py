@@ -17,14 +17,37 @@ from typing import List, Optional
 
 
 class Solution:
-    def countLargestGroup(self, n: int) -> int:
-        return len(multimode(sum(map(int,str(v))) for v in range(1,n+1)))
+    def countCompleteSubarrays(self, nums: List[int]) -> int:
+        n = len(nums)
+        k = len(set(nums))
+        freq = [0] * 2001
+        cnt, winCnt, l = 0, 0, 0
+        for r, x in enumerate(nums):
+            if freq[x] == 0: winCnt += 1
+            freq[x] += 1
+            while l <= r and winCnt == k:
+                cnt += n - r
+                freq[nums[l]] -= 1
+                if freq[nums[l]] == 0: winCnt -= 1
+                l += 1
+        return cnt
 
 
-n = 13
+nums = [1,3,1,2,2]
 solution = Solution()
-result = solution.countLargestGroup(n)
+result = solution.countCompleteSubarrays(nums)
 print(result)
+
+
+# class Solution:
+#     def countLargestGroup(self, n: int) -> int:
+#         return len(multimode(sum(map(int,str(v))) for v in range(1,n+1)))
+#
+#
+# n = 13
+# solution = Solution()
+# result = solution.countLargestGroup(n)
+# print(result)
 
 
 # class Solution:
