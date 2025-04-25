@@ -17,26 +17,44 @@ from typing import List, Optional
 
 
 class Solution:
-    def countCompleteSubarrays(self, nums: List[int]) -> int:
-        n = len(nums)
-        k = len(set(nums))
-        freq = [0] * 2001
-        cnt, winCnt, l = 0, 0, 0
-        for r, x in enumerate(nums):
-            if freq[x] == 0: winCnt += 1
-            freq[x] += 1
-            while l <= r and winCnt == k:
-                cnt += n - r
-                freq[nums[l]] -= 1
-                if freq[nums[l]] == 0: winCnt -= 1
-                l += 1
-        return cnt
+    def countInterestingSubarrays(self, nums, modulo, k):
+        res, p = 0, Counter({0:1})
+        for i in accumulate(map(lambda x: x % modulo == k, nums)):
+            res += p[(i - k) % modulo]
+            p[i % modulo] += 1
+
+        return res
 
 
-nums = [1,3,1,2,2]
+nums = [3, 2, 4]
+modulo = 2
+k = 1
 solution = Solution()
-result = solution.countCompleteSubarrays(nums)
+result = solution.countInterestingSubarrays(nums, modulo, k)
 print(result)
+
+
+# class Solution:
+#     def countCompleteSubarrays(self, nums: List[int]) -> int:
+#         n = len(nums)
+#         k = len(set(nums))
+#         freq = [0] * 2001
+#         cnt, winCnt, l = 0, 0, 0
+#         for r, x in enumerate(nums):
+#             if freq[x] == 0: winCnt += 1
+#             freq[x] += 1
+#             while l <= r and winCnt == k:
+#                 cnt += n - r
+#                 freq[nums[l]] -= 1
+#                 if freq[nums[l]] == 0: winCnt -= 1
+#                 l += 1
+#         return cnt
+#
+#
+# nums = [1,3,1,2,2]
+# solution = Solution()
+# result = solution.countCompleteSubarrays(nums)
+# print(result)
 
 
 # class Solution:
