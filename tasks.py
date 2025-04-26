@@ -17,21 +17,47 @@ from typing import List, Optional
 
 
 class Solution:
-    def countInterestingSubarrays(self, nums, modulo, k):
-        res, p = 0, Counter({0:1})
-        for i in accumulate(map(lambda x: x % modulo == k, nums)):
-            res += p[(i - k) % modulo]
-            p[i % modulo] += 1
+    def countSubarrays(self, nums, minK, maxK):
+        total = 0
+        last_invalid = last_min = last_max = -1
+        for i, num in enumerate(nums):
+            if num < minK or num > maxK:
+                last_invalid = i
+            if num == minK:
+                last_min = i
+            if num == maxK:
+                last_max = i
 
-        return res
+            valid_start = min(last_min, last_max)
+            total += max(0, valid_start - last_invalid)
+
+        return total
 
 
-nums = [3, 2, 4]
-modulo = 2
-k = 1
+nums = [1, 3, 5, 2, 7, 5]
+minK = 1
+maxK = 5
 solution = Solution()
-result = solution.countInterestingSubarrays(nums, modulo, k)
+result = solution.countSubarrays(nums, minK, maxK)
 print(result)
+
+
+# class Solution:
+#     def countInterestingSubarrays(self, nums, modulo, k):
+#         res, p = 0, Counter({0:1})
+#         for i in accumulate(map(lambda x: x % modulo == k, nums)):
+#             res += p[(i - k) % modulo]
+#             p[i % modulo] += 1
+#
+#         return res
+#
+#
+# nums = [3, 2, 4]
+# modulo = 2
+# k = 1
+# solution = Solution()
+# result = solution.countInterestingSubarrays(nums, modulo, k)
+# print(result)
 
 
 # class Solution:
