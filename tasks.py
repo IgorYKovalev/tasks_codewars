@@ -17,29 +17,40 @@ from typing import List, Optional
 
 
 class Solution:
-    def countSubarrays(self, nums, minK, maxK):
-        total = 0
-        last_invalid = last_min = last_max = -1
-        for i, num in enumerate(nums):
-            if num < minK or num > maxK:
-                last_invalid = i
-            if num == minK:
-                last_min = i
-            if num == maxK:
-                last_max = i
-
-            valid_start = min(last_min, last_max)
-            total += max(0, valid_start - last_invalid)
-
-        return total
+    def countSubarrays(self, nums: List[int]) -> int:
+        return sum(2 * (nums[i - 1] + nums[i + 1]) == nums[i] for i in range(1, len(nums) - 1))
 
 
-nums = [1, 3, 5, 2, 7, 5]
-minK = 1
-maxK = 5
+nums = [1, 2, 1, 4, 1]
 solution = Solution()
-result = solution.countSubarrays(nums, minK, maxK)
+result = solution.countSubarrays(nums)
 print(result)
+
+
+# class Solution:
+#     def countSubarrays(self, nums, minK, maxK):
+#         total = 0
+#         last_invalid = last_min = last_max = -1
+#         for i, num in enumerate(nums):
+#             if num < minK or num > maxK:
+#                 last_invalid = i
+#             if num == minK:
+#                 last_min = i
+#             if num == maxK:
+#                 last_max = i
+#
+#             valid_start = min(last_min, last_max)
+#             total += max(0, valid_start - last_invalid)
+#
+#         return total
+#
+#
+# nums = [1, 3, 5, 2, 7, 5]
+# minK = 1
+# maxK = 5
+# solution = Solution()
+# result = solution.countSubarrays(nums, minK, maxK)
+# print(result)
 
 
 # class Solution:
