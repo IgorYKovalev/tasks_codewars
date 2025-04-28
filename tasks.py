@@ -17,14 +17,36 @@ from typing import List, Optional
 
 
 class Solution:
-    def countSubarrays(self, nums: List[int]) -> int:
-        return sum(2 * (nums[i - 1] + nums[i + 1]) == nums[i] for i in range(1, len(nums) - 1))
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        res = part_sum = 0
+        left = 0
+
+        for right, num in enumerate(nums):
+            part_sum += num
+            while part_sum * (right - left + 1) >= k:
+                part_sum -= nums[left]
+                left += 1
+            res += right - left + 1
+
+        return res
 
 
-nums = [1, 2, 1, 4, 1]
+nums = [2, 1, 4, 3, 5]
+k = 10
 solution = Solution()
-result = solution.countSubarrays(nums)
+result = solution.countSubarrays(nums, k)
 print(result)
+
+
+# class Solution:
+#     def countSubarrays(self, nums: List[int]) -> int:
+#         return sum(2 * (nums[i - 1] + nums[i + 1]) == nums[i] for i in range(1, len(nums) - 1))
+#
+#
+# nums = [1, 2, 1, 4, 1]
+# solution = Solution()
+# result = solution.countSubarrays(nums)
+# print(result)
 
 
 # class Solution:
