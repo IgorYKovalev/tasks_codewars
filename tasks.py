@@ -17,26 +17,37 @@ from typing import List, Optional
 
 
 class Solution:
-    def countSubarrays(self, nums: List[int], k: int) -> int:
-        result = 0
-        left = 0
-        maxValue = max(nums)
-        for num in nums:
-            if num == maxValue:
-                k -= 1
-            while k == 0:
-                if nums[left] == maxValue:
-                    k += 1
-                left += 1
-            result += left
-        return result
+    def findNumbers(self, nums: List[int]) -> int:
+        return sum(int(math.floor(math.log10(x)) + 1) % 2 == 0 for x in nums)
 
 
-nums = [1, 3, 2, 3, 3]
-k = 2
+nums = [12, 345, 2, 6, 7896]
 solution = Solution()
-result = solution.countSubarrays(nums, k)
+result = solution.findNumbers(nums)
 print(result)
+
+
+# class Solution:
+#     def countSubarrays(self, nums: List[int], k: int) -> int:
+#         result = 0
+#         left = 0
+#         maxValue = max(nums)
+#         for num in nums:
+#             if num == maxValue:
+#                 k -= 1
+#             while k == 0:
+#                 if nums[left] == maxValue:
+#                     k += 1
+#                 left += 1
+#             result += left
+#         return result
+#
+#
+# nums = [1, 3, 2, 3, 3]
+# k = 2
+# solution = Solution()
+# result = solution.countSubarrays(nums, k)
+# print(result)
 
 
 # class Solution:
