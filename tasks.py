@@ -17,47 +17,75 @@ from typing import List, Optional
 
 
 class Solution:
-    def maxTaskAssign(self, tasks, workers, pills, strength):
-        tasks.sort()
-        workers.sort()
-
-        def can_assign(mid):
-            boosted = deque()
-            w = len(workers) - 1
-            free_pills = pills
-
-            for t in reversed(tasks[:mid]):
-                if boosted and boosted[0] >= t:
-                    boosted.popleft()
-                elif w >= 0 and workers[w] >= t:
-                    w -= 1
-                else:
-                    while w >= 0 and workers[w] + strength >= t:
-                        boosted.append(workers[w])
-                        w -= 1
-                    if not boosted or free_pills == 0:
-                        return False
-                    boosted.pop()
-                    free_pills -= 1
-            return True
-
-        low, high = 0, min(len(tasks), len(workers))
-        while low < high:
-            mid = (low + high + 1) // 2
-            if can_assign(mid):
-                low = mid
-            else:
-                high = mid - 1
-        return low
+    def pushDominoes(self, dominoes: str) -> str:
+        s = 'L' + dominoes + 'R'
+        prev, result, n = 0, list(s), len(s)
+        for i in range(1, n):
+            if s[i] == '.':
+                continue
+            if i - prev > 1:
+                if s[prev] == s[i]:
+                    for k in range(prev + 1, i):
+                        result[k] = s[i]
+                elif s[prev] == 'R' and s[i] == 'L':
+                    l, r = prev + 1, i - 1
+                    while l < r:
+                        result[l] = 'R'
+                        result[r] = 'L'
+                        l += 1
+                        r -= 1
+            prev = i
+        return ''.join(result[1:-1])
 
 
-tasks = [3,2,1]
-workers = [0,3,3]
-pills = 1
-strength = 1
+dominoes = ".L.R...LR..L.."
 solution = Solution()
-result = solution.maxTaskAssign(tasks, workers, pills, strength)
+result = solution.pushDominoes(dominoes)
 print(result)
+
+
+# class Solution:
+#     def maxTaskAssign(self, tasks, workers, pills, strength):
+#         tasks.sort()
+#         workers.sort()
+#
+#         def can_assign(mid):
+#             boosted = deque()
+#             w = len(workers) - 1
+#             free_pills = pills
+#
+#             for t in reversed(tasks[:mid]):
+#                 if boosted and boosted[0] >= t:
+#                     boosted.popleft()
+#                 elif w >= 0 and workers[w] >= t:
+#                     w -= 1
+#                 else:
+#                     while w >= 0 and workers[w] + strength >= t:
+#                         boosted.append(workers[w])
+#                         w -= 1
+#                     if not boosted or free_pills == 0:
+#                         return False
+#                     boosted.pop()
+#                     free_pills -= 1
+#             return True
+#
+#         low, high = 0, min(len(tasks), len(workers))
+#         while low < high:
+#             mid = (low + high + 1) // 2
+#             if can_assign(mid):
+#                 low = mid
+#             else:
+#                 high = mid - 1
+#         return low
+#
+#
+# tasks = [3,2,1]
+# workers = [0,3,3]
+# pills = 1
+# strength = 1
+# solution = Solution()
+# result = solution.maxTaskAssign(tasks, workers, pills, strength)
+# print(result)
 
 
 # class Solution:
