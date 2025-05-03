@@ -17,31 +17,47 @@ from typing import List, Optional
 
 
 class Solution:
-    def pushDominoes(self, dominoes: str) -> str:
-        s = 'L' + dominoes + 'R'
-        prev, result, n = 0, list(s), len(s)
-        for i in range(1, n):
-            if s[i] == '.':
-                continue
-            if i - prev > 1:
-                if s[prev] == s[i]:
-                    for k in range(prev + 1, i):
-                        result[k] = s[i]
-                elif s[prev] == 'R' and s[i] == 'L':
-                    l, r = prev + 1, i - 1
-                    while l < r:
-                        result[l] = 'R'
-                        result[r] = 'L'
-                        l += 1
-                        r -= 1
-            prev = i
-        return ''.join(result[1:-1])
+    def minDominoRotations(self, A, B):
+        for i in [A[0],B[0]]:
+            if all(i in d for d in zip(A, B)):
+                mod = max(A.count(i), B.count(i))
+                return len(A) - mod
+        return -1
 
 
-dominoes = ".L.R...LR..L.."
+tops = [2, 1, 2, 4, 2, 2]
+bottoms = [5, 2, 6, 2, 3, 2]
 solution = Solution()
-result = solution.pushDominoes(dominoes)
+result = solution.minDominoRotations(tops, bottoms)
 print(result)
+
+
+# class Solution:
+#     def pushDominoes(self, dominoes: str) -> str:
+#         s = 'L' + dominoes + 'R'
+#         prev, result, n = 0, list(s), len(s)
+#         for i in range(1, n):
+#             if s[i] == '.':
+#                 continue
+#             if i - prev > 1:
+#                 if s[prev] == s[i]:
+#                     for k in range(prev + 1, i):
+#                         result[k] = s[i]
+#                 elif s[prev] == 'R' and s[i] == 'L':
+#                     l, r = prev + 1, i - 1
+#                     while l < r:
+#                         result[l] = 'R'
+#                         result[r] = 'L'
+#                         l += 1
+#                         r -= 1
+#             prev = i
+#         return ''.join(result[1:-1])
+#
+#
+# dominoes = ".L.R...LR..L.."
+# solution = Solution()
+# result = solution.pushDominoes(dominoes)
+# print(result)
 
 
 # class Solution:
