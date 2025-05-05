@@ -17,20 +17,38 @@ from typing import List, Optional
 
 
 class Solution:
-    def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
-        freq = [0] * 100
-        cnt = 0
-        for d0, d1 in dominoes:
-            x = 10 * d0 + d1 if d0 < d1 else 10 * d1 + d0
-            cnt += freq[x]
-            freq[x] += 1
-        return cnt
+    def numTilings(self, n: int) -> int:
+        a = (1, 1, 2)
+
+        @cache
+        def f(n):
+            if n < 3: return a[n]
+            return (2 * f(n - 1) + f(n - 3)) % (10 ** 9 + 7)
+
+        return f(n)
 
 
-dominoes = [[1,2],[2,1],[3,4],[5,6]]
+n = 3
 solution = Solution()
-result = solution.numEquivDominoPairs(dominoes)
+result = solution.numTilings(n)
 print(result)
+
+
+# class Solution:
+#     def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
+#         freq = [0] * 100
+#         cnt = 0
+#         for d0, d1 in dominoes:
+#             x = 10 * d0 + d1 if d0 < d1 else 10 * d1 + d0
+#             cnt += freq[x]
+#             freq[x] += 1
+#         return cnt
+#
+#
+# dominoes = [[1,2],[2,1],[3,4],[5,6]]
+# solution = Solution()
+# result = solution.numEquivDominoPairs(dominoes)
+# print(result)
 
 
 # class Solution:
