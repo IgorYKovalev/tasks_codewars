@@ -17,21 +17,32 @@ from typing import List, Optional
 
 
 class Solution:
-    def numTilings(self, n: int) -> int:
-        a = (1, 1, 2)
-
-        @cache
-        def f(n):
-            if n < 3: return a[n]
-            return (2 * f(n - 1) + f(n - 3)) % (10 ** 9 + 7)
-
-        return f(n)
+    def buildArray(self, nums: List[int]) -> List[int]:
+        return [nums[nums[i]] for i in range(len(nums))]
 
 
-n = 3
+nums = [0, 2, 1, 5, 3, 4]
 solution = Solution()
-result = solution.numTilings(n)
+result = solution.buildArray(nums)
 print(result)
+
+
+# class Solution:
+#     def numTilings(self, n: int) -> int:
+#         a = (1, 1, 2)
+#
+#         @cache
+#         def f(n):
+#             if n < 3: return a[n]
+#             return (2 * f(n - 1) + f(n - 3)) % (10 ** 9 + 7)
+#
+#         return f(n)
+#
+#
+# n = 3
+# solution = Solution()
+# result = solution.numTilings(n)
+# print(result)
 
 
 # class Solution:
