@@ -17,38 +17,66 @@ from typing import List, Optional
 
 
 class Solution:
-    def minTimeToReach(self, moveTime: List[List[int]]) -> int:
-        n = len(moveTime)
-        m = len(moveTime[0])
-        INF = 10 ** 18
-        dist = [[INF] * m for _ in range(n)]
-        pq = [(0, 0, 0)]
-        dist[0][0] = 0
-        dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    def minTimeToReach(self, moveTime):
+        n, m = len(moveTime), len(moveTime[0])
+        vis = [[False] * m for _ in range(n)]
+        heap = [(0, 0, 0, 0)]
+        vis[0][0] = True
+        dirs = [(0, 1), (1, 0), (-1, 0), (0, -1)]
 
-        while pq:
-            t, i, j = heapq.heappop(pq)
-            if t > dist[i][j]:
-                continue
-
-            if i == n - 1 and j == m - 1:
-                return t
-
-            for di, dj in dirs:
-                ni, nj = i + di, j + dj
-                if 0 <= ni < n and 0 <= nj < m:
-                    new_time = max(t, moveTime[ni][nj]) + 1
-                    if new_time < dist[ni][nj]:
-                        dist[ni][nj] = new_time
-                        heapq.heappush(pq, (new_time, ni, nj))
-
-        return dist[n - 1][m - 1]
+        while heap:
+            time, moves, r, c = heapq.heappop(heap)
+            if r == n - 1 and c == m - 1:
+                return time
+            for dr, dc in dirs:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < n and 0 <= nc < m and not vis[nr][nc]:
+                    vis[nr][nc] = True
+                    wait = max(time, moveTime[nr][nc])
+                    travel_time = 1 if moves % 2 == 0 else 2
+                    heapq.heappush(heap, (wait + travel_time, moves + 1, nr, nc))
+        return -1
 
 
-moveTime = [[0, 4], [4, 4]]
+moveTime = [[0,4],[4,4]]
 solution = Solution()
 result = solution.minTimeToReach(moveTime)
 print(result)
+
+
+# class Solution:
+#     def minTimeToReach(self, moveTime: List[List[int]]) -> int:
+#         n = len(moveTime)
+#         m = len(moveTime[0])
+#         INF = 10 ** 18
+#         dist = [[INF] * m for _ in range(n)]
+#         pq = [(0, 0, 0)]
+#         dist[0][0] = 0
+#         dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+#
+#         while pq:
+#             t, i, j = heapq.heappop(pq)
+#             if t > dist[i][j]:
+#                 continue
+#
+#             if i == n - 1 and j == m - 1:
+#                 return t
+#
+#             for di, dj in dirs:
+#                 ni, nj = i + di, j + dj
+#                 if 0 <= ni < n and 0 <= nj < m:
+#                     new_time = max(t, moveTime[ni][nj]) + 1
+#                     if new_time < dist[ni][nj]:
+#                         dist[ni][nj] = new_time
+#                         heapq.heappush(pq, (new_time, ni, nj))
+#
+#         return dist[n - 1][m - 1]
+#
+#
+# moveTime = [[0, 4], [4, 4]]
+# solution = Solution()
+# result = solution.minTimeToReach(moveTime)
+# print(result)
 
 
 # class Solution:
