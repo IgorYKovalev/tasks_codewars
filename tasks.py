@@ -17,31 +17,57 @@ from typing import List, Optional
 
 
 class Solution:
-    def minTimeToReach(self, moveTime):
-        n, m = len(moveTime), len(moveTime[0])
-        vis = [[False] * m for _ in range(n)]
-        heap = [(0, 0, 0, 0)]
-        vis[0][0] = True
-        dirs = [(0, 1), (1, 0), (-1, 0), (0, -1)]
+    def countBalancedPermutations(self, num: str) -> int:
+        count = Counter(int(c) for c in num)
+        total = sum(int(c) for c in num)
+        MOD = 10 ** 9 + 7
+        n = len(num)
 
-        while heap:
-            time, moves, r, c = heapq.heappop(heap)
-            if r == n - 1 and c == m - 1:
-                return time
-            for dr, dc in dirs:
-                nr, nc = r + dr, c + dc
-                if 0 <= nr < n and 0 <= nc < m and not vis[nr][nc]:
-                    vis[nr][nc] = True
-                    wait = max(time, moveTime[nr][nc])
-                    travel_time = 1 if moves % 2 == 0 else 2
-                    heapq.heappush(heap, (wait + travel_time, moves + 1, nr, nc))
-        return -1
+        @cache
+        def DFS(i, odd, even, balance):
+            if odd == 0 and even == 0 and balance == 0:
+                return 1
+            if i < 0 or odd < 0 or even < 0 or balance < 0:
+                return 0
+            res = 0
+            for j in range(0, count[i] + 1):
+                res += math.comb(odd, j) * math.comb(even, count[i] - j) * DFS(i - 1, odd - j, even - count[i] + j, balance - i * j)
+            return res % MOD
+        return 0 if total % 2 else DFS(9, n - n // 2, n // 2, total // 2)
 
 
-moveTime = [[0,4],[4,4]]
+num = "123"
 solution = Solution()
-result = solution.minTimeToReach(moveTime)
+result = solution.countBalancedPermutations(num)
 print(result)
+
+
+# class Solution:
+#     def minTimeToReach(self, moveTime):
+#         n, m = len(moveTime), len(moveTime[0])
+#         vis = [[False] * m for _ in range(n)]
+#         heap = [(0, 0, 0, 0)]
+#         vis[0][0] = True
+#         dirs = [(0, 1), (1, 0), (-1, 0), (0, -1)]
+#
+#         while heap:
+#             time, moves, r, c = heapq.heappop(heap)
+#             if r == n - 1 and c == m - 1:
+#                 return time
+#             for dr, dc in dirs:
+#                 nr, nc = r + dr, c + dc
+#                 if 0 <= nr < n and 0 <= nc < m and not vis[nr][nc]:
+#                     vis[nr][nc] = True
+#                     wait = max(time, moveTime[nr][nc])
+#                     travel_time = 1 if moves % 2 == 0 else 2
+#                     heapq.heappush(heap, (wait + travel_time, moves + 1, nr, nc))
+#         return -1
+#
+#
+# moveTime = [[0,4],[4,4]]
+# solution = Solution()
+# result = solution.minTimeToReach(moveTime)
+# print(result)
 
 
 # class Solution:
