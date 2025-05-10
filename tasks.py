@@ -17,29 +17,48 @@ from typing import List, Optional
 
 
 class Solution:
-    def countBalancedPermutations(self, num: str) -> int:
-        count = Counter(int(c) for c in num)
-        total = sum(int(c) for c in num)
-        MOD = 10 ** 9 + 7
-        n = len(num)
+    def minSum(self, nums1: List[int], nums2: List[int]) -> int:
+        n1 = nums1.count(0)
+        n2 = nums2.count(0)
+        s1 = sum(nums1)
+        s2 = sum(nums2)
+        if (n1 == 0 and s1 < s2 + n2) or (n2 == 0 and s2 < s1 + n1):
+            return -1
 
-        @cache
-        def DFS(i, odd, even, balance):
-            if odd == 0 and even == 0 and balance == 0:
-                return 1
-            if i < 0 or odd < 0 or even < 0 or balance < 0:
-                return 0
-            res = 0
-            for j in range(0, count[i] + 1):
-                res += math.comb(odd, j) * math.comb(even, count[i] - j) * DFS(i - 1, odd - j, even - count[i] + j, balance - i * j)
-            return res % MOD
-        return 0 if total % 2 else DFS(9, n - n // 2, n // 2, total // 2)
+        return max(s1 + n1, s2 + n2)
 
 
-num = "123"
+nums1 = [3, 2, 0, 1, 0]
+nums2 = [6, 5, 0]
 solution = Solution()
-result = solution.countBalancedPermutations(num)
+result = solution.minSum(nums1, nums2)
 print(result)
+
+
+# class Solution:
+#     def countBalancedPermutations(self, num: str) -> int:
+#         count = Counter(int(c) for c in num)
+#         total = sum(int(c) for c in num)
+#         MOD = 10 ** 9 + 7
+#         n = len(num)
+#
+#         @cache
+#         def DFS(i, odd, even, balance):
+#             if odd == 0 and even == 0 and balance == 0:
+#                 return 1
+#             if i < 0 or odd < 0 or even < 0 or balance < 0:
+#                 return 0
+#             res = 0
+#             for j in range(0, count[i] + 1):
+#                 res += math.comb(odd, j) * math.comb(even, count[i] - j) * DFS(i - 1, odd - j, even - count[i] + j, balance - i * j)
+#             return res % MOD
+#         return 0 if total % 2 else DFS(9, n - n // 2, n // 2, total // 2)
+#
+#
+# num = "123"
+# solution = Solution()
+# result = solution.countBalancedPermutations(num)
+# print(result)
 
 
 # class Solution:
