@@ -17,22 +17,38 @@ from typing import List, Optional
 
 
 class Solution:
-    def minSum(self, nums1: List[int], nums2: List[int]) -> int:
-        n1 = nums1.count(0)
-        n2 = nums2.count(0)
-        s1 = sum(nums1)
-        s2 = sum(nums2)
-        if (n1 == 0 and s1 < s2 + n2) or (n2 == 0 and s2 < s1 + n1):
-            return -1
-
-        return max(s1 + n1, s2 + n2)
+    def threeConsecutiveOdds(self, a):
+        c = 0
+        for x in a:
+            c = c + 1 if x % 2 else 0
+            if c == 3:
+                return True
+        return False
 
 
-nums1 = [3, 2, 0, 1, 0]
-nums2 = [6, 5, 0]
+arr = [2, 6, 4, 1]
 solution = Solution()
-result = solution.minSum(nums1, nums2)
+result = solution.threeConsecutiveOdds(arr)
 print(result)
+
+
+# class Solution:
+#     def minSum(self, nums1: List[int], nums2: List[int]) -> int:
+#         n1 = nums1.count(0)
+#         n2 = nums2.count(0)
+#         s1 = sum(nums1)
+#         s2 = sum(nums2)
+#         if (n1 == 0 and s1 < s2 + n2) or (n2 == 0 and s2 < s1 + n1):
+#             return -1
+#
+#         return max(s1 + n1, s2 + n2)
+#
+#
+# nums1 = [3, 2, 0, 1, 0]
+# nums2 = [6, 5, 0]
+# solution = Solution()
+# result = solution.minSum(nums1, nums2)
+# print(result)
 
 
 # class Solution:
