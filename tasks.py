@@ -17,19 +17,31 @@ from typing import List, Optional
 
 
 class Solution:
-    def threeConsecutiveOdds(self, a):
-        c = 0
-        for x in a:
-            c = c + 1 if x % 2 else 0
-            if c == 3:
-                return True
-        return False
+    def findEvenNumbers(self, digits: List[int]) -> List[int]:
+        z = Counter(map(str, digits))
+        return [v for v in range(100, 1000, 2) if Counter(str(v)) <= z]
 
 
-arr = [2, 6, 4, 1]
+digits = [2, 1, 3, 0]
 solution = Solution()
-result = solution.threeConsecutiveOdds(arr)
+result = solution.findEvenNumbers(digits)
 print(result)
+
+
+# class Solution:
+#     def threeConsecutiveOdds(self, a):
+#         c = 0
+#         for x in a:
+#             c = c + 1 if x % 2 else 0
+#             if c == 3:
+#                 return True
+#         return False
+#
+#
+# arr = [2, 6, 4, 1]
+# solution = Solution()
+# result = solution.threeConsecutiveOdds(arr)
+# print(result)
 
 
 # class Solution:
