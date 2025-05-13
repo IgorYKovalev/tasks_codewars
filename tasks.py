@@ -12,20 +12,39 @@ from itertools import groupby, product, permutations, zip_longest, combinations,
 import math
 import random
 from collections import defaultdict, deque, Counter
+from operator import itemgetter
 from statistics import multimode
+from string import ascii_lowercase
 from typing import List, Optional
 
 
 class Solution:
-    def findEvenNumbers(self, digits: List[int]) -> List[int]:
-        z = Counter(map(str, digits))
-        return [v for v in range(100, 1000, 2) if Counter(str(v)) <= z]
+    def lengthAfterTransformations(self, s: str, t: int) -> int:
+        q = deque(itemgetter(*ascii_lowercase)(Counter(s)))
+        for _ in range(t):
+            q.appendleft(q.pop())
+            q[1] += q[0]
+
+        return sum(q) % (10 ** 9 + 7)
 
 
-digits = [2, 1, 3, 0]
+s = "abcyy"
+t = 2
 solution = Solution()
-result = solution.findEvenNumbers(digits)
+result = solution.lengthAfterTransformations(s,t)
 print(result)
+
+
+# class Solution:
+#     def findEvenNumbers(self, digits: List[int]) -> List[int]:
+#         z = Counter(map(str, digits))
+#         return [v for v in range(100, 1000, 2) if Counter(str(v)) <= z]
+#
+#
+# digits = [2, 1, 3, 0]
+# solution = Solution()
+# result = solution.findEvenNumbers(digits)
+# print(result)
 
 
 # class Solution:
