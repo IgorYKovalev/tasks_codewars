@@ -16,23 +16,66 @@ from operator import itemgetter
 from statistics import multimode
 from string import ascii_lowercase
 from typing import List, Optional
+import numpy as np
 
 
 class Solution:
-    def lengthAfterTransformations(self, s: str, t: int) -> int:
-        q = deque(itemgetter(*ascii_lowercase)(Counter(s)))
-        for _ in range(t):
-            q.appendleft(q.pop())
-            q[1] += q[0]
+    def lengthAfterTransformations(self, s: str, t: int, nums: List[int]) -> int:
+        MOD = int(1e9 + 7)
 
-        return sum(q) % (10 ** 9 + 7)
+        def chr_to_idx(c: str):
+            return ord(c) - ord("a")
+
+        def chr_to_vec(c: str):
+            vec = np.zeros(26, dtype=object)
+            vec[chr_to_idx(c)] = 1
+            return vec
+
+        def matrix_builder(nums: list[int]):
+            mat = np.zeros((26, 26), dtype=object)
+            for i, n in enumerate(nums):
+                mat[i, :n] = 1
+                mat[i] = np.roll(mat[i], 1 + i)
+            return mat
+
+        def matrix_power(base_mat: np.ndarray, power: int):
+            if power == 1:
+                return base_mat
+            if power % 2 == 0:
+                lhs = matrix_power(base_mat, power // 2)
+                return (lhs @ lhs) % MOD
+            return (matrix_power(base_mat, power - 1) @ base_mat) % MOD
+
+        vec = np.array([chr_to_vec(c) for c in s])
+
+        base_mat = matrix_builder(nums)
+        mat = matrix_power(base_mat, t)
+        return int((vec @ mat).sum() % MOD)
 
 
 s = "abcyy"
 t = 2
+nums = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
 solution = Solution()
-result = solution.lengthAfterTransformations(s,t)
+result = solution.lengthAfterTransformations(s, t, nums)
 print(result)
+
+
+# class Solution:
+#     def lengthAfterTransformations(self, s: str, t: int) -> int:
+#         q = deque(itemgetter(*ascii_lowercase)(Counter(s)))
+#         for _ in range(t):
+#             q.appendleft(q.pop())
+#             q[1] += q[0]
+#
+#         return sum(q) % (10 ** 9 + 7)
+#
+#
+# s = "abcyy"
+# t = 2
+# solution = Solution()
+# result = solution.lengthAfterTransformations(s,t)
+# print(result)
 
 
 # class Solution:
