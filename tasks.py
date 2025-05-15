@@ -20,45 +20,57 @@ import numpy as np
 
 
 class Solution:
-    def lengthAfterTransformations(self, s: str, t: int, nums: List[int]) -> int:
-        MOD = int(1e9 + 7)
-
-        def chr_to_idx(c: str):
-            return ord(c) - ord("a")
-
-        def chr_to_vec(c: str):
-            vec = np.zeros(26, dtype=object)
-            vec[chr_to_idx(c)] = 1
-            return vec
-
-        def matrix_builder(nums: list[int]):
-            mat = np.zeros((26, 26), dtype=object)
-            for i, n in enumerate(nums):
-                mat[i, :n] = 1
-                mat[i] = np.roll(mat[i], 1 + i)
-            return mat
-
-        def matrix_power(base_mat: np.ndarray, power: int):
-            if power == 1:
-                return base_mat
-            if power % 2 == 0:
-                lhs = matrix_power(base_mat, power // 2)
-                return (lhs @ lhs) % MOD
-            return (matrix_power(base_mat, power - 1) @ base_mat) % MOD
-
-        vec = np.array([chr_to_vec(c) for c in s])
-
-        base_mat = matrix_builder(nums)
-        mat = matrix_power(base_mat, t)
-        return int((vec @ mat).sum() % MOD)
+    def getLongestSubsequence(self, words: List[str], groups: List[int]) -> List[str]:
+        return [words[0]] + [words[i + 1] for i, (x, y) in enumerate(zip(groups, groups[1:])) if x != y]
 
 
-s = "abcyy"
-t = 2
-nums = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
+words = ["e","a","b"]
+groups = [0, 0, 1]
 solution = Solution()
-result = solution.lengthAfterTransformations(s, t, nums)
+result = solution.getLongestSubsequence(words, groups)
 print(result)
+
+
+# class Solution:
+#     def lengthAfterTransformations(self, s: str, t: int, nums: List[int]) -> int:
+#         MOD = int(1e9 + 7)
+#
+#         def chr_to_idx(c: str):
+#             return ord(c) - ord("a")
+#
+#         def chr_to_vec(c: str):
+#             vec = np.zeros(26, dtype=object)
+#             vec[chr_to_idx(c)] = 1
+#             return vec
+#
+#         def matrix_builder(nums: list[int]):
+#             mat = np.zeros((26, 26), dtype=object)
+#             for i, n in enumerate(nums):
+#                 mat[i, :n] = 1
+#                 mat[i] = np.roll(mat[i], 1 + i)
+#             return mat
+#
+#         def matrix_power(base_mat: np.ndarray, power: int):
+#             if power == 1:
+#                 return base_mat
+#             if power % 2 == 0:
+#                 lhs = matrix_power(base_mat, power // 2)
+#                 return (lhs @ lhs) % MOD
+#             return (matrix_power(base_mat, power - 1) @ base_mat) % MOD
+#
+#         vec = np.array([chr_to_vec(c) for c in s])
+#
+#         base_mat = matrix_builder(nums)
+#         mat = matrix_power(base_mat, t)
+#         return int((vec @ mat).sum() % MOD)
+#
+#
+# s = "abcyy"
+# t = 2
+# nums = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
+# solution = Solution()
+# result = solution.lengthAfterTransformations(s, t, nums)
+# print(result)
 
 
 # class Solution:
