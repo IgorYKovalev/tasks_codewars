@@ -12,7 +12,7 @@ from itertools import groupby, product, permutations, zip_longest, combinations,
 import math
 import random
 from collections import defaultdict, deque, Counter
-from operator import itemgetter
+from operator import itemgetter, ne
 from statistics import multimode
 from string import ascii_lowercase
 from typing import List, Optional
@@ -20,15 +20,33 @@ import numpy as np
 
 
 class Solution:
-    def getLongestSubsequence(self, words: List[str], groups: List[int]) -> List[str]:
-        return [words[0]] + [words[i + 1] for i, (x, y) in enumerate(zip(groups, groups[1:])) if x != y]
+    def getWordsInLongestSubsequence(self, w: List[str], g: List[int]) -> List[str]:
+        dp = []
+        for s, g1 in zip(w, g):
+            dp.append(max((q for t, g2, q in zip(w, g, dp)
+                    if g1 != g2 and len(s) == len(t) and sum(map(ne, s, t)) < 2),
+                    key=len, default=[]) + [s])
+
+        return max(dp, key=len)
 
 
-words = ["e","a","b"]
-groups = [0, 0, 1]
+w = ["bab", "dab", "cab"]
+g = [1, 2, 2]
 solution = Solution()
-result = solution.getLongestSubsequence(words, groups)
+result = solution.getWordsInLongestSubsequence(w, g)
 print(result)
+
+
+# class Solution:
+#     def getLongestSubsequence(self, words: List[str], groups: List[int]) -> List[str]:
+#         return [words[0]] + [words[i + 1] for i, (x, y) in enumerate(zip(groups, groups[1:])) if x != y]
+#
+#
+# words = ["e","a","b"]
+# groups = [0, 0, 1]
+# solution = Solution()
+# result = solution.getLongestSubsequence(words, groups)
+# print(result)
 
 
 # class Solution:
