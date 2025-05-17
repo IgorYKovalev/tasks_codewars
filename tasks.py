@@ -20,21 +20,29 @@ import numpy as np
 
 
 class Solution:
-    def getWordsInLongestSubsequence(self, w: List[str], g: List[int]) -> List[str]:
-        dp = []
-        for s, g1 in zip(w, g):
-            dp.append(max((q for t, g2, q in zip(w, g, dp)
-                    if g1 != g2 and len(s) == len(t) and sum(map(ne, s, t)) < 2),
-                    key=len, default=[]) + [s])
-
-        return max(dp, key=len)
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        nums.sort()
 
 
-w = ["bab", "dab", "cab"]
-g = [1, 2, 2]
-solution = Solution()
-result = solution.getWordsInLongestSubsequence(w, g)
-print(result)
+# class Solution:
+#     def getWordsInLongestSubsequence(self, w: List[str], g: List[int]) -> List[str]:
+#         dp = []
+#         for s, g1 in zip(w, g):
+#             dp.append(max((q for t, g2, q in zip(w, g, dp)
+#                     if g1 != g2 and len(s) == len(t) and sum(map(ne, s, t)) < 2),
+#                     key=len, default=[]) + [s])
+#
+#         return max(dp, key=len)
+#
+#
+# w = ["bab", "dab", "cab"]
+# g = [1, 2, 2]
+# solution = Solution()
+# result = solution.getWordsInLongestSubsequence(w, g)
+# print(result)
 
 
 # class Solution:
