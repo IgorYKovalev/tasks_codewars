@@ -20,29 +20,40 @@ import numpy as np
 
 
 class Solution:
-    def colorTheGrid(self, m: int, n: int) -> int:
-        @cache
-        def g(prev):
-            def gg(i, cur):
-                if i == m: return [cur]
-                return sum((gg(i + 1, cur + cand) for cand in 'rgb'
-                    if prev[i] != cand and (i == 0 or cur[-1] != cand)), [])
-
-            return gg(0,'')
-
-        @cache
-        def f(j, prev):
-            if j == n: return 1
-            return sum(f(j + 1, cur) for cur in g(prev)) % (10 ** 9 + 7)
-
-        return f(0, '_' * m)
+    def triangleType(self, nums: List[int]) -> str:
+        return ('none','equilateral','isosceles','scalene')[(2 * max(nums) < sum(nums)) * len({*nums})]
 
 
-m = 1
-n = 1
+nums = [3, 3, 3]
 solution = Solution()
-result = solution.colorTheGrid(m, n)
+result = solution.triangleType(nums)
 print(result)
+
+
+# class Solution:
+#     def colorTheGrid(self, m: int, n: int) -> int:
+#         @cache
+#         def g(prev):
+#             def gg(i, cur):
+#                 if i == m: return [cur]
+#                 return sum((gg(i + 1, cur + cand) for cand in 'rgb'
+#                     if prev[i] != cand and (i == 0 or cur[-1] != cand)), [])
+#
+#             return gg(0,'')
+#
+#         @cache
+#         def f(j, prev):
+#             if j == n: return 1
+#             return sum(f(j + 1, cur) for cur in g(prev)) % (10 ** 9 + 7)
+#
+#         return f(0, '_' * m)
+#
+#
+# m = 1
+# n = 1
+# solution = Solution()
+# result = solution.colorTheGrid(m, n)
+# print(result)
 
 
 # class Solution:
