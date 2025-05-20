@@ -20,14 +20,37 @@ import numpy as np
 
 
 class Solution:
-    def triangleType(self, nums: List[int]) -> str:
-        return ('none','equilateral','isosceles','scalene')[(2 * max(nums) < sum(nums)) * len({*nums})]
+    def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:
+        n = len(nums)
+        diff = [0] * (n + 1)
+        for li, ri in queries:
+            diff[li] -= 1
+            if ri + 1 < n:
+                diff[ri + 1] += 1
+        sum_val = 0
+        for i in range(n):
+            sum_val += diff[i]
+            if nums[i] > -sum_val:
+                return False
+        return True
 
 
-nums = [3, 3, 3]
+nums = [1, 0, 1]
+queries = [[0, 2]]
 solution = Solution()
-result = solution.triangleType(nums)
+result = solution.isZeroArray(nums, queries)
 print(result)
+
+
+# class Solution:
+#     def triangleType(self, nums: List[int]) -> str:
+#         return ('none','equilateral','isosceles','scalene')[(2 * max(nums) < sum(nums)) * len({*nums})]
+#
+#
+# nums = [3, 3, 3]
+# solution = Solution()
+# result = solution.triangleType(nums)
+# print(result)
 
 
 # class Solution:
