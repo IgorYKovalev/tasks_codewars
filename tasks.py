@@ -20,26 +20,36 @@ import numpy as np
 
 
 class Solution:
-    def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:
-        n = len(nums)
-        diff = [0] * (n + 1)
-        for li, ri in queries:
-            diff[li] -= 1
-            if ri + 1 < n:
-                diff[ri + 1] += 1
-        sum_val = 0
-        for i in range(n):
-            sum_val += diff[i]
-            if nums[i] > -sum_val:
-                return False
-        return True
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        r, c = [[*map(all, q)] for q in (matrix, zip(*matrix))]
+        for i, j in product(range(len(matrix)), range(len(matrix[0]))):
+            matrix[i][j] *= r[i] & c[j]
 
 
-nums = [1, 0, 1]
-queries = [[0, 2]]
-solution = Solution()
-result = solution.isZeroArray(nums, queries)
-print(result)
+# class Solution:
+#     def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:
+#         n = len(nums)
+#         diff = [0] * (n + 1)
+#         for li, ri in queries:
+#             diff[li] -= 1
+#             if ri + 1 < n:
+#                 diff[ri + 1] += 1
+#         sum_val = 0
+#         for i in range(n):
+#             sum_val += diff[i]
+#             if nums[i] > -sum_val:
+#                 return False
+#         return True
+#
+#
+# nums = [1, 0, 1]
+# queries = [[0, 2]]
+# solution = Solution()
+# result = solution.isZeroArray(nums, queries)
+# print(result)
 
 
 # class Solution:
