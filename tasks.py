@@ -19,14 +19,40 @@ from typing import List, Optional
 import numpy as np
 
 
-class Solution:
-    def setZeroes(self, matrix: List[List[int]]) -> None:
-        """
-        Do not return anything, modify matrix in-place instead.
-        """
-        r, c = [[*map(all, q)] for q in (matrix, zip(*matrix))]
-        for i, j in product(range(len(matrix)), range(len(matrix[0]))):
-            matrix[i][j] *= r[i] & c[j]
+class Solution(object):
+    def maxRemoval(self, nums, queries):
+        queries.sort(key=lambda x: x[0])
+        assigned, available = [], []
+        count, k = 0, 0
+        for time in range(len(nums)):
+            while assigned and assigned[0] < time:
+                heapq.heappop(assigned)
+            while k < len(queries) and queries[k][0] <= time:
+                heapq.heappush(available, -queries[k][1])
+                k += 1
+            while len(assigned) < nums[time] and available and -available[0] >= time:
+                heapq.heappush(assigned, -heapq.heappop(available))
+                count += 1
+            if len(assigned) < nums[time]:
+                return -1
+        return len(queries) - count
+
+
+nums = [2, 0, 2]
+queries = [[0, 2], [0, 2], [1, 1]]
+solution = Solution()
+result = solution.maxRemoval(nums, queries)
+print(result)
+
+
+# class Solution:
+#     def setZeroes(self, matrix: List[List[int]]) -> None:
+#         """
+#         Do not return anything, modify matrix in-place instead.
+#         """
+#         r, c = [[*map(all, q)] for q in (matrix, zip(*matrix))]
+#         for i, j in product(range(len(matrix)), range(len(matrix[0]))):
+#             matrix[i][j] *= r[i] & c[j]
 
 
 # class Solution:
