@@ -19,30 +19,53 @@ from typing import List, Optional
 import numpy as np
 
 
-class Solution(object):
-    def maxRemoval(self, nums, queries):
-        queries.sort(key=lambda x: x[0])
-        assigned, available = [], []
-        count, k = 0, 0
-        for time in range(len(nums)):
-            while assigned and assigned[0] < time:
-                heapq.heappop(assigned)
-            while k < len(queries) and queries[k][0] <= time:
-                heapq.heappush(available, -queries[k][1])
-                k += 1
-            while len(assigned) < nums[time] and available and -available[0] >= time:
-                heapq.heappush(assigned, -heapq.heappop(available))
-                count += 1
-            if len(assigned) < nums[time]:
-                return -1
-        return len(queries) - count
+class Solution:
+    def maximumValueSum(self, nums, k, edges):
+        total, res = 0, []
+        for x in nums:
+            total += x
+            y = x ^ k
+            res.append(y - x)
+        res.sort(reverse = True)
+        for i in range(0, len(res) - 1, 2):
+            if res[i] + res[i + 1] <= 0:
+                break
+            total += res[i] + res[i + 1 ]
+        return total
 
 
-nums = [2, 0, 2]
-queries = [[0, 2], [0, 2], [1, 1]]
-solution = Solution()
-result = solution.maxRemoval(nums, queries)
+nums = [1, 2, 1]
+k = 3
+edges = [[0, 1], [0, 2]]
+solution =Solution()
+result = solution.maximumValueSum(nums, k, edges)
 print(result)
+
+
+# class Solution(object):
+#     def maxRemoval(self, nums, queries):
+#         queries.sort(key=lambda x: x[0])
+#         assigned, available = [], []
+#         count, k = 0, 0
+#         for time in range(len(nums)):
+#             while assigned and assigned[0] < time:
+#                 heapq.heappop(assigned)
+#             while k < len(queries) and queries[k][0] <= time:
+#                 heapq.heappush(available, -queries[k][1])
+#                 k += 1
+#             while len(assigned) < nums[time] and available and -available[0] >= time:
+#                 heapq.heappush(assigned, -heapq.heappop(available))
+#                 count += 1
+#             if len(assigned) < nums[time]:
+#                 return -1
+#         return len(queries) - count
+#
+#
+# nums = [2, 0, 2]
+# queries = [[0, 2], [0, 2], [1, 1]]
+# solution = Solution()
+# result = solution.maxRemoval(nums, queries)
+# print(result)
 
 
 # class Solution:
