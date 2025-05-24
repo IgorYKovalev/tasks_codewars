@@ -19,27 +19,39 @@ from typing import List, Optional
 import numpy as np
 
 
-class Solution:
-    def maximumValueSum(self, nums, k, edges):
-        total, res = 0, []
-        for x in nums:
-            total += x
-            y = x ^ k
-            res.append(y - x)
-        res.sort(reverse = True)
-        for i in range(0, len(res) - 1, 2):
-            if res[i] + res[i + 1] <= 0:
-                break
-            total += res[i] + res[i + 1 ]
-        return total
+class Solution(object):
+    def findWordsContaining(self, words, x):
+        return [i for i, w in enumerate(words) if x in w]
 
 
-nums = [1, 2, 1]
-k = 3
-edges = [[0, 1], [0, 2]]
-solution =Solution()
-result = solution.maximumValueSum(nums, k, edges)
+words = ["leet", "code"]
+x = "e"
+solution = Solution()
+result = solution.findWordsContaining(words, x)
 print(result)
+
+
+# class Solution:
+#     def maximumValueSum(self, nums, k, edges):
+#         total, res = 0, []
+#         for x in nums:
+#             total += x
+#             y = x ^ k
+#             res.append(y - x)
+#         res.sort(reverse = True)
+#         for i in range(0, len(res) - 1, 2):
+#             if res[i] + res[i + 1] <= 0:
+#                 break
+#             total += res[i] + res[i + 1 ]
+#         return total
+#
+#
+# nums = [1, 2, 1]
+# k = 3
+# edges = [[0, 1], [0, 2]]
+# solution =Solution()
+# result = solution.maximumValueSum(nums, k, edges)
+# print(result)
 
 
 # class Solution(object):
