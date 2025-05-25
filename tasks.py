@@ -20,15 +20,36 @@ import numpy as np
 
 
 class Solution(object):
-    def findWordsContaining(self, words, x):
-        return [i for i, w in enumerate(words) if x in w]
+    def longestPalindrome(self, words):
+        mpp, count = Counter(words), 0
+        palindrome = 0
+        for w, freq in mpp.items():
+            s = w[::-1]
+            if w == s:
+                count += (freq // 2) * 4
+                if freq % 2:
+                    palindrome = 1
+            elif w < s and s in mpp:
+                count += min(freq, mpp[s]) * 4
+        return count + palindrome * 2
 
 
-words = ["leet", "code"]
-x = "e"
+words = ["lc", "cl", "gg"]
 solution = Solution()
-result = solution.findWordsContaining(words, x)
+result = solution.longestPalindrome(words)
 print(result)
+
+
+# class Solution(object):
+#     def findWordsContaining(self, words, x):
+#         return [i for i, w in enumerate(words) if x in w]
+#
+#
+# words = ["leet", "code"]
+# x = "e"
+# solution = Solution()
+# result = solution.findWordsContaining(words, x)
+# print(result)
 
 
 # class Solution:
