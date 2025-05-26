@@ -12,32 +12,60 @@ from itertools import groupby, product, permutations, zip_longest, combinations,
 import math
 import random
 from collections import defaultdict, deque, Counter
-from operator import itemgetter, ne
+from operator import itemgetter, ne, or_
 from statistics import multimode
 from string import ascii_lowercase
 from typing import List, Optional
 import numpy as np
 
 
-class Solution(object):
-    def longestPalindrome(self, words):
-        mpp, count = Counter(words), 0
-        palindrome = 0
-        for w, freq in mpp.items():
-            s = w[::-1]
-            if w == s:
-                count += (freq // 2) * 4
-                if freq % 2:
-                    palindrome = 1
-            elif w < s and s in mpp:
-                count += min(freq, mpp[s]) * 4
-        return count + palindrome * 2
+class Solution:
+    def largestPathValue(self, colors: str, edges: List[List[int]]) -> int:
+        g = defaultdict(list)
+        for v, u in edges:
+            g[v].append(u)
+
+        @cache
+        def f(node, pending = set()):
+            if node in pending:
+                raise
+            pending.add(node)
+            z = Counter(colors[node]) + reduce(or_, map(f, g[node]), Counter())
+            pending.remove(node)
+            return z
+
+        try:
+            return max(reduce(or_, map(f, range(len(colors)))).values())
+        except:
+            return -1
 
 
-words = ["lc", "cl", "gg"]
+colors = "abaca"
+edges = [[0, 1], [0, 2], [2, 3], [3, 4]]
 solution = Solution()
-result = solution.longestPalindrome(words)
+result = solution.largestPathValue(colors, edges)
 print(result)
+
+
+# class Solution(object):
+#     def longestPalindrome(self, words):
+#         mpp, count = Counter(words), 0
+#         palindrome = 0
+#         for w, freq in mpp.items():
+#             s = w[::-1]
+#             if w == s:
+#                 count += (freq // 2) * 4
+#                 if freq % 2:
+#                     palindrome = 1
+#             elif w < s and s in mpp:
+#                 count += min(freq, mpp[s]) * 4
+#         return count + palindrome * 2
+#
+#
+# words = ["lc", "cl", "gg"]
+# solution = Solution()
+# result = solution.longestPalindrome(words)
+# print(result)
 
 
 # class Solution(object):
