@@ -20,31 +20,43 @@ import numpy as np
 
 
 class Solution:
-    def largestPathValue(self, colors: str, edges: List[List[int]]) -> int:
-        g = defaultdict(list)
-        for v, u in edges:
-            g[v].append(u)
-
-        @cache
-        def f(node, pending = set()):
-            if node in pending:
-                raise
-            pending.add(node)
-            z = Counter(colors[node]) + reduce(or_, map(f, g[node]), Counter())
-            pending.remove(node)
-            return z
-
-        try:
-            return max(reduce(or_, map(f, range(len(colors)))).values())
-        except:
-            return -1
+    def differenceOfSums(self, n: int, m: int) -> int:
+        return n * (n + 1) // 2 - m * (n // m) * (n // m + 1)
 
 
-colors = "abaca"
-edges = [[0, 1], [0, 2], [2, 3], [3, 4]]
+n = 10
+m = 3
 solution = Solution()
-result = solution.largestPathValue(colors, edges)
+result = solution.differenceOfSums(n, m)
 print(result)
+
+
+# class Solution:
+#     def largestPathValue(self, colors: str, edges: List[List[int]]) -> int:
+#         g = defaultdict(list)
+#         for v, u in edges:
+#             g[v].append(u)
+#
+#         @cache
+#         def f(node, pending = set()):
+#             if node in pending:
+#                 raise
+#             pending.add(node)
+#             z = Counter(colors[node]) + reduce(or_, map(f, g[node]), Counter())
+#             pending.remove(node)
+#             return z
+#
+#         try:
+#             return max(reduce(or_, map(f, range(len(colors)))).values())
+#         except:
+#             return -1
+#
+#
+# colors = "abaca"
+# edges = [[0, 1], [0, 2], [2, 3], [3, 4]]
+# solution = Solution()
+# result = solution.largestPathValue(colors, edges)
+# print(result)
 
 
 # class Solution(object):
