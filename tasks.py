@@ -8,27 +8,50 @@ from contextlib import contextmanager
 from datetime import datetime
 from functools import reduce, cache
 from heapq import nsmallest, heappush, heappop, heapify
-from itertools import groupby, product, permutations, zip_longest, combinations, accumulate
+from itertools import groupby, product, permutations, zip_longest, combinations, accumulate, repeat
 import math
 import random
 from collections import defaultdict, deque, Counter
-from operator import itemgetter, ne, or_
+from operator import itemgetter, ne, or_, add
 from statistics import multimode
 from string import ascii_lowercase
 from typing import List, Optional
-import numpy as np
 
 
 class Solution:
-    def differenceOfSums(self, n: int, m: int) -> int:
-        return n * (n + 1) // 2 - m * (n // m) * (n // m + 1)
+    def maxTargetNodes(self, e1: List[List[int]], e2: List[List[int]], k: int) -> List[int]:
+        def build(e: List[List[int]], k: int) -> List[int]:
+            def dfs(node: int, par: int, k: int) -> int:
+                return k >= 0 and sum(dfs(ch, node, k - 1) for ch in chldn[node] if ch != par) + 1
+
+            chldn = defaultdict(list)
+            for u, v in e:
+                chldn[u].append(v)
+                chldn[v].append(u)
+
+            return [dfs(i, -1, k) for i in range(len(e) + 1)]
+
+        return [*map(add, build(e1, k), repeat(max(build(e2, k - 1))))]
 
 
-n = 10
-m = 3
+edges1 = [[0, 1], [0, 2], [2, 3], [2, 4]]
+edges2 = [[0, 1], [0, 2], [0, 3], [2, 7], [1, 4], [4, 5], [4, 6]]
+k = 2
 solution = Solution()
-result = solution.differenceOfSums(n, m)
+result = solution.maxTargetNodes(edges1, edges2, k)
 print(result)
+
+
+# class Solution:
+#     def differenceOfSums(self, n: int, m: int) -> int:
+#         return n * (n + 1) // 2 - m * (n // m) * (n // m + 1)
+#
+#
+# n = 10
+# m = 3
+# solution = Solution()
+# result = solution.differenceOfSums(n, m)
+# print(result)
 
 
 # class Solution:
