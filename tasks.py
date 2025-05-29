@@ -19,27 +19,64 @@ from typing import List, Optional
 
 
 class Solution:
-    def maxTargetNodes(self, e1: List[List[int]], e2: List[List[int]], k: int) -> List[int]:
-        def build(e: List[List[int]], k: int) -> List[int]:
-            def dfs(node: int, par: int, k: int) -> int:
-                return k >= 0 and sum(dfs(ch, node, k - 1) for ch in chldn[node] if ch != par) + 1
+    def dfs(self, node, color, graph, component, bipartite):
+        bipartite[color] += 1
+        component[node] = color
+        for neighbor in graph[node]:
+            if component[neighbor] == -1:
+                self.dfs(neighbor, 1 - color, graph, component, bipartite)
 
-            chldn = defaultdict(list)
-            for u, v in e:
-                chldn[u].append(v)
-                chldn[v].append(u)
+    def build_graph(self, edges, n):
+        graph = [[] for _ in range(n)]
+        for u, v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+        return graph
 
-            return [dfs(i, -1, k) for i in range(len(e) + 1)]
-
-        return [*map(add, build(e1, k), repeat(max(build(e2, k - 1))))]
+    def maxTargetNodes(self, edges1, edges2):
+        n1, n2 = len(edges1) + 1, len(edges2) + 1
+        graph1 = self.build_graph(edges1, n1)
+        graph2 = self.build_graph(edges2, n2)
+        component1 = [-1] * n1
+        bipartite1 = [0, 0]
+        self.dfs(0, 0, graph1, component1, bipartite1)
+        ans = [bipartite1[component1[i]] for i in range(n1)]
+        component2 = [-1] * n2
+        bipartite2 = [0, 0]
+        self.dfs(0, 0, graph2, component2, bipartite2)
+        max_bipartite2 = max(bipartite2)
+        return [val + max_bipartite2 for val in ans]
 
 
 edges1 = [[0, 1], [0, 2], [2, 3], [2, 4]]
 edges2 = [[0, 1], [0, 2], [0, 3], [2, 7], [1, 4], [4, 5], [4, 6]]
-k = 2
 solution = Solution()
-result = solution.maxTargetNodes(edges1, edges2, k)
+result = solution.maxTargetNodes(edges1, edges2)
 print(result)
+
+
+# class Solution:
+#     def maxTargetNodes(self, e1: List[List[int]], e2: List[List[int]], k: int) -> List[int]:
+#         def build(e: List[List[int]], k: int) -> List[int]:
+#             def dfs(node: int, par: int, k: int) -> int:
+#                 return k >= 0 and sum(dfs(ch, node, k - 1) for ch in chldn[node] if ch != par) + 1
+#
+#             chldn = defaultdict(list)
+#             for u, v in e:
+#                 chldn[u].append(v)
+#                 chldn[v].append(u)
+#
+#             return [dfs(i, -1, k) for i in range(len(e) + 1)]
+#
+#         return [*map(add, build(e1, k), repeat(max(build(e2, k - 1))))]
+#
+#
+# edges1 = [[0, 1], [0, 2], [2, 3], [2, 4]]
+# edges2 = [[0, 1], [0, 2], [0, 3], [2, 7], [1, 4], [4, 5], [4, 6]]
+# k = 2
+# solution = Solution()
+# result = solution.maxTargetNodes(edges1, edges2, k)
+# print(result)
 
 
 # class Solution:
