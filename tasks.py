@@ -19,40 +19,71 @@ from typing import List, Optional
 
 
 class Solution:
-    def dfs(self, node, color, graph, component, bipartite):
-        bipartite[color] += 1
-        component[node] = color
-        for neighbor in graph[node]:
-            if component[neighbor] == -1:
-                self.dfs(neighbor, 1 - color, graph, component, bipartite)
+    def closestMeetingNode(self, edges, node1, node2):
+        n, inf = len(edges), 1 << 32
+        dist1, dist2 = [inf] * n, [inf] * n
 
-    def build_graph(self, edges, n):
-        graph = [[] for _ in range(n)]
-        for u, v in edges:
-            graph[u].append(v)
-            graph[v].append(u)
-        return graph
+        def dfs(node, dist):
+            d, i = 0, node
+            while i != -1 and dist[i] == inf:
+                dist[i] = d
+                d += 1
+                i = edges[i]
 
-    def maxTargetNodes(self, edges1, edges2):
-        n1, n2 = len(edges1) + 1, len(edges2) + 1
-        graph1 = self.build_graph(edges1, n1)
-        graph2 = self.build_graph(edges2, n2)
-        component1 = [-1] * n1
-        bipartite1 = [0, 0]
-        self.dfs(0, 0, graph1, component1, bipartite1)
-        ans = [bipartite1[component1[i]] for i in range(n1)]
-        component2 = [-1] * n2
-        bipartite2 = [0, 0]
-        self.dfs(0, 0, graph2, component2, bipartite2)
-        max_bipartite2 = max(bipartite2)
-        return [val + max_bipartite2 for val in ans]
+        dfs(node1, dist1)
+        dfs(node2, dist2)
+        minD, index = inf, -1
+        for i in range(n):
+            max12 = max(dist1[i], dist2[i])
+            if max12 < minD:
+                minD = max12
+                index = i
+        return index
 
 
-edges1 = [[0, 1], [0, 2], [2, 3], [2, 4]]
-edges2 = [[0, 1], [0, 2], [0, 3], [2, 7], [1, 4], [4, 5], [4, 6]]
+edges = [2, 2, 3, -1]
+node1 = 0
+node2 = 1
 solution = Solution()
-result = solution.maxTargetNodes(edges1, edges2)
+result = solution.closestMeetingNode(edges, node1, node2)
 print(result)
+
+
+# class Solution:
+#     def dfs(self, node, color, graph, component, bipartite):
+#         bipartite[color] += 1
+#         component[node] = color
+#         for neighbor in graph[node]:
+#             if component[neighbor] == -1:
+#                 self.dfs(neighbor, 1 - color, graph, component, bipartite)
+#
+#     def build_graph(self, edges, n):
+#         graph = [[] for _ in range(n)]
+#         for u, v in edges:
+#             graph[u].append(v)
+#             graph[v].append(u)
+#         return graph
+#
+#     def maxTargetNodes(self, edges1, edges2):
+#         n1, n2 = len(edges1) + 1, len(edges2) + 1
+#         graph1 = self.build_graph(edges1, n1)
+#         graph2 = self.build_graph(edges2, n2)
+#         component1 = [-1] * n1
+#         bipartite1 = [0, 0]
+#         self.dfs(0, 0, graph1, component1, bipartite1)
+#         ans = [bipartite1[component1[i]] for i in range(n1)]
+#         component2 = [-1] * n2
+#         bipartite2 = [0, 0]
+#         self.dfs(0, 0, graph2, component2, bipartite2)
+#         max_bipartite2 = max(bipartite2)
+#         return [val + max_bipartite2 for val in ans]
+#
+#
+# edges1 = [[0, 1], [0, 2], [2, 3], [2, 4]]
+# edges2 = [[0, 1], [0, 2], [0, 3], [2, 7], [1, 4], [4, 5], [4, 6]]
+# solution = Solution()
+# result = solution.maxTargetNodes(edges1, edges2)
+# print(result)
 
 
 # class Solution:
