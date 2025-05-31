@@ -17,36 +17,76 @@ from statistics import multimode
 from string import ascii_lowercase
 from typing import List, Optional
 
+from numpy.ma.core import bitwise_or
+
 
 class Solution:
-    def closestMeetingNode(self, edges, node1, node2):
-        n, inf = len(edges), 1 << 32
-        dist1, dist2 = [inf] * n, [inf] * n
+    def snakesAndLadders(self, board: List[List[int]]) -> int:
+        n, q = len(board), deque()
+        min_rolls = [-1] * (n * n + 1)
+        min_rolls[1] = 0
+        q.append(1)
 
-        def dfs(node, dist):
-            d, i = 0, node
-            while i != -1 and dist[i] == inf:
-                dist[i] = d
-                d += 1
-                i = edges[i]
+        while q:
+            x = q.popleft()
+            for i in range(1, 7):
+                t = x + i
+                if t > n * n:
+                    break
+                row = (t - 1) // n
+                col = (t - 1) % n
+                v = board[n - 1 - row][(n - 1 - col) if (row % 2 == 1) else col]
+                y = v if v > 0 else t
+                if y == n * n:
+                    return min_rolls[x] + 1
+                if min_rolls[y] == -1:
+                    min_rolls[y] = min_rolls[x] + 1
+                    q.append(y)
+        return -1
 
-        dfs(node1, dist1)
-        dfs(node2, dist2)
-        minD, index = inf, -1
-        for i in range(n):
-            max12 = max(dist1[i], dist2[i])
-            if max12 < minD:
-                minD = max12
-                index = i
-        return index
 
-
-edges = [2, 2, 3, -1]
-node1 = 0
-node2 = 1
+board = [
+    [-1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1],
+    [-1, 35, -1, -1, 13, -1],
+    [-1, -1, -1, -1, -1, -1],
+    [-1, 15, -1, -1, -1, -1]
+]
 solution = Solution()
-result = solution.closestMeetingNode(edges, node1, node2)
+result = solution.snakesAndLadders(board)
 print(result)
+
+
+# class Solution:
+#     def closestMeetingNode(self, edges, node1, node2):
+#         n, inf = len(edges), 1 << 32
+#         dist1, dist2 = [inf] * n, [inf] * n
+#
+#         def dfs(node, dist):
+#             d, i = 0, node
+#             while i != -1 and dist[i] == inf:
+#                 dist[i] = d
+#                 d += 1
+#                 i = edges[i]
+#
+#         dfs(node1, dist1)
+#         dfs(node2, dist2)
+#         minD, index = inf, -1
+#         for i in range(n):
+#             max12 = max(dist1[i], dist2[i])
+#             if max12 < minD:
+#                 minD = max12
+#                 index = i
+#         return index
+#
+#
+# edges = [2, 2, 3, -1]
+# node1 = 0
+# node2 = 1
+# solution = Solution()
+# result = solution.closestMeetingNode(edges, node1, node2)
+# print(result)
 
 
 # class Solution:
