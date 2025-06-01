@@ -16,46 +16,60 @@ from operator import itemgetter, ne, or_, add
 from statistics import multimode
 from string import ascii_lowercase
 from typing import List, Optional
-
 from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def snakesAndLadders(self, board: List[List[int]]) -> int:
-        n, q = len(board), deque()
-        min_rolls = [-1] * (n * n + 1)
-        min_rolls[1] = 0
-        q.append(1)
-
-        while q:
-            x = q.popleft()
-            for i in range(1, 7):
-                t = x + i
-                if t > n * n:
-                    break
-                row = (t - 1) // n
-                col = (t - 1) % n
-                v = board[n - 1 - row][(n - 1 - col) if (row % 2 == 1) else col]
-                y = v if v > 0 else t
-                if y == n * n:
-                    return min_rolls[x] + 1
-                if min_rolls[y] == -1:
-                    min_rolls[y] = min_rolls[x] + 1
-                    q.append(y)
-        return -1
+    def distributeCandies(self, n: int, limit: int) -> int:
+        def comb(num: int) -> int:
+            res = num * (num - 1) // 2 if num >= 0 else 0
+            return res
+        return max((comb(n + 2) - 3 * comb(n - limit + 1) + 3 * comb(n - 2 * limit) - comb(n - 3 * limit - 1)), 0)
 
 
-board = [
-    [-1, -1, -1, -1, -1, -1],
-    [-1, -1, -1, -1, -1, -1],
-    [-1, -1, -1, -1, -1, -1],
-    [-1, 35, -1, -1, 13, -1],
-    [-1, -1, -1, -1, -1, -1],
-    [-1, 15, -1, -1, -1, -1]
-]
+n = 5
+limit = 2
 solution = Solution()
-result = solution.snakesAndLadders(board)
+result = solution.distributeCandies(n, limit)
 print(result)
+
+
+# class Solution:
+#     def snakesAndLadders(self, board: List[List[int]]) -> int:
+#         n, q = len(board), deque()
+#         min_rolls = [-1] * (n * n + 1)
+#         min_rolls[1] = 0
+#         q.append(1)
+#
+#         while q:
+#             x = q.popleft()
+#             for i in range(1, 7):
+#                 t = x + i
+#                 if t > n * n:
+#                     break
+#                 row = (t - 1) // n
+#                 col = (t - 1) % n
+#                 v = board[n - 1 - row][(n - 1 - col) if (row % 2 == 1) else col]
+#                 y = v if v > 0 else t
+#                 if y == n * n:
+#                     return min_rolls[x] + 1
+#                 if min_rolls[y] == -1:
+#                     min_rolls[y] = min_rolls[x] + 1
+#                     q.append(y)
+#         return -1
+#
+#
+# board = [
+#     [-1, -1, -1, -1, -1, -1],
+#     [-1, -1, -1, -1, -1, -1],
+#     [-1, -1, -1, -1, -1, -1],
+#     [-1, 35, -1, -1, 13, -1],
+#     [-1, -1, -1, -1, -1, -1],
+#     [-1, 15, -1, -1, -1, -1]
+# ]
+# solution = Solution()
+# result = solution.snakesAndLadders(board)
+# print(result)
 
 
 # class Solution:
