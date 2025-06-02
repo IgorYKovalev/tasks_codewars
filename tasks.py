@@ -20,18 +20,39 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def distributeCandies(self, n: int, limit: int) -> int:
-        def comb(num: int) -> int:
-            res = num * (num - 1) // 2 if num >= 0 else 0
-            return res
-        return max((comb(n + 2) - 3 * comb(n - limit + 1) + 3 * comb(n - 2 * limit) - comb(n - 3 * limit - 1)), 0)
+    def candy(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        candies = [1] * n
+
+        for i in range(1, n):
+            if ratings[i] > ratings[i - 1]:
+                candies[i] = candies[i - 1] + 1
+
+        for i in range(n - 2, -1, -1):
+            if ratings[i] > ratings[i + 1]:
+                candies[i] = max(candies[i], candies[i + 1] + 1)
+        return sum(candies)
 
 
-n = 5
-limit = 2
+ratings = [1, 0, 2]
 solution = Solution()
-result = solution.distributeCandies(n, limit)
+result = solution.candy(ratings)
 print(result)
+
+
+# class Solution:
+#     def distributeCandies(self, n: int, limit: int) -> int:
+#         def comb(num: int) -> int:
+#             res = num * (num - 1) // 2 if num >= 0 else 0
+#             return res
+#         return max((comb(n + 2) - 3 * comb(n - limit + 1) + 3 * comb(n - 2 * limit) - comb(n - 3 * limit - 1)), 0)
+#
+#
+# n = 5
+# limit = 2
+# solution = Solution()
+# result = solution.distributeCandies(n, limit)
+# print(result)
 
 
 # class Solution:
