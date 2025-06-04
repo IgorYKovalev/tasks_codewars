@@ -20,24 +20,89 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def candy(self, ratings: List[int]) -> int:
-        n = len(ratings)
-        candies = [1] * n
-
-        for i in range(1, n):
-            if ratings[i] > ratings[i - 1]:
-                candies[i] = candies[i - 1] + 1
-
-        for i in range(n - 2, -1, -1):
-            if ratings[i] > ratings[i + 1]:
-                candies[i] = max(candies[i], candies[i + 1] + 1)
-        return sum(candies)
+    def answerString(self, word: str, n: int) -> str:
+        m = len(word) - n + 1
+        if n == 1:
+            return word
+        return max(word[i:i + m] for i in range(len(word)))
 
 
-ratings = [1, 0, 2]
+word = "dbca"
+numFriends = 2
 solution = Solution()
-result = solution.candy(ratings)
+result = solution.answerString(word, numFriends)
 print(result)
+
+
+# class Solution:
+#     def maxCandies(self, status, candies, keys, containedBoxes, initialBoxes):
+#         n = len(status)
+#         canOpen = [False] * n
+#         hasBox = [False] * n
+#         visited = [False] * n
+#         queue = []
+#
+#         for i in initialBoxes:
+#             hasBox[i] = True
+#             if status[i] == 1:
+#                 canOpen[i] = True
+#                 queue.append(i)
+#
+#         for i in range(n):
+#             if status[i] == 1:
+#                 canOpen[i] = True
+#
+#         total = 0
+#         while queue:
+#             i = queue.pop()
+#             if visited[i]:
+#                 continue
+#             visited[i] = True
+#             total += candies[i]
+#
+#             for k in keys[i]:
+#                 if not canOpen[k]:
+#                     canOpen[k] = True
+#                     if hasBox[k] and not visited[k]:
+#                         queue.append(k)
+#
+#             for j in containedBoxes[i]:
+#                 hasBox[j] = True
+#                 if canOpen[j] and not visited[j]:
+#                     queue.append(j)
+#
+#         return total
+#
+#
+# status = [1, 0, 1, 0]
+# candies = [7, 5, 4, 100]
+# keys = [[], [], [1], []]
+# containedBoxes = [[1, 2], [3], [], []]
+# initialBoxes = [0]
+# solution = Solution()
+# result = solution.maxCandies(status, candies, keys, containedBoxes, initialBoxes)
+# print(result)
+
+
+# class Solution:
+#     def candy(self, ratings: List[int]) -> int:
+#         n = len(ratings)
+#         candies = [1] * n
+#
+#         for i in range(1, n):
+#             if ratings[i] > ratings[i - 1]:
+#                 candies[i] = candies[i - 1] + 1
+#
+#         for i in range(n - 2, -1, -1):
+#             if ratings[i] > ratings[i + 1]:
+#                 candies[i] = max(candies[i], candies[i + 1] + 1)
+#         return sum(candies)
+#
+#
+# ratings = [1, 0, 2]
+# solution = Solution()
+# result = solution.candy(ratings)
+# print(result)
 
 
 # class Solution:
