@@ -20,18 +20,35 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def answerString(self, word: str, n: int) -> str:
-        m = len(word) - n + 1
-        if n == 1:
-            return word
-        return max(word[i:i + m] for i in range(len(word)))
+    def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
+        uf = ascii_lowercase
+        for i, j in sorted({tuple(sorted(map(ord, p))) for p in zip(s1, s2)}):
+            uf = uf.replace(*sorted((uf[i - 97], uf[j - 97]))[::-1])
+
+        return ''.join(uf[ord(c) - 97] for c in baseStr)
 
 
-word = "dbca"
-numFriends = 2
+s1 = "parker"
+s2 = "morris"
+baseStr = "parser"
 solution = Solution()
-result = solution.answerString(word, numFriends)
+result = solution.smallestEquivalentString(s1, s2, baseStr)
 print(result)
+
+
+# class Solution:
+#     def answerString(self, word: str, n: int) -> str:
+#         m = len(word) - n + 1
+#         if n == 1:
+#             return word
+#         return max(word[i:i + m] for i in range(len(word)))
+#
+#
+# word = "dbca"
+# numFriends = 2
+# solution = Solution()
+# result = solution.answerString(word, numFriends)
+# print(result)
 
 
 # class Solution:
