@@ -20,20 +20,44 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
-        uf = ascii_lowercase
-        for i, j in sorted({tuple(sorted(map(ord, p))) for p in zip(s1, s2)}):
-            uf = uf.replace(*sorted((uf[i - 97], uf[j - 97]))[::-1])
+    def robotWithString(self, s: str) -> str:
+        n = len(s)
+        suffix_min = [''] * n
+        suffix_min[-1] = s[-1]
+        for i in range(n - 2, -1, -1):
+            suffix_min[i] = min(s[i], suffix_min[i + 1])
 
-        return ''.join(uf[ord(c) - 97] for c in baseStr)
+        stack = []
+        result = []
+        for i in range(n):
+            stack.append(s[i])
+            while stack and (i == n - 1 or stack[-1] <= suffix_min[i + 1]):
+                result.append(stack.pop())
+
+        return ''.join(result)
 
 
-s1 = "parker"
-s2 = "morris"
-baseStr = "parser"
+s = "zza"
 solution = Solution()
-result = solution.smallestEquivalentString(s1, s2, baseStr)
+result = solution.robotWithString(s)
 print(result)
+
+
+# class Solution:
+#     def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
+#         uf = ascii_lowercase
+#         for i, j in sorted({tuple(sorted(map(ord, p))) for p in zip(s1, s2)}):
+#             uf = uf.replace(*sorted((uf[i - 97], uf[j - 97]))[::-1])
+#
+#         return ''.join(uf[ord(c) - 97] for c in baseStr)
+#
+#
+# s1 = "parker"
+# s2 = "morris"
+# baseStr = "parser"
+# solution = Solution()
+# result = solution.smallestEquivalentString(s1, s2, baseStr)
+# print(result)
 
 
 # class Solution:
