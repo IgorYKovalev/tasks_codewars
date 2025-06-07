@@ -20,27 +20,45 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def robotWithString(self, s: str) -> str:
-        n = len(s)
-        suffix_min = [''] * n
-        suffix_min[-1] = s[-1]
-        for i in range(n - 2, -1, -1):
-            suffix_min[i] = min(s[i], suffix_min[i + 1])
+    def clearStars(self, s: str) -> str:
+        a, h = [*s], []
+        for i, c in enumerate(s):
+            if c == '*':
+                a[i] = a[-heappop(h)[1]] = ''
+            else:
+                heappush(h, (c, -i))
 
-        stack = []
-        result = []
-        for i in range(n):
-            stack.append(s[i])
-            while stack and (i == n - 1 or stack[-1] <= suffix_min[i + 1]):
-                result.append(stack.pop())
-
-        return ''.join(result)
+        return ''.join(a)
 
 
-s = "zza"
+s = "aaba*"
 solution = Solution()
-result = solution.robotWithString(s)
+result = solution.clearStars(s)
 print(result)
+
+
+# class Solution:
+#     def robotWithString(self, s: str) -> str:
+#         n = len(s)
+#         suffix_min = [''] * n
+#         suffix_min[-1] = s[-1]
+#         for i in range(n - 2, -1, -1):
+#             suffix_min[i] = min(s[i], suffix_min[i + 1])
+#
+#         stack = []
+#         result = []
+#         for i in range(n):
+#             stack.append(s[i])
+#             while stack and (i == n - 1 or stack[-1] <= suffix_min[i + 1]):
+#                 result.append(stack.pop())
+#
+#         return ''.join(result)
+#
+#
+# s = "zza"
+# solution = Solution()
+# result = solution.robotWithString(s)
+# print(result)
 
 
 # class Solution:
