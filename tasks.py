@@ -20,21 +20,32 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def clearStars(self, s: str) -> str:
-        a, h = [*s], []
-        for i, c in enumerate(s):
-            if c == '*':
-                a[i] = a[-heappop(h)[1]] = ''
-            else:
-                heappush(h, (c, -i))
-
-        return ''.join(a)
+    def lexicalOrder(self, n: int) -> List[int]:
+        return sorted(range(1, n + 1), key=str)
 
 
-s = "aaba*"
+n = 13
 solution = Solution()
-result = solution.clearStars(s)
+result = solution.lexicalOrder(n)
 print(result)
+
+
+# class Solution:
+#     def clearStars(self, s: str) -> str:
+#         a, h = [*s], []
+#         for i, c in enumerate(s):
+#             if c == '*':
+#                 a[i] = a[-heappop(h)[1]] = ''
+#             else:
+#                 heappush(h, (c, -i))
+#
+#         return ''.join(a)
+#
+#
+# s = "aaba*"
+# solution = Solution()
+# result = solution.clearStars(s)
+# print(result)
 
 
 # class Solution:
