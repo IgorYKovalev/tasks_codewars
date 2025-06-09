@@ -20,14 +20,43 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def lexicalOrder(self, n: int) -> List[int]:
-        return sorted(range(1, n + 1), key=str)
+    def findKthNumber(self, n: int, k: int) -> int:
+        curr = 1
+        k -= 1
+        while k > 0:
+            steps = 0
+            first = curr
+            last = curr + 1
+            while first <= n:
+                steps += min(n + 1, last) - first
+                first *= 10
+                last *= 10
+
+            if steps <= k:
+                curr += 1
+                k -= steps
+            else:
+                curr *= 10
+                k -= 1
+        return curr
 
 
 n = 13
+k = 2
 solution = Solution()
-result = solution.lexicalOrder(n)
+result = solution.findKthNumber(n, k)
 print(result)
+
+
+# class Solution:
+#     def lexicalOrder(self, n: int) -> List[int]:
+#         return sorted(range(1, n + 1), key=str)
+#
+#
+# n = 13
+# solution = Solution()
+# result = solution.lexicalOrder(n)
+# print(result)
 
 
 # class Solution:
