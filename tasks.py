@@ -20,32 +20,50 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def findKthNumber(self, n: int, k: int) -> int:
-        curr = 1
-        k -= 1
-        while k > 0:
-            steps = 0
-            first = curr
-            last = curr + 1
-            while first <= n:
-                steps += min(n + 1, last) - first
-                first *= 10
-                last *= 10
+    def maxDifference(self, s: str) -> int:
+        odd, even = 0, len(s)
+        for count in Counter(s).values():
+            if count % 2 == 1:
+                odd = max(count, odd)
+            elif count != 0:
+                even = min(count, even)
 
-            if steps <= k:
-                curr += 1
-                k -= steps
-            else:
-                curr *= 10
-                k -= 1
-        return curr
+        return odd - even
 
 
-n = 13
-k = 2
+s = "aaaaabbc"
 solution = Solution()
-result = solution.findKthNumber(n, k)
+result = solution.maxDifference(s)
 print(result)
+
+
+# class Solution:
+#     def findKthNumber(self, n: int, k: int) -> int:
+#         curr = 1
+#         k -= 1
+#         while k > 0:
+#             steps = 0
+#             first = curr
+#             last = curr + 1
+#             while first <= n:
+#                 steps += min(n + 1, last) - first
+#                 first *= 10
+#                 last *= 10
+#
+#             if steps <= k:
+#                 curr += 1
+#                 k -= steps
+#             else:
+#                 curr *= 10
+#                 k -= 1
+#         return curr
+#
+#
+# n = 13
+# k = 2
+# solution = Solution()
+# result = solution.findKthNumber(n, k)
+# print(result)
 
 
 # class Solution:
