@@ -20,21 +20,32 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def maxDifference(self, s: str) -> int:
-        odd, even = 0, len(s)
-        for count in Counter(s).values():
-            if count % 2 == 1:
-                odd = max(count, odd)
-            elif count != 0:
-                even = min(count, even)
-
-        return odd - even
+    def maxAdjacentDistance(self, nums: List[int]) -> int:
+        return max(abs(v - nums[k - 1]) for k, v in enumerate(nums))
 
 
-s = "aaaaabbc"
+nums = [1, 2, 4]
 solution = Solution()
-result = solution.maxDifference(s)
+result = solution.maxAdjacentDistance(nums)
 print(result)
+
+
+# class Solution:
+#     def maxDifference(self, s: str) -> int:
+#         odd, even = 0, len(s)
+#         for count in Counter(s).values():
+#             if count % 2 == 1:
+#                 odd = max(count, odd)
+#             elif count != 0:
+#                 even = min(count, even)
+#
+#         return odd - even
+#
+#
+# s = "aaaaabbc"
+# solution = Solution()
+# result = solution.maxDifference(s)
+# print(result)
 
 
 # class Solution:
