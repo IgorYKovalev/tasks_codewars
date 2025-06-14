@@ -20,34 +20,53 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def minimizeMax(self, nums, p):
-        nums.sort()
+    def minMaxDifference(self, num: int) -> int:
+        s = str(num)
 
-        def isValid(diff):
-            cnt, i = 0, 1
-            while i < len(nums):
-                if nums[i] - nums[i - 1] <= diff:
-                    cnt += 1
-                    i += 1
-                i += 1
-            return cnt >= p
+        firstN9 = re.search(r'[0-8]', s)
+        firstN0 = re.search(r'[1-9]', s)
 
-        l, r = 0, nums[-1] - nums[0]
-        while l <= r:
-            mid = (l + r) // 2
-            if isValid(mid):
-                ans = mid
-                r = mid - 1
-            else:
-                l = mid + 1
-        return ans
+        max_num = int(s.replace(s[firstN9.start()], '9')) if firstN9 else num
+        min_num = int(s.replace(s[firstN0.start()], '0')) if firstN0 else num
+
+        return max_num - min_num
 
 
-nums = [10,1,2,7,1,3]
-p = 2
+num = 11891
 solution = Solution()
-result = solution.minimizeMax(nums, p)
+result = solution.minMaxDifference(num)
 print(result)
+
+
+# class Solution:
+#     def minimizeMax(self, nums, p):
+#         nums.sort()
+#
+#         def isValid(diff):
+#             cnt, i = 0, 1
+#             while i < len(nums):
+#                 if nums[i] - nums[i - 1] <= diff:
+#                     cnt += 1
+#                     i += 1
+#                 i += 1
+#             return cnt >= p
+#
+#         l, r = 0, nums[-1] - nums[0]
+#         while l <= r:
+#             mid = (l + r) // 2
+#             if isValid(mid):
+#                 ans = mid
+#                 r = mid - 1
+#             else:
+#                 l = mid + 1
+#         return ans
+#
+#
+# nums = [10,1,2,7,1,3]
+# p = 2
+# solution = Solution()
+# result = solution.minimizeMax(nums, p)
+# print(result)
 
 
 # class Solution:
