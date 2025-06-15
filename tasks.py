@@ -20,22 +20,35 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def minMaxDifference(self, num: int) -> int:
-        s = str(num)
+    def maxDiff(self, v: int) -> int:
+        s = str(v)
+        return (int(s.replace((s+'_').lstrip('9')[0],'9')) -
+                ((m:= re.search(r'[2-9]', s)) and
+                 int(s.replace(m[0], '01'[s[0] > '1'])) or v))
 
-        firstN9 = re.search(r'[0-8]', s)
-        firstN0 = re.search(r'[1-9]', s)
-
-        max_num = int(s.replace(s[firstN9.start()], '9')) if firstN9 else num
-        min_num = int(s.replace(s[firstN0.start()], '0')) if firstN0 else num
-
-        return max_num - min_num
-
-
-num = 11891
+num = 555
 solution = Solution()
-result = solution.minMaxDifference(num)
+result = solution.maxDiff(num)
 print(result)
+
+
+# class Solution:
+#     def minMaxDifference(self, num: int) -> int:
+#         s = str(num)
+#
+#         firstN9 = re.search(r'[0-8]', s)
+#         firstN0 = re.search(r'[1-9]', s)
+#
+#         max_num = int(s.replace(s[firstN9.start()], '9')) if firstN9 else num
+#         min_num = int(s.replace(s[firstN0.start()], '0')) if firstN0 else num
+#
+#         return max_num - min_num
+#
+#
+# num = 11891
+# solution = Solution()
+# result = solution.minMaxDifference(num)
+# print(result)
 
 
 # class Solution:
