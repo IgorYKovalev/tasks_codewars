@@ -12,7 +12,7 @@ from itertools import groupby, product, permutations, zip_longest, combinations,
 import math
 import random
 from collections import defaultdict, deque, Counter
-from operator import itemgetter, ne, or_, add
+from operator import itemgetter, ne, or_, add, sub
 from statistics import multimode
 from string import ascii_lowercase
 from typing import List, Optional
@@ -20,16 +20,27 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def maxDiff(self, v: int) -> int:
-        s = str(v)
-        return (int(s.replace((s+'_').lstrip('9')[0],'9')) -
-                ((m:= re.search(r'[2-9]', s)) and
-                 int(s.replace(m[0], '01'[s[0] > '1'])) or v))
+    def maximumDifference(self, nums: List[int]) -> int:
+        return max(map(sub, nums, accumulate(nums, min))) or -1
 
-num = 555
+
+nums = [7, 1, 5, 4]
 solution = Solution()
-result = solution.maxDiff(num)
+result = solution.maximumDifference(nums)
 print(result)
+
+
+# class Solution:
+#     def maxDiff(self, v: int) -> int:
+#         s = str(v)
+#         return (int(s.replace((s+'_').lstrip('9')[0],'9')) -
+#                 ((m:= re.search(r'[2-9]', s)) and
+#                  int(s.replace(m[0], '01'[s[0] > '1'])) or v))
+#
+# num = 555
+# solution = Solution()
+# result = solution.maxDiff(num)
+# print(result)
 
 
 # class Solution:
