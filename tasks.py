@@ -20,21 +20,33 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def divideArray(self, nums: List[int], k: int) -> List[List[int]]:
-        nums.sort()
-        ans = []
-        for i in range(0, len(nums) - 2, 3):
-            if nums[i + 2] - nums[i] > k:
-                return []
-            ans.append(nums[i:i + 3])
-        return ans
+    def partitionArray(self, a: List[int], k: int) -> int:
+        return len({*accumulate(sorted(a),lambda q, v: (q, v)[v - q > k])})
 
 
-nums = [1, 3, 4, 8, 7, 9, 3, 5, 1]
+nums = [3, 6, 1, 2, 5]
 k = 2
-solution = Solution()
-result = solution.divideArray(nums, k)
+solution =Solution()
+result = solution.partitionArray(nums, k)
 print(result)
+
+
+# class Solution:
+#     def divideArray(self, nums: List[int], k: int) -> List[List[int]]:
+#         nums.sort()
+#         ans = []
+#         for i in range(0, len(nums) - 2, 3):
+#             if nums[i + 2] - nums[i] > k:
+#                 return []
+#             ans.append(nums[i:i + 3])
+#         return ans
+#
+#
+# nums = [1, 3, 4, 8, 7, 9, 3, 5, 1]
+# k = 2
+# solution = Solution()
+# result = solution.divideArray(nums, k)
+# print(result)
 
 
 # class Solution:
