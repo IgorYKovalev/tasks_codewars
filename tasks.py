@@ -20,15 +20,34 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def partitionArray(self, a: List[int], k: int) -> int:
-        return len({*accumulate(sorted(a),lambda q, v: (q, v)[v - q > k])})
+    def maxDistance(self, s: str, k: int) -> int:
+        res = 0
+        for dirr in 'NE', 'SE', 'SW', 'NW':
+            kk, dist = k, 0
+            for c in s:
+                dist += c in dirr or kk > 0 or -1
+                kk -= c not in dirr
+                res = max(res, dist)
+        return res
 
 
-nums = [3, 6, 1, 2, 5]
-k = 2
-solution =Solution()
-result = solution.partitionArray(nums, k)
+s = "NWSE"
+k = 1
+solution = Solution()
+result = solution.maxDistance(s, k)
 print(result)
+
+
+# class Solution:
+#     def partitionArray(self, a: List[int], k: int) -> int:
+#         return len({*accumulate(sorted(a),lambda q, v: (q, v)[v - q > k])})
+#
+#
+# nums = [3, 6, 1, 2, 5]
+# k = 2
+# solution =Solution()
+# result = solution.partitionArray(nums, k)
+# print(result)
 
 
 # class Solution:
