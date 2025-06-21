@@ -20,22 +20,35 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def maxDistance(self, s: str, k: int) -> int:
-        res = 0
-        for dirr in 'NE', 'SE', 'SW', 'NW':
-            kk, dist = k, 0
-            for c in s:
-                dist += c in dirr or kk > 0 or -1
-                kk -= c not in dirr
-                res = max(res, dist)
-        return res
+    def minimumDeletions(self, word: str, k: int) -> int:
+        b = sorted(Counter(word).values())
+        return min(sum(b[:i]) + sum(max(v - b[i] - k, 0) for v in b[i:]) for i in range(len(b)))
 
 
-s = "NWSE"
-k = 1
+word = "aabcaba"
+k = 0
 solution = Solution()
-result = solution.maxDistance(s, k)
+result = solution.minimumDeletions(word, k)
 print(result)
+
+
+# class Solution:
+#     def maxDistance(self, s: str, k: int) -> int:
+#         res = 0
+#         for dirr in 'NE', 'SE', 'SW', 'NW':
+#             kk, dist = k, 0
+#             for c in s:
+#                 dist += c in dirr or kk > 0 or -1
+#                 kk -= c not in dirr
+#                 res = max(res, dist)
+#         return res
+#
+#
+# s = "NWSE"
+# k = 1
+# solution = Solution()
+# result = solution.maxDistance(s, k)
+# print(result)
 
 
 # class Solution:
