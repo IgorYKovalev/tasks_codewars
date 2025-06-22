@@ -20,16 +20,29 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def minimumDeletions(self, word: str, k: int) -> int:
-        b = sorted(Counter(word).values())
-        return min(sum(b[:i]) + sum(max(v - b[i] - k, 0) for v in b[i:]) for i in range(len(b)))
+    def divideString(self, s: str, k: int, fill: str) -> List[str]:
+        return [s[i:i + k].ljust(k, fill) for i in range(0, len(s), k)]
 
 
-word = "aabcaba"
-k = 0
+s = "abcdefghi"
+k = 3
+fill = "x"
 solution = Solution()
-result = solution.minimumDeletions(word, k)
+result = solution.divideString(s, k, fill)
 print(result)
+
+
+# class Solution:
+#     def minimumDeletions(self, word: str, k: int) -> int:
+#         b = sorted(Counter(word).values())
+#         return min(sum(b[:i]) + sum(max(v - b[i] - k, 0) for v in b[i:]) for i in range(len(b)))
+#
+#
+# word = "aabcaba"
+# k = 0
+# solution = Solution()
+# result = solution.minimumDeletions(word, k)
+# print(result)
 
 
 # class Solution:
