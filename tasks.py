@@ -20,36 +20,49 @@ from numpy.ma.core import bitwise_or
 
 
 class Solution:
-    def kMirror(self, base: int, count: int) -> int:
-        def next_symmetric(digits: list[str]) -> list[str]:
-            half = len(digits) // 2
-            for i in range(half, len(digits)):
-                if int(digits[i]) + 1 < base:
-                    digits[i] = digits[~i] = str(int(digits[i]) + 1)
-                    for j in range(half, i):
-                        digits[j] = digits[~j] = '0'
-                    return digits
-            return ['1'] + ['0'] * (len(digits) - 1) + ['1']
-
-        current = ['0']
-        total = 0
-
-        for _ in range(count):
-            while True:
-                current = next_symmetric(current)
-                val = int(''.join(current), base)
-                if str(val) == str(val)[::-1]:
-                    break
-            total += val
-
-        return total
+    def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
+        return [i for i in range(len(nums)) if key in nums[max(0, i - k):i + k + 1]]
 
 
-k = 2
-n = 5
+nums = [3, 4, 9, 1, 3, 9, 5]
+key = 9
+k = 1
 solution = Solution()
-result = solution.kMirror(k, n)
+result = solution.findKDistantIndices(nums, key, k)
 print(result)
+
+
+# class Solution:
+#     def kMirror(self, base: int, count: int) -> int:
+#         def next_symmetric(digits: list[str]) -> list[str]:
+#             half = len(digits) // 2
+#             for i in range(half, len(digits)):
+#                 if int(digits[i]) + 1 < base:
+#                     digits[i] = digits[~i] = str(int(digits[i]) + 1)
+#                     for j in range(half, i):
+#                         digits[j] = digits[~j] = '0'
+#                     return digits
+#             return ['1'] + ['0'] * (len(digits) - 1) + ['1']
+#
+#         current = ['0']
+#         total = 0
+#
+#         for _ in range(count):
+#             while True:
+#                 current = next_symmetric(current)
+#                 val = int(''.join(current), base)
+#                 if str(val) == str(val)[::-1]:
+#                     break
+#             total += val
+#
+#         return total
+#
+#
+# k = 2
+# n = 5
+# solution = Solution()
+# result = solution.kMirror(k, n)
+# print(result)
 
 
 # class Solution:
