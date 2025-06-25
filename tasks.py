@@ -17,19 +17,56 @@ from statistics import multimode
 from string import ascii_lowercase
 from typing import List, Optional
 from numpy.ma.core import bitwise_or
+import bisect
 
 
 class Solution:
-    def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
-        return [i for i in range(len(nums)) if key in nums[max(0, i - k):i + k + 1]]
+    def kthSmallestProduct(self, nums1, nums2, k):
+        def f(x):
+            count = 0
+            for num in nums1:
+                if num > 0:
+                    val = x / num
+                    count += bisect.bisect_right(nums2, val)
+                elif num < 0:
+                    val = x / num
+                    count += len(nums2) - bisect.bisect_left(nums2, val)
+                else:
+                    if x >= 0:
+                        count += len(nums2)
+            return count
+
+        left = -10 ** 10
+        right = 10 ** 10
+        while left <= right:
+            mid = (left + right) // 2
+            cnt = f(mid)
+            if cnt < k:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return left
 
 
-nums = [3, 4, 9, 1, 3, 9, 5]
-key = 9
-k = 1
+nums1 = [2, 5]
+nums2 = [3, 4]
+k = 2
 solution = Solution()
-result = solution.findKDistantIndices(nums, key, k)
+result = solution.kthSmallestProduct(nums1, nums2, k)
 print(result)
+
+
+# class Solution:
+#     def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
+#         return [i for i in range(len(nums)) if key in nums[max(0, i - k):i + k + 1]]
+#
+#
+# nums = [3, 4, 9, 1, 3, 9, 5]
+# key = 9
+# k = 1
+# solution = Solution()
+# result = solution.findKDistantIndices(nums, key, k)
+# print(result)
 
 
 # class Solution:
