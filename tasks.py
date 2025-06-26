@@ -21,39 +21,52 @@ import bisect
 
 
 class Solution:
-    def kthSmallestProduct(self, nums1, nums2, k):
-        def f(x):
-            count = 0
-            for num in nums1:
-                if num > 0:
-                    val = x / num
-                    count += bisect.bisect_right(nums2, val)
-                elif num < 0:
-                    val = x / num
-                    count += len(nums2) - bisect.bisect_left(nums2, val)
-                else:
-                    if x >= 0:
-                        count += len(nums2)
-            return count
-
-        left = -10 ** 10
-        right = 10 ** 10
-        while left <= right:
-            mid = (left + right) // 2
-            cnt = f(mid)
-            if cnt < k:
-                left = mid + 1
-            else:
-                right = mid - 1
-        return left
+    def longestSubsequence(self, s: str, k: int) -> int:
+        i = next((i for i in range(len(s) + 1) if int(s[~i:], 2) > k), len(s))
+        return i + s[:-i].count('0')
 
 
-nums1 = [2, 5]
-nums2 = [3, 4]
-k = 2
+s = "1001010"
+k = 5
 solution = Solution()
-result = solution.kthSmallestProduct(nums1, nums2, k)
+result = solution.longestSubsequence(s, k)
 print(result)
+
+
+# class Solution:
+#     def kthSmallestProduct(self, nums1, nums2, k):
+#         def f(x):
+#             count = 0
+#             for num in nums1:
+#                 if num > 0:
+#                     val = x / num
+#                     count += bisect.bisect_right(nums2, val)
+#                 elif num < 0:
+#                     val = x / num
+#                     count += len(nums2) - bisect.bisect_left(nums2, val)
+#                 else:
+#                     if x >= 0:
+#                         count += len(nums2)
+#             return count
+#
+#         left = -10 ** 10
+#         right = 10 ** 10
+#         while left <= right:
+#             mid = (left + right) // 2
+#             cnt = f(mid)
+#             if cnt < k:
+#                 left = mid + 1
+#             else:
+#                 right = mid - 1
+#         return left
+#
+#
+# nums1 = [2, 5]
+# nums2 = [3, 4]
+# k = 2
+# solution = Solution()
+# result = solution.kthSmallestProduct(nums1, nums2, k)
+# print(result)
 
 
 # class Solution:
