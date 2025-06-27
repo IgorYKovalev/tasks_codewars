@@ -21,16 +21,53 @@ import bisect
 
 
 class Solution:
-    def longestSubsequence(self, s: str, k: int) -> int:
-        i = next((i for i in range(len(s) + 1) if int(s[~i:], 2) > k), len(s))
-        return i + s[:-i].count('0')
+    def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
+        freq = Counter(s)
+        valid = sorted([ch for ch in freq if freq[ch] >= k], reverse=True)
+
+        def is_subseq(x):
+            t = x * k
+            i = 0
+            for ch in s:
+                if i < len(t) and ch == t[i]:
+                    i += 1
+            return i == len(t)
+
+        queue = deque([""])
+        res = ""
+
+        while queue:
+            curr = queue.popleft()
+            for ch in valid:
+                next_candidate = curr + ch
+                if is_subseq(next_candidate):
+                    if (len(next_candidate) > len(res) or
+                       (len(next_candidate) == len(res) and
+                       next_candidate > res)):
+                        res = next_candidate
+                    queue.append(next_candidate)
+
+        return res
 
 
-s = "1001010"
-k = 5
+s = "letsleetcode"
+k = 2
 solution = Solution()
-result = solution.longestSubsequence(s, k)
+result = solution.longestSubsequenceRepeatedK(s, k)
 print(result)
+
+
+# class Solution:
+#     def longestSubsequence(self, s: str, k: int) -> int:
+#         i = next((i for i in range(len(s) + 1) if int(s[~i:], 2) > k), len(s))
+#         return i + s[:-i].count('0')
+#
+#
+# s = "1001010"
+# k = 5
+# solution = Solution()
+# result = solution.longestSubsequence(s, k)
+# print(result)
 
 
 # class Solution:
