@@ -1,5 +1,4 @@
 import asyncio
-import heapq
 import operator
 import re
 from bisect import bisect_left, bisect_right
@@ -7,7 +6,7 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import datetime
 from functools import reduce, cache
-from heapq import nsmallest, heappush, heappop, heapify
+from heapq import nsmallest, heappush, heappop, heapify, nlargest
 from itertools import groupby, product, permutations, zip_longest, combinations, accumulate, repeat
 import math
 import random
@@ -21,40 +20,52 @@ import bisect
 
 
 class Solution:
-    def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
-        freq = Counter(s)
-        valid = sorted([ch for ch in freq if freq[ch] >= k], reverse=True)
-
-        def is_subseq(x):
-            t = x * k
-            i = 0
-            for ch in s:
-                if i < len(t) and ch == t[i]:
-                    i += 1
-            return i == len(t)
-
-        queue = deque([""])
-        res = ""
-
-        while queue:
-            curr = queue.popleft()
-            for ch in valid:
-                next_candidate = curr + ch
-                if is_subseq(next_candidate):
-                    if (len(next_candidate) > len(res) or
-                       (len(next_candidate) == len(res) and
-                       next_candidate > res)):
-                        res = next_candidate
-                    queue.append(next_candidate)
-
-        return res
+    def maxSubsequence(self, nums: List[int], k: int) -> List[int]:
+        return [v for _, v in sorted(nlargest(k, enumerate(nums), itemgetter(1)))]
 
 
-s = "letsleetcode"
+nums = [2, 1, 3, 3]
 k = 2
 solution = Solution()
-result = solution.longestSubsequenceRepeatedK(s, k)
+result = solution.maxSubsequence(nums, k)
 print(result)
+
+
+# class Solution:
+#     def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
+#         freq = Counter(s)
+#         valid = sorted([ch for ch in freq if freq[ch] >= k], reverse=True)
+#
+#         def is_subseq(x):
+#             t = x * k
+#             i = 0
+#             for ch in s:
+#                 if i < len(t) and ch == t[i]:
+#                     i += 1
+#             return i == len(t)
+#
+#         queue = deque([""])
+#         res = ""
+#
+#         while queue:
+#             curr = queue.popleft()
+#             for ch in valid:
+#                 next_candidate = curr + ch
+#                 if is_subseq(next_candidate):
+#                     if (len(next_candidate) > len(res) or
+#                        (len(next_candidate) == len(res) and
+#                        next_candidate > res)):
+#                         res = next_candidate
+#                     queue.append(next_candidate)
+#
+#         return res
+#
+#
+# s = "letsleetcode"
+# k = 2
+# solution = Solution()
+# result = solution.longestSubsequenceRepeatedK(s, k)
+# print(result)
 
 
 # class Solution:
