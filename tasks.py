@@ -20,14 +20,25 @@ import bisect
 
 
 class Solution:
-    def findLHS(self, nums: List[int]) -> int:
-        return (z:=Counter(nums)) and max(z[v + 1] and z[v] + z[v + 1] for v in z)
+    def possibleStringCount(self, word: str) -> int:
+        return len(word) - sum(word[i] != word[i - 1] for i in range(1, len(word)))
 
 
-nums = [1, 3, 2, 2, 5, 2, 3, 7]
+word = "abbcccc"
 solution = Solution()
-result = solution.findLHS(nums)
+result = solution.possibleStringCount(word)
 print(result)
+
+
+# class Solution:
+#     def findLHS(self, nums: List[int]) -> int:
+#         return (z:=Counter(nums)) and max(z[v + 1] and z[v] + z[v + 1] for v in z)
+#
+#
+# nums = [1, 3, 2, 2, 5, 2, 3, 7]
+# solution = Solution()
+# result = solution.findLHS(nums)
+# print(result)
 
 
 # class Solution:
