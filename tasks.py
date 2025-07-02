@@ -19,15 +19,68 @@ from numpy.ma.core import bitwise_or
 import bisect
 
 
+MOD = 10 ** 9 + 7
+
 class Solution:
-    def possibleStringCount(self, word: str) -> int:
-        return len(word) - sum(word[i] != word[i - 1] for i in range(1, len(word)))
+    def possibleStringCount(self, word: str, k: int) -> int:
+        groups = self.getConsecutiveLetters(word)
+        totalCombinations = 1
+        for g in groups:
+            totalCombinations = (totalCombinations * g) % MOD
+
+        if k <= len(groups):
+            return totalCombinations
+
+        dp = [0] * k
+        dp[0] = 1
+
+        for i in range(len(groups)):
+            group = groups[i]
+            new_dp = [0] * k
+            window_sum = 0
+
+            for j in range(i, k):
+                new_dp[j] = (new_dp[j] + window_sum) % MOD
+                window_sum = (window_sum + dp[j]) % MOD
+                if j >= group:
+                    window_sum = (window_sum - dp[j - group] + MOD) % MOD
+
+            dp = new_dp
+        invalid = sum(dp) % MOD
+        return (totalCombinations - invalid + MOD) % MOD
+
+    def getConsecutiveLetters(self, word: str) -> list:
+        if not word:
+            return []
+
+        groups = []
+        count = 1
+        for i in range(1, len(word)):
+            if word[i] == word[i - 1]:
+                count += 1
+            else:
+                groups.append(count)
+                count = 1
+        groups.append(count)
+        return groups
 
 
-word = "abbcccc"
+word = "aabbccdd"
+k = 7
 solution = Solution()
-result = solution.possibleStringCount(word)
+result = solution.possibleStringCount(word, k)
 print(result)
+
+
+# class Solution:
+#     def possibleStringCount(self, word: str) -> int:
+#         return len(word) - sum(word[i] != word[i - 1] for i in range(1, len(word)))
+#
+#
+# word = "abbcccc"
+# solution = Solution()
+# result = solution.possibleStringCount(word)
+# print(result)
 
 
 # class Solution:
