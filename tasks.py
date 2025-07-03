@@ -18,58 +18,79 @@ from typing import List, Optional
 from numpy.ma.core import bitwise_or
 import bisect
 
-
-MOD = 10 ** 9 + 7
-
 class Solution:
-    def possibleStringCount(self, word: str, k: int) -> int:
-        groups = self.getConsecutiveLetters(word)
-        totalCombinations = 1
-        for g in groups:
-            totalCombinations = (totalCombinations * g) % MOD
+    def kthCharacter(self, k: int) -> str:
+        index = k - 1
+        increments = 0
+        while index > 0:
+            p = 1
+            while p * 2 <= index:
+                p *= 2
 
-        if k <= len(groups):
-            return totalCombinations
+            increments += 1
+            index -= p
 
-        dp = [0] * k
-        dp[0] = 1
-
-        for i in range(len(groups)):
-            group = groups[i]
-            new_dp = [0] * k
-            window_sum = 0
-
-            for j in range(i, k):
-                new_dp[j] = (new_dp[j] + window_sum) % MOD
-                window_sum = (window_sum + dp[j]) % MOD
-                if j >= group:
-                    window_sum = (window_sum - dp[j - group] + MOD) % MOD
-
-            dp = new_dp
-        invalid = sum(dp) % MOD
-        return (totalCombinations - invalid + MOD) % MOD
-
-    def getConsecutiveLetters(self, word: str) -> list:
-        if not word:
-            return []
-
-        groups = []
-        count = 1
-        for i in range(1, len(word)):
-            if word[i] == word[i - 1]:
-                count += 1
-            else:
-                groups.append(count)
-                count = 1
-        groups.append(count)
-        return groups
+        final_char_code = ord('a') + (increments % 26)
+        return chr(final_char_code)
 
 
-word = "aabbccdd"
-k = 7
+k = 5
 solution = Solution()
-result = solution.possibleStringCount(word, k)
+result = solution.kthCharacter(k)
 print(result)
+
+
+# MOD = 10 ** 9 + 7
+#
+# class Solution:
+#     def possibleStringCount(self, word: str, k: int) -> int:
+#         groups = self.getConsecutiveLetters(word)
+#         totalCombinations = 1
+#         for g in groups:
+#             totalCombinations = (totalCombinations * g) % MOD
+#
+#         if k <= len(groups):
+#             return totalCombinations
+#
+#         dp = [0] * k
+#         dp[0] = 1
+#
+#         for i in range(len(groups)):
+#             group = groups[i]
+#             new_dp = [0] * k
+#             window_sum = 0
+#
+#             for j in range(i, k):
+#                 new_dp[j] = (new_dp[j] + window_sum) % MOD
+#                 window_sum = (window_sum + dp[j]) % MOD
+#                 if j >= group:
+#                     window_sum = (window_sum - dp[j - group] + MOD) % MOD
+#
+#             dp = new_dp
+#         invalid = sum(dp) % MOD
+#         return (totalCombinations - invalid + MOD) % MOD
+#
+#     def getConsecutiveLetters(self, word: str) -> list:
+#         if not word:
+#             return []
+#
+#         groups = []
+#         count = 1
+#         for i in range(1, len(word)):
+#             if word[i] == word[i - 1]:
+#                 count += 1
+#             else:
+#                 groups.append(count)
+#                 count = 1
+#         groups.append(count)
+#         return groups
+#
+#
+# word = "aabbccdd"
+# k = 7
+# solution = Solution()
+# result = solution.possibleStringCount(word, k)
+# print(result)
 
 
 # class Solution:
