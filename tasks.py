@@ -18,26 +18,39 @@ from typing import List, Optional
 from numpy.ma.core import bitwise_or
 import bisect
 
+
 class Solution:
-    def kthCharacter(self, k: int) -> str:
-        index = k - 1
-        increments = 0
-        while index > 0:
-            p = 1
-            while p * 2 <= index:
-                p *= 2
-
-            increments += 1
-            index -= p
-
-        final_char_code = ord('a') + (increments % 26)
-        return chr(final_char_code)
+    def kthCharacter(self, k: int, operations: List[int]) -> str:
+        return chr(ord('a') + (f:=lambda k: k and operations[i:=int(math.log2(k))] + f(k - 2 ** i))(k - 1) % 26)
 
 
 k = 5
+operations = [0, 0, 0]
 solution = Solution()
-result = solution.kthCharacter(k)
+result = solution.kthCharacter(k, operations)
 print(result)
+
+
+# class Solution:
+#     def kthCharacter(self, k: int) -> str:
+#         index = k - 1
+#         increments = 0
+#         while index > 0:
+#             p = 1
+#             while p * 2 <= index:
+#                 p *= 2
+#
+#             increments += 1
+#             index -= p
+#
+#         final_char_code = ord('a') + (increments % 26)
+#         return chr(final_char_code)
+#
+#
+# k = 5
+# solution = Solution()
+# result = solution.kthCharacter(k)
+# print(result)
 
 
 # MOD = 10 ** 9 + 7
