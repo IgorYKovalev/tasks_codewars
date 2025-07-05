@@ -20,15 +20,26 @@ import bisect
 
 
 class Solution:
-    def kthCharacter(self, k: int, operations: List[int]) -> str:
-        return chr(ord('a') + (f:=lambda k: k and operations[i:=int(math.log2(k))] + f(k - 2 ** i))(k - 1) % 26)
+    def findLucky(self, arr: List[int]) -> int:
+        return max((x for x, f in Counter(arr).items() if x == f), default=-1)
 
 
-k = 5
-operations = [0, 0, 0]
+arr = [2, 2, 3, 4]
 solution = Solution()
-result = solution.kthCharacter(k, operations)
+result = solution.findLucky(arr)
 print(result)
+
+
+# class Solution:
+#     def kthCharacter(self, k: int, operations: List[int]) -> str:
+#         return chr(ord('a') + (f:=lambda k: k and operations[i:=int(math.log2(k))] + f(k - 2 ** i))(k - 1) % 26)
+#
+#
+# k = 5
+# operations = [0, 0, 0]
+# solution = Solution()
+# result = solution.kthCharacter(k, operations)
+# print(result)
 
 
 # class Solution:
