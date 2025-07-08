@@ -20,17 +20,27 @@ import bisect
 
 
 class Solution:
-    def maxValue(self, events, k):
+    def maxValue(self, events: List[List[int]], k: int) -> int:
+        N = len(events)
         events.sort()
-        def dfs(i, lastEnd, k):
-            if i == len(events) or k == 0:
+        memo = [[-1 for _ in range(k + 1)] for _ in range(N)]
+
+        def max_events_recur(idx, k):
+            if idx == N or k == 0:
                 return 0
-            take = 0
-            if events[i][0] > lastEnd:
-                take = events[i][2] + dfs(i + 1, events[i][1], k - 1)
-            skip = dfs(i + 1, lastEnd, k)
-            return max(take, skip)
-        return dfs(0, -1, k)
+
+            if memo[idx][k] != -1:
+                return memo[idx][k]
+
+            startDay, endDay, value = events[idx]
+            nextIdxAvail = bisect.bisect_right(events, endDay, key=lambda event: event[0])
+            total = value + max_events_recur(nextIdxAvail, k - 1)
+            total = max(total, max_events_recur(idx + 1, k))
+            memo[idx][k] = total
+            return total
+
+        total = max_events_recur(0, k)
+        return total
 
 
 events = [[1, 2, 4], [3, 4, 3], [2, 3, 1]]
