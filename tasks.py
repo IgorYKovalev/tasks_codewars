@@ -19,45 +19,66 @@ from numpy.ma.core import bitwise_or
 import bisect
 
 
-class FindSumPairs:
-    def __init__(self, nums1: List[int], nums2: List[int]):
-        self.nums1 = nums1
-        self.nums2 = nums2
-        self.nums2_count = Counter(nums2)
-
-    def add(self, index: int, val: int) -> None:
-        self.nums2_count[self.nums2[index]] -= 1
-        if self.nums2_count[self.nums2[index]] <= 0:
-            self.nums2_count.pop(self.nums2[index])
-
-        self.nums2[index] += val
-        self.nums2_count[self.nums2[index]] += 1
-
-    def count(self, tot: int) -> int:
-        count = 0
-        for val in self.nums1:
-            count += self.nums2_count[tot - val]
-        return count
+class Solution:
+    def maxValue(self, events, k):
+        events.sort()
+        def dfs(i, lastEnd, k):
+            if i == len(events) or k == 0:
+                return 0
+            take = 0
+            if events[i][0] > lastEnd:
+                take = events[i][2] + dfs(i + 1, events[i][1], k - 1)
+            skip = dfs(i + 1, lastEnd, k)
+            return max(take, skip)
+        return dfs(0, -1, k)
 
 
-commands = ["FindSumPairs", "count", "add", "count", "count", "add", "add", "count"]
-args = [[[1, 1, 2, 2, 2, 3], [1, 4, 5, 2, 5, 4]], [7], [3, 2], [8], [4], [0, 1], [1, 1], [7]]
+events = [[1, 2, 4], [3, 4, 3], [2, 3, 1]]
+k = 2
+solution = Solution()
+result = solution.maxValue(events, k)
+print(result)
 
-output = []
-obj = None
 
-for command, arg in zip(commands, args):
-    if command == "FindSumPairs":
-        obj = FindSumPairs(*arg)
-        output.append(None)
-    elif command == "count":
-        result = obj.count(*arg)
-        output.append(result)
-    elif command == "add":
-        obj.add(*arg)
-        output.append(None)
-
-print(output)
+# class FindSumPairs:
+#     def __init__(self, nums1: List[int], nums2: List[int]):
+#         self.nums1 = nums1
+#         self.nums2 = nums2
+#         self.nums2_count = Counter(nums2)
+#
+#     def add(self, index: int, val: int) -> None:
+#         self.nums2_count[self.nums2[index]] -= 1
+#         if self.nums2_count[self.nums2[index]] <= 0:
+#             self.nums2_count.pop(self.nums2[index])
+#
+#         self.nums2[index] += val
+#         self.nums2_count[self.nums2[index]] += 1
+#
+#     def count(self, tot: int) -> int:
+#         count = 0
+#         for val in self.nums1:
+#             count += self.nums2_count[tot - val]
+#         return count
+#
+#
+# commands = ["FindSumPairs", "count", "add", "count", "count", "add", "add", "count"]
+# args = [[[1, 1, 2, 2, 2, 3], [1, 4, 5, 2, 5, 4]], [7], [3, 2], [8], [4], [0, 1], [1, 1], [7]]
+#
+# output = []
+# obj = None
+#
+# for command, arg in zip(commands, args):
+#     if command == "FindSumPairs":
+#         obj = FindSumPairs(*arg)
+#         output.append(None)
+#     elif command == "count":
+#         result = obj.count(*arg)
+#         output.append(result)
+#     elif command == "add":
+#         obj.add(*arg)
+#         output.append(None)
+#
+# print(output)
 
 
 # class Solution:
