@@ -20,30 +20,66 @@ import bisect
 
 
 class Solution:
-    def maxFreeTime(self, eventTime: int, k: int, startTime: List[int], endTime: List[int]) -> int:
-        n, busy = len(startTime), 0
-        for i in range(k):
-            busy += endTime[i] - startTime[i]
+    def maxFreeTime(self, eventTime, startTime, endTime):
+        n = len(startTime)
+        gap = [0] * (n + 1)
+        lastEnd = 0
+        for i in range(n):
+            gap[i] = startTime[i] - lastEnd
+            lastEnd = endTime[i]
 
-        if n == k: return eventTime - busy
-        ans = startTime[k] - busy
-        l = 0
-        for r in range(k, n):
-            busy += (endTime[r] - startTime[r]) - (endTime[l] - startTime[l])
-            end = eventTime if r == n - 1 else startTime[r + 1]
-            start = endTime[l]
-            ans = max(ans, end - start - busy)
-            l += 1
-        return ans
+        gap[n] = eventTime - lastEnd
+        rightMax = [0] * (n + 1)
+        for i in range(n - 1, - 1, -1):
+            rightMax[i] = max(rightMax[i + 1], gap[i + 1])
+
+        leftMax = 0
+        maxGap = 0
+        for i in range(1, n + 1):
+            dur = endTime[i - 1] - startTime[i - 1]
+            gapL = gap[i - 1]
+            gapR = gap[i]
+
+            if leftMax >= dur or rightMax[i] >= dur:
+                maxGap = max(maxGap, gapL + dur + gapR)
+            maxGap = max(maxGap, gapL + gapR)
+            leftMax = max(leftMax, gapL)
+        return maxGap
 
 
 eventTime = 5
-k = 1
 startTime = [1, 3]
 endTime = [2, 5]
 solution = Solution()
-result = solution.maxFreeTime(eventTime, k, startTime, endTime)
+result = solution.maxFreeTime(eventTime, startTime, endTime)
 print(result)
+
+
+# class Solution:
+#     def maxFreeTime(self, eventTime: int, k: int, startTime: List[int], endTime: List[int]) -> int:
+#         n, busy = len(startTime), 0
+#         for i in range(k):
+#             busy += endTime[i] - startTime[i]
+#
+#         if n == k: return eventTime - busy
+#         ans = startTime[k] - busy
+#         l = 0
+#         for r in range(k, n):
+#             busy += (endTime[r] - startTime[r]) - (endTime[l] - startTime[l])
+#             end = eventTime if r == n - 1 else startTime[r + 1]
+#             start = endTime[l]
+#             ans = max(ans, end - start - busy)
+#             l += 1
+#         return ans
+#
+#
+# eventTime = 5
+# k = 1
+# startTime = [1, 3]
+# endTime = [2, 5]
+# solution = Solution()
+# result = solution.maxFreeTime(eventTime, k, startTime, endTime)
+# print(result)
 
 
 # class Solution:
