@@ -20,39 +20,59 @@ import bisect
 
 
 class Solution:
-    def maxFreeTime(self, eventTime, startTime, endTime):
-        n = len(startTime)
-        gap = [0] * (n + 1)
-        lastEnd = 0
-        for i in range(n):
-            gap[i] = startTime[i] - lastEnd
-            lastEnd = endTime[i]
-
-        gap[n] = eventTime - lastEnd
-        rightMax = [0] * (n + 1)
-        for i in range(n - 1, - 1, -1):
-            rightMax[i] = max(rightMax[i + 1], gap[i + 1])
-
-        leftMax = 0
-        maxGap = 0
-        for i in range(1, n + 1):
-            dur = endTime[i - 1] - startTime[i - 1]
-            gapL = gap[i - 1]
-            gapR = gap[i]
-
-            if leftMax >= dur or rightMax[i] >= dur:
-                maxGap = max(maxGap, gapL + dur + gapR)
-            maxGap = max(maxGap, gapL + gapR)
-            leftMax = max(leftMax, gapL)
-        return maxGap
+    def matchPlayersAndTrainers(self, players, trainers):
+        players.sort()
+        trainers.sort()
+        i = j = matches = 0
+        while i < len(players) and j < len(trainers):
+            if players[i] <= trainers[j]:
+                matches += 1
+                i += 1
+            j += 1
+        return matches
 
 
-eventTime = 5
-startTime = [1, 3]
-endTime = [2, 5]
+players = [4, 7, 9]
+trainers = [8, 2, 5, 8]
 solution = Solution()
-result = solution.maxFreeTime(eventTime, startTime, endTime)
+result = solution.matchPlayersAndTrainers(players, trainers)
 print(result)
+
+
+# class Solution:
+#     def maxFreeTime(self, eventTime, startTime, endTime):
+#         n = len(startTime)
+#         gap = [0] * (n + 1)
+#         lastEnd = 0
+#         for i in range(n):
+#             gap[i] = startTime[i] - lastEnd
+#             lastEnd = endTime[i]
+#
+#         gap[n] = eventTime - lastEnd
+#         rightMax = [0] * (n + 1)
+#         for i in range(n - 1, - 1, -1):
+#             rightMax[i] = max(rightMax[i + 1], gap[i + 1])
+#
+#         leftMax = 0
+#         maxGap = 0
+#         for i in range(1, n + 1):
+#             dur = endTime[i - 1] - startTime[i - 1]
+#             gapL = gap[i - 1]
+#             gapR = gap[i]
+#
+#             if leftMax >= dur or rightMax[i] >= dur:
+#                 maxGap = max(maxGap, gapL + dur + gapR)
+#             maxGap = max(maxGap, gapL + gapR)
+#             leftMax = max(leftMax, gapL)
+#         return maxGap
+#
+#
+# eventTime = 5
+# startTime = [1, 3]
+# endTime = [2, 5]
+# solution = Solution()
+# result = solution.maxFreeTime(eventTime, startTime, endTime)
+# print(result)
 
 
 # class Solution:
