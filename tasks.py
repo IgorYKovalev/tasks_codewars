@@ -19,24 +19,49 @@ from numpy.ma.core import bitwise_or
 import bisect
 
 
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 class Solution:
-    def matchPlayersAndTrainers(self, players, trainers):
-        players.sort()
-        trainers.sort()
-        i = j = matches = 0
-        while i < len(players) and j < len(trainers):
-            if players[i] <= trainers[j]:
-                matches += 1
-                i += 1
-            j += 1
-        return matches
+    def getDecimalValue(self, head: ListNode, ans=0) -> int:
+        return self.getDecimalValue(head.next, (ans << 1) + head.val) if head else ans
 
 
-players = [4, 7, 9]
-trainers = [8, 2, 5, 8]
+def create_linked_list(arr):
+    head = ListNode(arr[0])
+    current = head
+    for value in arr[1:]:
+        current.next = ListNode(value)
+        current = current.next
+    return head
+
+
+head = create_linked_list([1, 0, 1])
 solution = Solution()
-result = solution.matchPlayersAndTrainers(players, trainers)
+result = solution.getDecimalValue(head)
 print(result)
+
+
+# class Solution:
+#     def matchPlayersAndTrainers(self, players, trainers):
+#         players.sort()
+#         trainers.sort()
+#         i = j = matches = 0
+#         while i < len(players) and j < len(trainers):
+#             if players[i] <= trainers[j]:
+#                 matches += 1
+#                 i += 1
+#             j += 1
+#         return matches
+#
+#
+# players = [4, 7, 9]
+# trainers = [8, 2, 5, 8]
+# solution = Solution()
+# result = solution.matchPlayersAndTrainers(players, trainers)
+# print(result)
 
 
 # class Solution:
