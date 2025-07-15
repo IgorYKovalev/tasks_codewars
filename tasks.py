@@ -19,29 +19,41 @@ from numpy.ma.core import bitwise_or
 import bisect
 
 
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
 class Solution:
-    def getDecimalValue(self, head: ListNode, ans=0) -> int:
-        return self.getDecimalValue(head.next, (ans << 1) + head.val) if head else ans
+    def isValid(self, word: str) -> bool:
+        regex = r"(?i)(?=^.*[b-df-hj-np-tv-z])(?=.*[aieou])^[a-z0-9]{3,}$"
+        return re.search(regex, word) is not None
 
 
-def create_linked_list(arr):
-    head = ListNode(arr[0])
-    current = head
-    for value in arr[1:]:
-        current.next = ListNode(value)
-        current = current.next
-    return head
-
-
-head = create_linked_list([1, 0, 1])
+word = "234Adas"
 solution = Solution()
-result = solution.getDecimalValue(head)
+result = solution.isValid(word)
 print(result)
+
+
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+#
+# class Solution:
+#     def getDecimalValue(self, head: ListNode, ans=0) -> int:
+#         return self.getDecimalValue(head.next, (ans << 1) + head.val) if head else ans
+#
+#
+# def create_linked_list(arr):
+#     head = ListNode(arr[0])
+#     current = head
+#     for value in arr[1:]:
+#         current.next = ListNode(value)
+#         current = current.next
+#     return head
+#
+#
+# head = create_linked_list([1, 0, 1])
+# solution = Solution()
+# result = solution.getDecimalValue(head)
+# print(result)
 
 
 # class Solution:
